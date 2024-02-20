@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block css %}
+            {{ parent()}}
+
+            <style>
+              <style>
+                body {
+                  font-family: 'Nunito', sans-serif;
+                  background-color: #f8f9fa;
+                  margin: 0; /* Reset default margin */
+                  padding: 0; /* Reset default padding */
+                }
+
+                .site-wrap {
+                  min-height: 100vh; /* Set minimum height to full viewport height */
+                  display: flex;
+                  flex-direction: column;
+                }
+
+                .site-footer {
+                  margin-top: auto; /* Push footer to the bottom */
+                }
+               .center-Buttons-container {
+                flex: 1;
+                /* Allow the center container to take up remaining space */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                }
+                .center-container {
+                  flex: 1; /* Allow the center container to take up remaining space */
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+
+                 .form-container {
+                  max-width:fit-content;
+                  width: 100%;
+                  padding: 40px;
+                  background-color: #ffffff;
+                  border-radius: 20px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+        {% endblock %}
+    </head>
+
+    {% block title %}Edit FichePatient{% endblock %}
+
+
+  {% block body %}
+
+    <div class="site-wrap">
+
+        {% block navbar %}
+          {{ parent() }}
+        {% endblock %}
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="title-section text-center col-12 mt-5 mb-3">
+         <h2>Modifier une <strong class="text-primary">fiche</strong></h2>
+    </div>
+
+  
+    <div class="center-container">
+      <div class="form-container mt-5 mb-5">
+        <div class="site-section">
+          <div class="container" align="center">
+           {{ include('fiche_patient/_form.html.twig',{'state': 'update'}) }}
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    {% block footer %}
+      {{ parent() }}
+    {% endblock %}
+    </div>  
+         
+  {% endblock %}
+</html>
+{% endblock %}
+
+
