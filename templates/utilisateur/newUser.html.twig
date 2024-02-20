@@ -1,0 +1,12 @@
+{% block body %}
+    <h1>Create User</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.motDePasse) }}
+
+        <button type="submit">Create User</button>
+    {{ form_end(form) }}
+{% endblock %}
