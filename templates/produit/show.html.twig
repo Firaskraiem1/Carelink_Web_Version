@@ -1,0 +1,90 @@
+
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block css %}
+          {{ parent() }}
+        {% endblock %}
+
+</head>
+{% block title %}Produit{% endblock %}
+
+{##############################################################}
+{#########################BODY#################################}
+{% block body %}
+<div class="site-wrap">
+
+  {% block navbar %}
+    {{ parent() }}
+  {% endblock %}
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="#">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Products</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{##############################################################}
+{#########################DETAILS###############################}
+    <div class="title-section text-center col-12 mt-5 mb-3">
+        <h2>Détails <strong class="text-primary">Produit</strong></h2>
+    </div>
+    <div class="col-md-12">
+        <div class="site-blocks-table">
+            <table class="table table-bordered">
+                <tbody>
+            <tr>
+                <th>Id_prod</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_prod</th>
+                <td>{{ produit.nomProd }}</td>
+            </tr>
+            <tr>
+                <th>Prix_prod</th>
+                <td>{{ produit.prixProd }}</td>
+            </tr>
+            <tr>
+                <th>Stock_prod</th>
+                <td>{{ produit.stockProd }}</td>
+            </tr>
+        </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="container">
+            <div class="row mb-5 mt-3">
+                <div class="col-md-4">
+                    <a class="btn btn-primary btn-md btn-block" href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_produit_index') }}">Retourner</a>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    {{ include('produit/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    {####################################################################}
+    {############################FOOTER##################################}
+    {% block footer %}  
+        {{ parent() }}
+    {% endblock %}
+    </div>  
+         
+    {###################################################################################}
+
+{% endblock %}
+</html>
+{% endblock %}

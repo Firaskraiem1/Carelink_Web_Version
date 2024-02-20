@@ -1,0 +1,102 @@
+
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block css %}
+    {{ parent() }}
+  {% endblock %}
+</head>
+
+<body>
+{% block body %}
+  <div class="site-wrap">
+
+  {% block navbar %}
+    {{ parent() }}
+    
+  {% endblock %}
+
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{{ path('app_home') }}">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Products</strong> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {##############################################################}
+  {#########################TABLE#################################}
+     <div class="site-section">
+      <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+            <div class="row mb-2">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <a href="{{ path('app_produit_new') }}" class="btn btn-primary btn-md btn-block">Ajouter Produit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              <table class="table table-bordered">
+                   
+        <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Id_prod</th>
+                <th>Nom_prod</th>
+                <th>Prix_prod</th>
+                <th>Stock_prod</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.nomProd }}</td>
+                <td>{{ produit.prixProd }}</td>
+                <td>{{ produit.stockProd }}</td>
+                <td>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Afficher</a>
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {####################################################################}
+  {############################FOOTER##################################}
+  {% block footer %}
+    {{ parent() }}
+  {% endblock %}
+
+  {% block js %}
+    {{ parent() }}
+  {% endblock %}
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}

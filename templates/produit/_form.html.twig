@@ -1,0 +1,48 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+    <table style="border-collapse: separate; border-spacing: 5px;">
+        <tr>
+            <th>{{ form_label(form.nom_prod, "Nom Produit:") }}</th>
+            <td>{{ form_widget(form.nom_prod) }}</td>
+            <td>{{ form_errors(form.nom_prod) }}</td>
+        </tr>
+       
+        <tr>
+            <th>{{ form_label(form.prix_prod, "Prix:") }}</th>
+            <td>{{ form_widget(form.prix_prod ) }}</td>
+            <td>{{ form_errors(form.prix_prod) }}</td>
+        </tr>
+        
+        <tr>
+            <th>{{ form_label(form.stock_prod, "Stock:") }}</th>
+            <td>{{ form_widget(form.stock_prod) }}</td>
+            <td>{{ form_errors(form.stock_prod) }}</td>
+        </tr>
+        
+         <tr>
+            <th>{{ form_label(form.id_C, "Categorie:") }}</th>
+            <td>{{ form_widget(form.id_C) }}</td>
+            <td>{{ form_errors(form.id_C) }}</td>
+        </tr>
+
+    </table>
+    
+    <div class="container">
+        <div class="row mb-3">
+        {% if button_label == "new" %} 
+            <div class="col-md-6 mb-3 mb-md-0">
+                <button class="btn btn-primary btn-md btn-block" href="{{ path('app_produit_new') }}">Ajouter Produit</button>
+            </div>
+            {% else %}
+          <div class="col-md-6 mb-3 mb-md-0">
+                <button class="btn btn-primary btn-md btn-block" href="{{ path('app_produit_edit',{'id':produit.id}) }}">Editer Produit</button>
+            </div>
+            {% endif %}
+              <div class="col-md-6">
+                <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_produit_index') }}">Annuler</a>
+            </div>
+        </div>
+    </div>
+    
+{{ form_end(form) }}
+
