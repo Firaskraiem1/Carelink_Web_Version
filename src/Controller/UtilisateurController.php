@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Repository\UtilisateurRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class UtilisateurController extends AbstractController
@@ -21,16 +22,29 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    #[Route('/utilisateur/get/{id}', name: 'app_utilisateur')]
-    public function getUserById($id): Response
+    #[Route('/utilisateur/list', name: 'utilisateur_all')]
+    public function getAllUsers(UtilisateurRepository $userRepo): Response
     {
-        return $this->render('utilisateur/index.html.twig',[
-            'controller_name' => 'UserController',
+        $users = $userRepo->findAll();
+        return $this->render('utilisateur/list.html.twig',[
+            'users' => $users,
+        ]);
+    }
+
+    #[Route('/utilisateur/get/{id}', name: 'utilisateur_getOne')]
+    public function getUserById($id,UtilisateurRepository $userRepo): Response
+    {
+        $user = $userRepo->find($id);
+        if ($user == null) {
+            throw $this->createNotFoundException('Ce utilisateur n\'existe pas');
+        }
+        return $this->render('utilisateur/user.html.twig',[
+            'user' => $user,
         ]);
     }
 
     #[Route('/utilisateur/add', name: 'app_add_utilisateur')]
-    public function addUser(Request $request, ManagerRegistry $managerRegistry): Response
+    public function addUser(Request $request, ManagerRegistry $managerRegistry, UserPasswordHasherInterface $passwordHasher): Response
     {
         $entitymanager = $managerRegistry->getManager();
         $user = new Utilisateur();
@@ -38,6 +52,8 @@ class UtilisateurController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setMotDePasse($hashedPassword);
             $entitymanager->persist($user);
             $entitymanager->flush();
             return $this->redirectToRoute('app_home');
@@ -47,19 +63,30 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    #[Route('/utilisateur/add', name: 'app_utilisateur')]
-    public function updateUser(): Response
+    #[Route('/utilisateur/update/{id}', name: 'utilisateur_update')]
+    public function updateUser($id,ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
     {
-        return $this->render('utilisateur/index.html.twig',[
-            'controller_name' => 'UserController',
+        $em = $managerRegistry->getManager();
+        $user = $userRepo->find($id);
+        $form = $this->createForm(UtilisateurType::class,$user);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute("utilisateur_all");
+        }
+        return $this->renderForm('utilisateur/newUser.html.twig',[
+            'form' => $form,
         ]);
     }
 
-    #[Route('/utilisateur/add', name: 'app_utilisateur')]
-    public function deleteUser(): Response
+    #[Route('/utilisateur/delete/{id}', name: 'utilisateur_delete')]
+    public function deleteUser($id, ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
     {
-        return $this->render('utilisateur/index.html.twig',[
-            'controller_name' => 'UserController',
-        ]);
+        $em = $managerRegistry->getManager();
+        $user = $userRepo->find($id);
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute('utilisateur_all');
     }
 }

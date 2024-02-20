@@ -1,0 +1,19 @@
+    {% if users is empty%}    
+    <p> aucun affichage </p>
+    {% else %}
+    {% for user in users %}
+    <table border="1">
+        <tr>
+            <td>{{ user.id }}</td>
+                <td>{{ user.nom  }}</td>
+                <td>{{ user.prenom  }}</td>
+                <td>{{ user.email }}</td>
+                <td>nb_books</td>
+                <td> 
+                    <a href="#"> edit </a>
+                    <a href="#">delete</a>
+                </td>
+        </tr>
+    <table>
+    {% endfor %}
+    {% endif %}
