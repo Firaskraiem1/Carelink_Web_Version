@@ -46,7 +46,7 @@
           <div class="logo">
             <div class="site-logo">
               <a href="#" class="js-logo-clone">
-                <img src="{{ asset('/images/CareLinkLogo.png') }}" alt="CareLink Logo" class="logo-img">
+                <img src="{{ asset('/images/CareLinkLogo.png') }}" alt="Logo" class="logo-img">
                 <strong class="text-primary">Care</strong>Link
               </a>
             </div>
@@ -81,7 +81,15 @@
               {# {{ app.session.get('user').username }} #}
               <li><a href="{{path("app_logout")}}">Logout</a></li>
             {% else %}
-            <li><a href="{{path("app_login")}}">Connect</a></li>
+            <button id="connect-button"><a href="{{path("app_login")}}">Connect</a></button>
+            {# <div id="login-form-box" class="login-form-box">
+              {% include 'login/index.html.twig' %}
+            </div>
+            <script>
+        document.getElementById('connect-button').addEventListener('click', function() {
+            document.getElementById('login-form-box').style.display = 'block';
+        });
+    </script> #}
             {% endif %}
         </ul>
     </nav>

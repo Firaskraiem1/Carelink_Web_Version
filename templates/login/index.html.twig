@@ -1,12 +1,36 @@
-{# <form method="post" action="{{ path('app_login') }}">
-    {{ form_widget(form) }}
-</form> #}
-{% block body %}
+<form method="post" action="{{ path('app_login') }}">
+    {{ form_start(form,{'attr':{ 'novalidate':'novalidate' }})  }}
+        <div class="form-group">
+        {{form_label(form.email,"email")}}
+        {{form_widget(form.email,{'attr':{'class':'form-control'}})}}
+        {{form_errors(form.email)}}
+        </div>
+        <div class="form-group">
+        {{form_label(form.password,"password")}}
+        {{form_widget(form.password,{'attr':{'class':'form-control'}})}}
+        {{form_errors(form.password)}}
+        </div>
+        {# {{ form_widget(form) }} #}
+
+    {{ form_end(form) }}
+</form>
+{# {% block body %}
+<form method="post" action="{{ path('app_login') }}">
     <h1>Create User</h1>
 
-    {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
-    {{ form_end(form) }}
+    {{ form_start(form,{'attr':{ 'novalidate':'novalidate' }}) }}
+        <div class="form-group">
+        {{form_label(form.email,"email")}}
+        {{form_widget(form.email,{'attr':{'class':'form-control'}})}}
+        {{form_errors(form.email)}}
+        </div>
+        <div class="form-group">
+        {{form_label(form.motDePasse,"password")}}
+        {{form_widget(form.motDePasse,{'attr':{'class':'form-control'}})}}
+        {{form_errors(form.motDePasse)}}
+        </div>
+         {# <button type="submit" ><a href="{{ path('app_login') }}">Login</a></button> #}
+    {# {{ form_end(form) }}
     <button><a href="{{path('app_add_utilisateur')}}">créer un compte</a></button>
-{% endblock %}
+    </form>
+{% endblock %} #} 

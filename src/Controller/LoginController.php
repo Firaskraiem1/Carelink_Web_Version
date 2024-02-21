@@ -21,7 +21,6 @@ class LoginController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle login logic here (e.g., check credentials)
             $email = $form->get('email')->getData();
             $password = $form->get('password')->getData();
             $user = $userRepo->findOneBy(["email"=>$email]);
@@ -29,7 +28,6 @@ class LoginController extends AbstractController
                 $session->set('user',$user);
                 return $this->redirectToRoute('app_home');
             }else{
-                // Redirect to the login route after successful form submission
                 return $this->redirectToRoute('app_login');
             }
         }
@@ -37,9 +35,5 @@ class LoginController extends AbstractController
         return $this->render('login/index.html.twig', [
             'form' => $form->createView(),
         ]);
-        
-        // return $this->render('login/index.html.twig', [
-        //     'controller_name' => 'LoginController',
-        // ]);
     }
 }
