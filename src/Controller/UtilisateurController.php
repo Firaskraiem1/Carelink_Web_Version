@@ -9,15 +9,16 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class UtilisateurController extends AbstractController
 {
-    #[Route('/utilisateur', name: 'app_home')]
+    #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('utilisateur/index.html.twig',[
+        return $this->render('base.html.twig',[
             'controller_name' => 'UserController',
         ]);
     }
@@ -44,7 +45,7 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/utilisateur/add', name: 'app_add_utilisateur')]
-    public function addUser(Request $request, ManagerRegistry $managerRegistry, UserPasswordHasherInterface $passwordHasher): Response
+    public function addUser(Request $request, ManagerRegistry $managerRegistry, UserPasswordHasherInterface $passwordHasher,SessionInterface $session): Response
     {
         $entitymanager = $managerRegistry->getManager();
         $user = new Utilisateur();
@@ -56,6 +57,7 @@ class UtilisateurController extends AbstractController
             $user->setMotDePasse($hashedPassword);
             $entitymanager->persist($user);
             $entitymanager->flush();
+            $session->set('user',$user);
             return $this->redirectToRoute('app_home');
         }
         return $this->renderForm('Utilisateur/newUser.html.twig',[
