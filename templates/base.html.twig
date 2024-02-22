@@ -1,8 +1,5 @@
 <!DOCTYPE html> <html lang="en">
-
 <head>
-
-  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {% block css %}
@@ -75,57 +72,22 @@
             </li>
             <li><a href="#">Evènements</a></li>
             <li><a href="#">About</a></li>
-            {# <li><a href="#">Contact</a></li> #}
             {% if app.session.get('user') is not null %}
-              <li><a href="#">{{ app.session.get('user').nom }} </a></li>
-              {# {{ app.session.get('user').username }} #}
-              <li><a href="{{path("app_logout")}}">Logout</a></li>
+            <li class="has-children">
+                <a href="#">{{ app.session.get('user').nom }}</a>
+                <ul class="dropdown">
+                    <li><a href="{{path("utilisateur_update",{'id':app.session.get('user').id})}}">Profile</a></li>
+                    <li><a href="{{path("app_logout")}}">Logout</a></li>  
+                </ul>
+            </li>
             {% else %}
             <button id="connect-button"><a href="{{path("app_login")}}">Connect</a></button>
-            {# <div id="login-form-box" class="login-form-box">
-              {% include 'login/index.html.twig' %}
-            </div>
-            <script>
-        document.getElementById('connect-button').addEventListener('click', function() {
-            document.getElementById('login-form-box').style.display = 'block';
-        });
-    </script> #}
             {% endif %}
         </ul>
     </nav>
 </div>
-
-{#<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var menuItems = document.getElementById('main-menu').querySelectorAll('li');
-
-        menuItems.forEach(function (item) {
-            if (window.location.href.includes(item.querySelector('a').href)) {
-                item.classList.add('active');
-            }
-
-            item.addEventListener('click', function (event) {
-                event.preventDefault();
-
-                item.classList.add('active');
-
-                menuItems.forEach(function (menuItem) {
-                    if (menuItem !== item) {
-                        menuItem.classList.remove('active');
-                    }
-                });
-
-                window.location.href = item.querySelector('a').href;
-            });
-        });
-    });
-</script>#}
-
-
-
-
           <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            {# <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a> #}
             {#<a href="cart.html" class="icons-btn d-inline-block bag">
               <span class="icon-shopping-bag"></span>
               <span class="number">2</span>

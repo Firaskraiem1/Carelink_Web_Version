@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Utilisateur;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,6 +18,13 @@ class UtilisateurType extends AbstractType
             ->add('prenom')
             ->add('email')
             ->add('motDePasse')
+            ->add('role',ChoiceType::class,[
+                'choices'=>[
+                    'Admin' => 'ROLE_ADMIN',
+                    'Patient' => 'ROLE_PATIENT',
+                    'Medecin' => 'ROLE_MEDECIN',
+                ],
+            ])
         ;
     }
 

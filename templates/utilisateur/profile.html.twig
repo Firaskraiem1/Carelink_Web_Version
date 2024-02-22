@@ -1,5 +1,4 @@
 
-
 {% extends 'base.html.twig' %}
 {% block html %} 
 <!DOCTYPE html>
@@ -48,7 +47,7 @@
         {% endblock %}
     </head>
 
-    {% block title %}New Evenement{% endblock %}
+    {% block title %}Profile{% endblock %}
 
   {##############################################################}
   {#########################BODY#################################}
@@ -65,7 +64,7 @@
         <div class="row">
           <div class="col-md-12 mb-0">
             <a href="#">Utilisateur</a> <span class="mx-2 mb-0">/</span> 
-            <strong class="text-black">Se connecter</strong>
+            <strong class="text-black">Profile</strong>
           </div>
         </div>
       </div>
@@ -74,7 +73,7 @@
   {##############################################################}
   {#########################FORM#################################}
     <div class="center-container">
-      <div class="form-container mt-3 mb-2">
+      <div class="form-container mt-3 mb-3">
         <div class="site-section">
           <div class="container">
             <div class="row">
@@ -82,24 +81,35 @@
                 <div class="site-blocks-table" style="max-width: 100%; overflow-x: hidden;">
                   <div class="row">
                     <div class="title-section text-center col-12">
-                      <h2>Proposez un <strong class="text-primary">Évènement</strong></h2>
+                      <h2> <strong class="text-primary">Profile</strong></h2>
                     </div>
                   </div>
                   <form method="post" action="{{ path('app_login') }}">
+    {# <h1>Profile</h1> #}
+
     {{ form_start(form,{'attr':{ 'novalidate':'novalidate' }})  }}
         <div class="form-group">
-        {{form_label(form.email,"Email")}}
+        {{form_label(form.nom,"nom")}}
+        {{form_widget(form.nom,{'attr':{'class':'form-control'}})}}
+        {{form_errors(form.nom)}}
+        </div>
+        <div class="form-group">
+        {{form_label(form.prenom,"prenom")}}
+        {{form_widget(form.prenom,{'attr':{'class':'form-control'}})}}
+        {{form_errors(form.prenom)}}
+        </div>
+        <div class="form-group">
+        {{form_label(form.email,"email")}}
         {{form_widget(form.email,{'attr':{'class':'form-control'}})}}
         {{form_errors(form.email)}}
         </div>
         <div class="form-group">
-        {{form_label(form.password,"Mot de passe")}}
-        {{form_widget(form.password,{'attr':{'class':'form-control'}})}}
-        {{form_errors(form.password)}}
+        {{form_label(form.role,"Role")}}
+        {{form_widget(form.role,{'attr':{'class':'form-control'}})}}
+        {{form_errors(form.role)}}
         </div>
+        <button type="submit">Modifier</button>
     {{ form_end(form) }}
-    </br>
-    <p >Vous n avez pas de compte ? <a href="{{ path('app_add_utilisateur') }}">s'inscrire</a> </p>
 </form>
                 </div>
               </form>

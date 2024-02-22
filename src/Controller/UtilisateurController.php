@@ -75,9 +75,9 @@ class UtilisateurController extends AbstractController
         if($form->isSubmitted()){
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute("utilisateur_all");
+            return $this->redirectToRoute("utilisateur_update", ['id' => $user->getId()]);
         }
-        return $this->renderForm('utilisateur/newUser.html.twig',[
+        return $this->renderForm('utilisateur/profile.html.twig',[
             'form' => $form,
         ]);
     }

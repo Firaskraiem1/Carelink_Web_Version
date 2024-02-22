@@ -32,6 +32,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
     private ?string $motDePasse = null;
 
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
+    private ?string $role = null;
+
     public function getRoles(): array
     {
         return ['ROLE_USER'];
@@ -101,6 +105,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMotDePasse(string $motDePasse): static
     {
         $this->motDePasse = $motDePasse;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
