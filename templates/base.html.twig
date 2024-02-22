@@ -81,7 +81,13 @@
                 </ul>
             </li>
             {% else %}
-            <button id="connect-button"><a href="{{path("app_login")}}">Connect</a></button>
+            <li>
+              <a class="btn btn-primary btn-block rounded-pill py-2" href="{{ path('app_login') }}">
+                  <span class="fw-bold">Login</span>
+              </a>
+            </li>
+
+
             {% endif %}
         </ul>
     </nav>

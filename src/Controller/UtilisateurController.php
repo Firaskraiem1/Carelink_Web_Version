@@ -82,6 +82,8 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
+    
+
     #[Route('/utilisateur/delete/{id}', name: 'utilisateur_delete')]
     public function deleteUser($id, ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
     {

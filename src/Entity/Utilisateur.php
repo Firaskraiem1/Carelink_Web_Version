@@ -25,15 +25,24 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "L email est obligatoire")]
+    #[Assert\NotBlank(message: "L'email est obligatoire")]
+    #[Assert\Email(message: "L'email '{{ value }}' n'est pas valide.")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
+    #[Assert\Length(
+    min: 8,
+    minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+    pattern: '/^(?=.*[A-Z])(?=.*\d).+$/',
+    message: 'Le mot de passe doit contenir au moins une majuscule et un chiffre.'
+    )]
     private ?string $motDePasse = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
+    // #[Assert\NotBlank(message: "]
     private ?string $role = null;
 
     public function getRoles(): array

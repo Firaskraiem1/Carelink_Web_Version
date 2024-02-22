@@ -22,10 +22,11 @@ class LoginFormType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Password',
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Login',
+                'constraints' => [ new NotBlank(['message'=>'Veulliez verifier votre mot de passe']),],
             ]);
+            // ->add('submit', SubmitType::class, [
+            //     'label' => 'Login',
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

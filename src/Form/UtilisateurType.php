@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType as SymfonyPasswordType;
 
 class UtilisateurType extends AbstractType
 {
@@ -17,7 +18,8 @@ class UtilisateurType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('motDePasse')
+            ->add('motDePasse',SymfonyPasswordType::class, [
+                'label' => 'Mot de passe'])
             ->add('role',ChoiceType::class,[
                 'choices'=>[
                     'Admin' => 'ROLE_ADMIN',
