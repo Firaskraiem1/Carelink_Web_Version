@@ -1,0 +1,270 @@
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block css %}
+  <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
+  <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+  <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+
+
+  <link rel="stylesheet" href="{{asset('css/aos.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+  <style>
+
+.btn-back {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #17a2b8; /* Change to desired color */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-edit {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ffc107; /* Change to desired color */
+  color: #212529;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+ .background-image {
+      background-image: url('{{ asset('images/para.jpg') }}'); /* Path to your image */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      padding-top: 100px; /* Adjust this value to move the box below the navbar */
+
+    }
+
+ .form-box {
+      border: 2px solid #17a2b8;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+  </style>
+{% endblock %}
+</head>
+
+<body>
+{% block body %}
+   <div class="site-wrap">
+
+
+    <div class="site-navbar py-2">
+
+      <div class="search-wrap">
+        <div class="container container-search">
+          
+          <form action="#" method="post">
+            <div class="search-form">
+             
+              <input type="text" class="search-input" placeholder="Enter keyword">
+              <input type="text" class="search-input" placeholder="Enter location">
+              <select class="search-select">
+                <option value="">Select location</option>
+                <option value="location1">Location 1</option>
+                <option value="location2">Location 2</option>
+                <option value="location3">Location 3</option>
+              </select>
+              <input type="text" class="search-input" placeholder="Enter location">
+              <input type="text" class="search-input" placeholder="Enter location">
+              <a href="results.html"><span class="icon-search"></span></a>
+              <a href="#" class="js-search-close" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+              </svg></a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="index.html" class="js-logo-clone"><strong class="text-primary">Pharma</strong>tive</a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+               
+                <a href="shop.html">Evenements</a>
+                <li class="has-children">
+                  <a href="shop.html">Produit</a>
+                  <ul class="dropdown">
+                    <li><a href="#">Supplements</a></li>
+                    <li class="has-children">
+                      <a href="#">Vitamins</a>
+                      <ul class="dropdown">
+                        <li><a href="#">Supplements</a></li>
+                        <li><a href="#">Vitamins</a></li>
+                        <li><a href="#">Diet &amp; Nutrition</a></li>
+                        <li><a href="#">Tea &amp; Coffee</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Diet &amp; Nutrition</a></li>
+                    <li><a href="#">Tea &amp; Coffee</a></li>
+                    
+                  </ul>
+                </li>
+                <li><a href="{{ path('app_para_pharmacie_index') }}">Parapharmacie</a></li>
+                <li><a href="consultation.html">Prendre une consultation</a></li>
+                <li></li>
+              </ul>
+            </nav>
+          </div>
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+               
+                <li class="has-children">
+                  <a href="#">Profile</a>
+                  <ul class="dropdown">
+                    <li><a href="#">Profile</a></li>
+                    <li class="has-children">
+                      <a href="#">Parametres</a>
+                    </li>
+                    <li><a href="{{ path('app_para_pharmacie_espace_index') }}">Gérer un espace</a></li>
+                    <li><a href="#">Déconnexion</a></li>
+                    
+                    
+                  </ul>
+                </li>
+                
+               
+              </ul>
+            </nav>
+          </div>
+          
+      </div>
+    </div>
+
+    <!-- Background image container -->
+    
+      <div class="container">
+      <div class="background-image">
+        <div class="row mb-5">
+          <div class="col-md-6 mx-auto">
+            <div class="form-box">
+            <h1 class="text-center mb-4" style="color: green;">détails ParaPharmacie</h1>
+              <table class="table">
+        <tbody>
+        <tr>
+        <th style="color: green;">map</th>
+          <td style="width: 250px; height: 250px;">
+    <iframe id="map-iframe" src='https://www.google.com/maps?q={{ para_pharmacie.latitude }},{{ para_pharmacie.longitude }}&h1=es;z=14&output=embed' style="width: 100%; height: 100%; border: 0;"></iframe>
+</td>
+ </tr>
+       <tr>
+    <th style="color: green;">image</th>
+    <td><img src="{{ vich_uploader_asset(para_pharmacie, 'imageFile') }}" style="max-width: 100%; height: auto;"></td>
+</tr>
+            <tr>
+                <th style="color: green;">Id</th>
+                <td style="color: black;">{{ para_pharmacie.id }}</td> 
+            <tr>
+                 <th style="color: green;">NomPara</th>
+                <td style="color: black;">{{ para_pharmacie.nomPara }}</td>
+            </tr>
+               <tr>
+    <th style="color: green;">Type Para</th>
+    <td style="color: black;">{{ para_pharmacie.typePara }}</td>
+</tr>
+<tr>
+    <th style="color: green;">Horraire Ouverture</th>
+    <td style="color: black;">{{ para_pharmacie.getHorraireOuverture()|date('H:i') }}</td>
+</tr>
+<tr>
+    <th style="color: green;">Horraire Fermeture</th>
+    <td style="color: black;">{{ para_pharmacie.getHorraireFermeture()|date('H:i') }}</td>
+</tr>
+            <tr>
+                 <th style="color: green;">Email</th>
+                <td style="color: black;">{{ para_pharmacie.email }}</td>
+            </tr>
+            <tr>
+                 <th style="color: green;">NbrPharmaciens</th>
+                <td style="color: black;">{{ para_pharmacie.nbrPharmaciens }}</td>
+            </tr>
+            <tr>
+                 <th style="color: green;">N°tel</th>
+                <td style="color: black;">{{ para_pharmacie.numtel }}</td>
+            </tr>
+            <tr>
+                <th style="color: green;">Distance</th>
+                <td id="distance"></td>
+            </tr>
+           
+        </tbody>
+    </table>
+<a href="{{ path('app_para_pharmacie_index') }}"class="btn btn-back">back to list</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% block js %}
+  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.js')}}"></script>
+  <script src="{{asset('js/popper.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+  <script src="{{asset('js/aos.js')}}"></script>
+
+  <script>
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Rayon de la Terre en km
+        const dLat = deg2rad(lat2 - lat1);
+        const dLon = deg2rad(lon2 - lon1); 
+        const a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2); 
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        const d = R * c; // Distance en km
+        return d;
+    }
+
+    function deg2rad(deg) {
+        return deg * (Math.PI/180)
+    }
+
+    // Coordonnées de la carte Google Maps
+    const mapLat = {{ para_pharmacie.latitude }};
+    const mapLon = {{ para_pharmacie.longitude }};
+
+    // Coordonnées spécifiées
+    const specifiedLat = 36.90100499935435;
+    const specifiedLon = 10.190288258634265;
+
+    const distance = calculateDistance(mapLat, mapLon, specifiedLat, specifiedLon);
+    document.getElementById('distance').innerText = distance.toFixed(2) + ' km';
+  </script>
+
+  <script src="{{asset('js/main.js')}}"></script>
+
+{% endblock %}
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}
