@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SpecialiteRepository::class)]
 class Specialite
@@ -17,15 +18,31 @@ class Specialite
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La specialité ne peut pas etre vide.")]
+    #[Assert\Regex(
+        pattern: '/^[A-Za-z]+$/',
+        message: "La specialité ne peut contenir que des lettres alphabétiques."
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La description ne peut pas etre vide.")]
+    #[Assert\Length(
+        
+        max:255,
+        maxMessage: "La description est trop long, elle ne faut pas depasser 255 caracteres"
+    )]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "La sous specialité ne peut pas etre vide.")]
     private ?string $sousSpecialite = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0)]
+    #[Assert\Regex(
+        pattern: '/^(?:100|[0-9]{1,2})$/',
+        message: "Les années d'experience doivent etre entre 0 et 100"
+    )]
     private ?string $anneeExperience = null;
 
     #[ORM\OneToMany(targetEntity: Medecin::class, mappedBy: 'idSpecialite')]

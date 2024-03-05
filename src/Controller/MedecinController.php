@@ -21,6 +21,16 @@ class MedecinController extends AbstractController
             'medecins' => $medecinRepository->findAll(),
         ]);
     }
+    #[Route('/admin', name: 'app_dashboard_index', methods: ['GET'])]
+    public function indexAdmin(MedecinRepository $medecinRepository): Response
+    {
+        return $this->render('admin/indexDashboard.html.twig', [
+            'medecins' => $medecinRepository->findAll(),
+        ]);
+    }
+    
+    
+
 
     #[Route('/new', name: 'app_medecin_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

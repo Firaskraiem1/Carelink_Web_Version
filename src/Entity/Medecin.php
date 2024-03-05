@@ -4,7 +4,8 @@ namespace App\Entity;
 
 use App\Repository\MedecinRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraint as Assert; 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: MedecinRepository::class)]
 class Medecin
 {
@@ -14,19 +15,44 @@ class Medecin
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"il est vide")]
+    #[Assert\NotBlank(message: "Le nom ne peut pas etre vide.")]
+    #[Assert\Length(
+        min: 3,
+        max:25,
+        minMessage:"Le nom il faut avoir au moins 3 lettres", 
+        maxMessage: "Le nom est trop long"
+    )]
+    #[Assert\Regex(
+        pattern: '/^[A-Za-z]+$/',
+        message: "Le nom ne peut contenir que des lettres alphabétiques."
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le prenom ne peut pas être vide.")]
+    #[Assert\Regex(
+        pattern: '/^[A-Za-z]+$/',
+        message: "Le prenom ne peut contenir que des lettres alphabétiques."
+    )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "L'adresse de téléphone ne peut pas être vide.")]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le numéro de téléphone ne peut pas être vide.")]
+    #[Assert\Regex(
+        pattern: '/^\d{8}$/',
+        message: "Le numéro de téléphone doit contenir exactement 8 chiffres."
+    )]
     private ?string $tel = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Regex(
+        pattern: '/^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)-(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/',
+        message: "Le format de horaires de consultations doit etre sous le forma hh:mm[AM|PM]-hh:mm[AM|PM]"
+    )]
     private ?string $horairesConsultation = null;
 
     #[ORM\ManyToOne(inversedBy: 'Specialite')]

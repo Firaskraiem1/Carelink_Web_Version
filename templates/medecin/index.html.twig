@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}
 
 {% block title %}Medecin index{% endblock %}
 
@@ -41,3 +41,107 @@
 
     <a href="{{ path('app_medecin_new') }}">Create new</a>
 {% endblock %}
+#}
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block css %}
+    {{ parent() }}
+  {% endblock %}
+</head>
+
+<body>
+{% block body %}
+  <div class="site-wrap">
+
+  {% block navbar %}
+    {{ parent() }}
+  {% endblock %}
+
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {##############################################################}
+  {#########################TABLE#################################}
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row mb-2">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <a href="{{ path('app_medecin_new') }}" class="btn btn-primary btn-md btn-block">Ajouter un medecin</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              <table class="table table-bordered">                  
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Adresse</th>
+                        <th>Tel</th>
+                        <th>HorairesConsultation</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for medecin in medecins %}
+                      <tr>
+                          <td>{{ medecin.id }}</td>
+                <td>{{ medecin.nom }}</td>
+                <td>{{ medecin.prenom }}</td>
+                <td>{{ medecin.adresse }}</td>
+                <td>{{ medecin.tel }}</td>
+                <td>{{ medecin.horairesConsultation }}</td>
+                <td>
+                    <a href="{{ path('app_medecin_show', {'id': medecin.id}) }}">show</a>
+                    <a href="{{ path('app_medecin_edit', {'id': medecin.id}) }}">edit</a>
+                </td>
+                      </tr>
+                  {% else %}
+                      <tr>
+                          <td colspan="8">no records found</td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {####################################################################}
+  {############################FOOTER##################################}
+  {% block footer %}
+    {{ parent() }}
+  {% endblock %}
+
+  {% block js %}
+    {{ parent() }}
+  {% endblock %}
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}
+

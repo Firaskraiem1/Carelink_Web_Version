@@ -21,7 +21,7 @@ class MedecinType extends AbstractType
             ->add('horairesConsultation')
             ->add('idSpecialite', EntityType::class, [
                 'class' => specialite::class,
-'choice_label' => 'id',
+'choice_label' => 'nom',
             ])
         ;
     }

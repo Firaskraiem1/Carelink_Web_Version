@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}
 
 {% block title %}Specialite{% endblock %}
 
@@ -35,4 +35,99 @@
     <a href="{{ path('app_specialite_edit', {'id': specialite.id}) }}">edit</a>
 
     {{ include('specialite/_delete_form.html.twig') }}
+{% endblock %}
+#}
+
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block css %}
+          {{ parent() }}
+        {% endblock %}
+
+</head>
+{% block title %}Specialite{% endblock %}
+
+{##############################################################}
+{#########################BODY#################################}
+{% block body %}
+<div class="site-wrap">
+
+  {% block navbar %}
+    {{ parent() }}
+  {% endblock %}
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{##############################################################}
+{#########################DETAILS###############################}
+    <div class="title-section text-center col-12 mt-5 mb-3">
+        <h2>Détails <strong class="text-primary">Specialite</strong></h2>
+    </div>
+    <div class="col-md-12">
+        <div class="site-blocks-table">
+            <table class="table table-bordered">
+                <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ specialite.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ specialite.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ specialite.description }}</td>
+            </tr>
+            <tr>
+                <th>SousSpecialite</th>
+                <td>{{ specialite.sousSpecialite }}</td>
+            </tr>
+            <tr>
+                <th>AnneeExperience</th>
+                <td>{{ specialite.anneeExperience }}</td>
+            </tr>
+        </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="container">
+            <div class="row mb-5 mt-3">
+                <div class="col-md-4">
+                    <a class="btn btn-primary btn-md btn-block" href="{{ path('app_specialite_edit', {'id': specialite.id}) }}">Modifier</a>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_specialite_index') }}">Retourner</a>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    {{ include('specialite/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    {####################################################################}
+    {############################FOOTER##################################}
+    {% block footer %}  
+        {{ parent() }}
+    {% endblock %}
+    </div>  
+         
+    {###################################################################################}
+
+{% endblock %}
+</html>
 {% endblock %}
