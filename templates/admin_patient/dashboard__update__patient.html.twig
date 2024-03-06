@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/ion.rangeSlider.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/dashboard.min.css')}}">
     <link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900')}}" rel="stylesheet"> 
-    <style>
+   <style>
         /* Custom CSS for table */
         .table {
             width: 100%;
@@ -33,6 +33,7 @@
         }
 		 .btn-show,
             .btn-edit,
+
             .btn-delete {
               display: inline-block;
               padding: 8px 16px;
@@ -47,11 +48,7 @@
               text-decoration: none;
             }
 
-            .btn-edit {
-              background-color: #ffc107; /* Change to desired color */
-              color: #212529;
-              text-decoration: none;
-            }
+           
 
             .btn-delete {
               background-color: #dc3545; /* Change to desired color */
@@ -59,25 +56,27 @@
               text-decoration: none;
             }
 			.btn-back {
-      		background-color: #ffc107;
-     		color: #212529;
-      		border-color: #ffc107;
-       		}
-<<<<<<< HEAD
-			.centered-text td {
-  text-align: center;
-  font-weight: bold;
-  color: black;
-  font-size: 18px;
-  vertical-align: middle;
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #17a2b8; /* Change to desired color */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
 
+.btn-edit {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ffc107; /* Change to desired color */
+  color: #212529;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
-.centered-text td img {
-  max-width: 120px;
-}
-=======
->>>>>>> gestion_patient
-    </style>
+   
+	
+  </style>
     {% endblock %}
 </head>
 <body>
@@ -90,25 +89,13 @@
 	
 			<nav class="sidebar-menu"> 
 				<ul>
-<<<<<<< HEAD
-					<li class="dashboard"><a href="{{ path('app_para_pharmacie_ad_front_index') }}"><b>Dashboard</b></a></li>
-					<li class="components has-submenu open"><a href="#"><b><span class="submenu-arrow"></span></b>gestion Para</a>
-						<ul class="sidebar-menu__submenu active" style="display:block;">
-							
-							<li><a href="{{ path('app_zone_ad_index') }}">Zone</a></li>
-							<li class="selected"><a href="">ParaPharmacie</a></li>
-						</ul>
-					</li>
-=======
 					<li class="components has-submenu open"><a href="#"><b><span >Dashboard</span></b></a>
 						<ul class="sidebar-menu__submenu active" style="display:block;">
 							<li><a href="{{path('app_patient_list_admin')}}">Listes des patients </a></li>
 							<li><a href="{{path('app_fiche_patient_listes_admin')}}">Listes des fiches patients</a></li>
 						</ul>
 					</li>
-					
 				</ul>
->>>>>>> gestion_patient
 			</nav>
 	
 	</div>
@@ -122,13 +109,8 @@
 			
 			<div class="content-header__user content-header__dropdown">  
 			    <div class="content-header__user-avatar content-header__dropdown-activate" data-dropdown="userdropdown">
-<<<<<<< HEAD
-					<div class="content-header__user-thumb"><img src="{{asset('images/houssam.jpg')}}" alt="" title=""/></div>
-					<span class="content-header__user-name">Houssam Bk</span>
-=======
-					<div class="content-header__user-thumb"><img src="{{ asset('public/images/unnamed.jpg') }}" alt="" title=""/></div>
-					<span class="content-header__user-name">Firas Ben Kraiem</span>	
->>>>>>> gestion_patient
+		<div class="content-header__user-thumb"><img src="{{ asset('public/images/unnamed.jpg') }}" alt="" title=""/></div>
+					<span class="content-header__user-name">Firas Ben Kraiem</span>
 			    </div>  
 				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--user-menu " id="userdropdown"> 	
 				<h3 class="dropdown-menu__subtitle">User menu</h3>
@@ -190,17 +172,10 @@
 		<div class="content-subheader">
 		
 			<div class="content-subheader__titles">
-<<<<<<< HEAD
-					<h2 class="content-subheader__title">Gestion Para</h2>
-					<nav class="content-subheader__breadcrumb-menu">			
-							<ul>
-								<li><a href="">ParaPharmacie</a></li>
-=======
 					<h2 class="content-subheader__title">Forms</h2>
 					<nav class="content-subheader__breadcrumb-menu">			
 							<ul>
 								<li><a href="dashboard.html">Dashboard</a></li>
->>>>>>> gestion_patient
 							</ul>
 					</nav>
 			</div>
@@ -220,99 +195,19 @@
 		</div>
 		
 
-		 <div class="grid grid--margin bg-white">
-<<<<<<< HEAD
-		 <a href="{{ path('app_para_pharmacie_ad_new') }}" class="btn btn-show">ajouter Para</a>
-             <table class="table centered-text">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom de la ParaPharmacie</th>
-                        <th>Email</th>
-                        <th>Nombre de Pharmaciens</th>
-                        <th>Numéro de Téléphone</th>
-                <th>ville</th>
-                <th>Type Para</th>
-            <th>Horraire Ouverture</th>
-            <th>Horraire Fermeture</th>
-                <th>image</th>
-                <th>actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for para_pharmacie in para_pharmacies %}
-              <tr>
-                <td>{{ para_pharmacie.id }}</td>
-                <td>{{ para_pharmacie.nomPara }}</td>
-                <td>{{ para_pharmacie.email }}</td>
-                <td>{{ para_pharmacie.nbrPharmaciens }}</td>
-                <td>{{ para_pharmacie.numtel }}</td>
-                <td>{{ para_pharmacie.ville ? para_pharmacie.ville.ville : '-' }}</td>
-                 <td>{{ para_pharmacie.typePara }}</td>
-                 <td>{{ para_pharmacie.getHorraireOuverture()|date('H:i') }}</td>
-                <td>{{ para_pharmacie.getHorraireFermeture()|date('H:i') }}</td>
-                 <td><img src="{{ vich_uploader_asset(para_pharmacie, 'imageFile') }}"></td>
-                 </td>
-               
-                <td>
+		 <div class="grid grid--margin bg-white" align="center">
+		 <h1 class="text-center mb-4" style="color: purple;">modifier un patient</h1>
+            
+     <form method="post" novalidate> 
+     {{ include('admin_patient/dashboard_form.html.twig',{'state': 'update'}) }}
+              </form>
+            
 
-                  <a href="{{ path('app_para_pharmacie_ad_show', {'id': para_pharmacie.id}) }}" class="btn btn-show">afficher</a>
-                  <a href="{{ path('app_para_pharmacie_ad_edit', {'id': para_pharmacie.id}) }}" class="btn btn-edit">modifier</a>
-                 {{ include('admin/_delete_form_para.html.twig') }}
-                </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="7">Aucun enregistrement trouvé</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-=======
-		<div align="center" class="title-section text-center col-12 mt-5 mb-3">
-         <h2>Listes des <strong class="text-primary">fiches</strong></h2>
-    </div>
-             <table class="table table-bordered">
-                   
-       <thead>
-            <tr>
-                <th>Id fiche</th>
-                <th>Prenom du patient</th>
-                <th>Nom du patient</th> 
-                <th>Adresse</th>
-                <th>Date naissance</th>
-                <th>Poids</th>
-                <th>Taille</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for fiche_patient in fiche_patients %}
-            <tr>
-                <td>{{ fiche_patient.getIdFiche() }}</td>
-                <td>{{ fiche_patient.relationPatient.getPrenomP() }}</td>
-                <td>{{ fiche_patient.relationPatient.getNomP() }}</td>
-                <td>{{ fiche_patient.adresse }}</td>
-                <td>{{ fiche_patient.getDateNaissance() ? fiche_patient.getDateNaissance()|date('Y-m-d') : '' }}</td>
-                <td>{{ fiche_patient.poids }}</td>
-                <td>{{ fiche_patient.taille }}</td>
-                <td>
-                    <a href="{{ path('app_fiche_patient_show_admin', {'id': fiche_patient.getIdFiche()}) }}">afficher</a>
-                    <a href="{{ path('app_fiche_patient_edit_admin', {'id': fiche_patient.getIdFiche()}) }}">modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-	 <div style="margin-top:15px;" align="center"><a  href="{{ path('app_fiche_patient_new_admin') }}" class="btn btn-show">ajouter fiche patient</a></div>
->>>>>>> gestion_patient
-        </div>
-    </div>
-</div>
+			
+		</div>
+
+		</div>
+ </div> 
  {% block js %}
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('js/moment.min.js')}}"></script>

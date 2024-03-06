@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+ <table style="border-collapse: separate; border-spacing: 5px;">
+<tr>
+<th> {{ form_label(form.prenomP, "Prénom:") }}</th>
+<td> {{ form_widget(form.prenomP) }}
+<br>
+{{ form_errors(form.prenomP) }}
+</td>
+    
+<tr>
+<th> {{ form_label(form.nomP, "Nom:") }}</th>
+<td> {{ form_widget(form.nomP) }}
+<br>
+{{ form_errors(form.nomP) }}
+</td>
+
+<tr>
+<th> {{ form_label(form.email_P, "Email:") }}</th>
+<td> {{ form_widget(form.email_P) }}
+<br>
+{{ form_errors(form.email_P) }}
+</td>
+   
+<tr>
+<tr>
+<th> {{ form_label(form.numTelP, "Numéro de télèphone:") }}</th>
+<td> {{ form_widget(form.numTelP) }}
+<br>
+{{ form_errors(form.numTelP) }}
+</td>
+     
+</table>
+     <div class="center-Buttons-container">
+ {% if state=="update" %}
+    
+        <div class="row" style="margin-top:50px;" >
+            <button class="btn btn-primary" style="margin-right:10px;" href="{{ path('app_patient_edit_admin', {'id': patient.getIdPatient()}) }}">Modifier</button>
+            <a href="{{ path('app_patient_list_admin') }}" class="btn btn-outline-primary">Annuler </a>
+        </div>
+{% else %}
+        <div class="row" style="margin-top:50px;" >
+            <button class="btn btn-primary" style="margin-right:10px;" href="{{ path('app_patient_new_admin')}}">Créer</button>
+            <a href="{{ path('app_patient_list_admin') }}" class="btn btn-outline-primary" >Annuler </a>
+        </div>
+{% endif %}
+            
+</div>
+{{ form_end(form) }}

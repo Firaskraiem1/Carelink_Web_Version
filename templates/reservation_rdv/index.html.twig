@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+{% block html %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      {% block css %}
+      {{parent()}}
+      <style>
+         body {
+         font-family: 'Nunito', sans-serif;
+         background-color: #f8f9fa;
+         margin: 0; /* Reset default margin */
+         padding: 0; /* Reset default padding */
+         }
+         .site-wrap {
+         min-height: 100vh; /* Set minimum height to full viewport height */
+         display: flex;
+         flex-direction: column;
+         }
+         .site-footer {
+         margin-top: auto; /* Push footer to the bottom */
+         }
+         .center-Buttons-container {
+         flex: 1;
+         /* Allow the center container to take up remaining space */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         }
+         .center-container {
+         flex: 1; /* Allow the center container to take up remaining space */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         }
+         .container-listes {
+         flex: 1; /* Allow the center container to take up remaining space */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-left:150px;
+         width:500px;
+         }
+         .form-container {
+         width: 100%;
+         padding: 40px;
+         background-color: white;
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         }
+         .section--content {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: space-between;
+         }
+         .medecin-section {
+         width: calc(33.33% - 20px); /* 33.33% pour afficher 3 sections par ligne */
+         margin-bottom: 20px;
+         background-color: white;
+         border: 2px solid #ddd; /* Style de bordure */
+         border-radius: 15px; /* Coins arrondis pour un aspect plus artistique */
+         padding: 20px;
+         box-sizing: border-box;
+         text-align: center; /* Aligner le contenu au centre */
+         position: relative; /* Permet de positionner le texte par rapport à l'image */
+         }
+         .medecin-details {
+         font-weight: bold; /* Texte en gras */
+         font-size: 18px; /* Taille du texte */
+         margin-top: 15px; /* Espace au-dessus du texte */
+         display: flex; /* Pour centrer le contenu */
+         flex-direction: column; /* Aligner les éléments en colonne */
+         justify-content: center; 
+         color:black/* Centrer verticalement */
+         }
+      
+         .medecin-details p,h5 {
+         color: black; /* Couleur du texte en rouge (par exemple) */
+         }
+      </style>
+      {% endblock %}  
+   </head>
+   {% block title %}Reservation Rendez-vous{% endblock %}
+   <body>
+      {% block body %}
+      <div class="site-wrap">
+         {% block navbar %}
+         {{ parent() }}
+         {% endblock %}
+         
+            <div class="center-container">
+               <div class="form-container" style="margin-top:120px;margin-left:150px;margin-right:150px">
+                  <div class="row" style="justify-content: space-between;">
+                     <h2> <strong class="text-primary">Chercher un médecin</strong></h2>
+                     <form class="col-md-12" method="post" style="margin-right:10px;margin-left:150px;margin-top:20px;" novalidate>
+                        {{ form_start(form) }}
+                        <table style="border-collapse: separate; border-spacing: 10px;">
+                           <tr>
+                              <td>{{ form_widget(form.nom, {'attr': {'style': 'height: 50px;'}}) }}</td>
+                              <td>{{ form_widget(form.medecin,{'attr': {'style': 'height: 50px;'}}) }}</td>
+                              <td><button class="btn btn-primary" style="margin-right:10px;margin-left:80px;height:50px;width:150px" href="#">Chercher</button></td>
+                           </tr>
+                        </table>
+                        {{ form_end(form) }}
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <div class="center-container" style="margin-top:30px;">
+            <div class="form-container" style="margin-top:20px;margin-bottom:50px;margin-left:150px;margin-right:150px">
+               <div class="section section--content" id="content">
+                  <!-- Boucle pour afficher chaque objet parapharmacie dans une section horizontale -->
+                  {% for medecin in pagination %}
+                  <section class="medecin-section">
+                     <div class="medecin-details">
+                     <table  style="margin-top:50px;margin-bottom:50px;">
+                        <tbody>
+                              <tr>
+                                 <th>Médecin:</th>
+                                 <td>{{ medecin.nom }}</td>
+                              </tr>
+                              <tr>
+                                 <th>Adresse:</th>
+                                 <td>{{ medecin.adresse }}</td>
+                              </tr>
+                              <tr>
+                                 <th>Spécialité:</th>
+                                 <td>{{ medecin.specialite }}</td>
+                              </tr>
+                        </tbody>
+                     </table>
+                     </div>
+                     <a class="btn btn-primary"  href="{{ path('app_reservation_new',{'idPatient':idPatient,'idMedecin':medecin.getId()})  }}" style="height:35px;font-size:13px">Réserver</a>
+                  </section>
+                  {% endfor %}
+               </div>
+               <div class="center-Buttons-container">
+                  {{ knp_pagination_render(pagination)}}
+               </div>
+            </div>
+            </div>
+  
+         {% block footer %}
+         {{ parent() }}
+         {% endblock %}
+      </div>
+      {% endblock %}
+</html>
+{% endblock %}
