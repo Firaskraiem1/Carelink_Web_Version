@@ -20,7 +20,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/utilisateur/update/{id}', name: 'admin_utilisateur_update')]
+    #[Route('/utilisateur/admin/update/{id}', name: 'admin_utilisateur_update')]
     public function updateUser($id,ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
     {
         $em = $managerRegistry->getManager();

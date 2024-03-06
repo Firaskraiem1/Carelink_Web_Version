@@ -109,8 +109,11 @@
 			
 			<div class="content-header__user content-header__dropdown">  
 			    <div class="content-header__user-avatar content-header__dropdown-activate" data-dropdown="userdropdown">
-					<div class="content-header__user-thumb"><img src="{{asset('images/avatar-2.jpg')}}" alt="" title=""/></div>
-					<span class="content-header__user-name">Admin</span>
+					<li class="has-children">
+						<a href="#">{{ app.session.get('user').nom }}</a>
+						<a href="{{path("utilisateur_update",{'id':app.session.get('user').id})}}">Profile</a>
+						<a href="{{path("app_logout")}}">Logout</a>
+            		</li>
 			    </div>  
 				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--user-menu " id="userdropdown"> 	
 				<h3 class="dropdown-menu__subtitle">User menu</h3>

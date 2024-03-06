@@ -59,7 +59,6 @@ class LoginController extends AbstractController
                 if($user->getRole() == "ROLE_MEDECIN"){
                     return $this->redirectToRoute('app_medecin');
                 }
-
                 return $this->redirectToRoute('app_home');
             }else{
                 return $this->redirectToRoute('app_login');

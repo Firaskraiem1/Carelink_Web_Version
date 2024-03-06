@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Form\RegisterType;
 use App\Form\UtilisateurType;
 use App\Repository\UtilisateurRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -45,16 +46,17 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/utilisateur/add', name: 'app_add_utilisateur')]
-    public function addUser(Request $request, ManagerRegistry $managerRegistry, UserPasswordHasherInterface $passwordHasher,SessionInterface $session): Response
+    public function addUser( Request $request, ManagerRegistry $managerRegistry, UserPasswordHasherInterface $passwordHasher,SessionInterface $session): Response
     {
         $entitymanager = $managerRegistry->getManager();
         $user = new Utilisateur();
-        $form = $this->createForm(UtilisateurType::class,$user);
+        $form = $this->createForm(RegisterType::class,$user);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setMotDePasse($hashedPassword);
+            $user->setRole("NULL");
             $entitymanager->persist($user);
             $entitymanager->flush();
             $session->set('user',$user);
@@ -66,15 +68,19 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/utilisateur/update/{id}', name: 'utilisateur_update')]
-    public function updateUser($id,ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
+    public function updateUser(SessionInterface $session, $id,ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
     {
         $em = $managerRegistry->getManager();
         $user = $userRepo->find($id);
-        $form = $this->createForm(UtilisateurType::class,$user);
+        $form = $this->createForm(RegisterType::class,$user);
         $form->handleRequest($request);
         if($form->isSubmitted()){
             $em->persist($user);
             $em->flush();
+            // $action= $session->get('user')->role;
+            // if ($action=="ROLE_ADMIN"){
+            //     return $this->redirectToRoute('utilisateur_all');
+            // }
             return $this->redirectToRoute("utilisateur_update", ['id' => $user->getId()]);
         }
         return $this->renderForm('utilisateur/profile.html.twig',[
