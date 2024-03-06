@@ -47,13 +47,12 @@
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
-              <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="index.html">Home</a></li>
+                <li ><a href="{{ path('app_home') }}">Home</a></li>
                 
                
-                <li><a href="">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html">Se connecter</a></li>
+               <li ><a href="{{ path('app_about') }}">About</a></li>
+                <li class="active"><a href="">Contact</a></li>
+                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
                 
               </ul>
             </nav>
