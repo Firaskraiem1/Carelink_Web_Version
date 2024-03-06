@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-=======
 
 <!-- Mirrored from smarttemplates.net/medikit/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Apr 2019 00:51:52 GMT -->
->>>>>>> gestion_evenement
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1" />
@@ -20,138 +17,13 @@
 <link rel="stylesheet" href="{{asset('css/ion.rangeSlider.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/dashboard.min.css')}}">
 <link href="{{asset('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900')}}" rel="stylesheet">  
-<<<<<<< HEAD
-<style>
-/* CSS pour les sections horizontales */
-.section--content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.card {
-    width: calc(33.33% - 20px); /* 33.33% for displaying 3 cards per row */
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    border: 2px solid #ddd; /* Border style */
-    border-radius: 15px; /* Rounded corners for artistic appearance */
-    box-sizing: border-box;
-    text-align: center; /* Center align content */
-    position: relative; /* Position text relative to image */
-}
-
-.card img {
-    max-width: 100%; /* Limit image width */
-    max-height: 200px; /* Limit image height */
-    border-radius: 10px 10px 0 0; /* Rounded corners for top */
-}
-
-.card-content {
-    padding: 10px 20px;
-}
-
-.btn-edit,
-.btn-show,
-.btn-delete,
-.btn-back {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    margin-right: 10px; /* Add margin to create space */
-}
-
-.btn-show {
-    background-color: #17a2b8; /* Change to desired color */
-    color: #fff;
-    text-decoration: none;
-}
-
-.btn-edit {
-    background-color: #ffc107; /* Change to desired color */
-    color: #212529;
-    text-decoration: none;
-}
-
-.btn-delete {
-    background-color: #dc3545; /* Change to desired color */
-    color: #fff;
-    text-decoration: none;
-}
-
-.btn-back {
-    background-color: #ffc107;
-    color: #212529;
-    border-color: #ffc107;
-}
-
-.para-details {
-    font-weight: bold; /* Bold text */
-    font-size: 16px; /* Text size */
-    margin-top: 10px; /* Space above text */
-    display: flex; /* Center content */
-    flex-direction: column; /* Align elements in column */
-    justify-content: center; /* Center vertically */
-}
-</style>
-{% endblock %}
-=======
    {% endblock %}
->>>>>>> gestion_evenement
 </head>
 <body>
 {% block body %}
 
 <div class="dashboard-wrap">
 
-<<<<<<< HEAD
-    <header class="sidebar-header">
-        <h1 class="sidebar-header__logo">C<span>are<strong>Link</strong></span></h1>
-    </header>
-    
-    <!-- Left Sidebar -->
-    <div class="section section--sidebar" id="sidebar">
-    
-        <nav class="sidebar-menu"> 
-            <ul>
-                <li class="dashboard" class="selected"><a href=""><b>Dashboard</b></a></li>
-                <li class="components has-submenu open"><a href="#"><b><span class="submenu-arrow"></span></b>gestion Para</a>
-                    <ul class="sidebar-menu__submenu active" style="display:block;">
-                        <li ><a href="{{ path('app_zone_ad_index') }}">Zone</a></li>
-                        <li ><a href="{{ path('app_para_pharmacie_ad_index') }}">ParaPharmacie</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    
-    <!-- Content -->
-    <div class="section section--content" id="content">
-        <!-- Loop to display each parapharmacy object in a card -->
-        {% for para_pharmacie in para_pharmacies %}
-        <div class="card">
-            <div class="card-image">
-                <img src="{{ vich_uploader_asset(para_pharmacie, 'imageFile') }}" alt="{{ para_pharmacie.nomPara }}">
-            </div>
-            <div class="card-content">
-                <p><b>Nom para:</b> {{ para_pharmacie.nomPara }}</p>
-                <p><b>Email:</b> {{ para_pharmacie.email }}</p>
-                <p><b>Nombre pharmaciens:</b> {{ para_pharmacie.nbrPharmaciens }}</p>
-                <p><b>N°tel:</b> {{ para_pharmacie.numtel }}</p>
-                <p><b>Ville:</b> {{ para_pharmacie.ville ? para_pharmacie.ville.ville : '-' }}</p>
-                <p><b>Type para:</b> {{ para_pharmacie.typePara }}</p>
-                <p><b>Horraire ouverture:</b> {{ para_pharmacie.getHorraireOuverture()|date('H:i') }}</p>
-                <p><b>Horraire fermeture:</b> {{ para_pharmacie.getHorraireFermeture()|date('H:i') }}</p>
-                <!-- Add more details as needed -->
-            </div>
-            <a href="{{ path('app_para_pharmacie_ad_front_show', {'id': para_pharmacie.id}) }}" class="btn btn-show">Afficher infos</a>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
-{% block js %}
-=======
 	<header class="sidebar-header">
 		<h1 class="sidebar-header__logo">C<span>are<strong>Link</strong></span></h1>
 	</header>
@@ -1371,7 +1243,6 @@
 		</div>
  </div> 
   {% block js %}
->>>>>>> gestion_evenement
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('js/Chart.min.js')}}"></script>
 <script src="{{asset('js/chartjs-plugin-style.min.js')}}"></script>
@@ -1388,10 +1259,6 @@
 {% endblock %}
 {% endblock %}
 </body>
-<<<<<<< HEAD
-</html>
-=======
 
 <!-- Mirrored from smarttemplates.net/medikit/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 04 Apr 2019 00:52:24 GMT -->
 </html>
->>>>>>> gestion_evenement

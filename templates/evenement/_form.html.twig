@@ -1,0 +1,52 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+    {#<div class="form-group">
+        {{ form_label(form.idEvenement, "ID") }}
+        {{ form_widget(form.idEvenement, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.idEvenement) }}
+    </div>#}
+    <div class="form-group">
+        {{ form_label(form.titreEvenement, "Titre") }}
+        {{ form_widget(form.titreEvenement, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.titreEvenement) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.TypeEvenement, "Type de l'évènement") }}
+        {{ form_widget(form.TypeEvenement, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.TypeEvenement) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.lieuEvenement, "Lieu de l'évènement") }}
+        {{ form_widget(form.lieuEvenement, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.lieuEvenement) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.dateEvenement, "Date de l'évènement") }}
+        {{ form_widget(form.dateEvenement, {'attr': {'class': 'form-control', 'data-input': 'flatpickr'}}) }}
+        {{ form_errors(form.dateEvenement) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.descEvenement, 'Description') }}
+        {{ form_widget(form.descEvenement, {'attr': {'class': 'form-control', 'style': 'height: 150px;'}}) }}
+        {{ form_errors(form.descEvenement) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.idCatEvenement, 'Catégorie') }}
+        {{ form_widget(form.idCatEvenement, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <button class="btn btn-primary btn-md btn-block">{{ button_label|default('Envoyer proposition') }}</button>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_evenement_historique_index') }}">Annuler</a>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

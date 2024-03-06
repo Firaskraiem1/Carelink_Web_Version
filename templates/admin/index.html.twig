@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> gestion_evenement
 <!DOCTYPE html>
 <html lang="en">
 {% block header %}
@@ -200,13 +203,22 @@
                 <thead>
                     <tr>
                         <th>Id</th>
+<<<<<<< HEAD
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Tel</th>
+=======
+                        <th>TitreEvenement</th>
+                        <th>CategorieEvenement</th>
+                        <th>LieuEvenement</th>
+                        <th>DateEvenement</th>
+                        <th>Status</th>
+>>>>>>> gestion_evenement
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                     {% for medecin in medecins %}
                       <tr>
                           <td>{{ medecin.id}}</td>
@@ -218,6 +230,26 @@
                               <a href="{{ path('app_medecin_show', {'id': medecin.id}) }}">Détails</a>
                               <a href="{{ path('app_medecin_edit', {'id': medecin.id}) }}">Modifier</a>
                               <a href="{{ path('app_medecin_delete', {'id': medecin.id}) }}">Supprimer</a>
+=======
+                    {% for evenement in evenements %}
+                      <tr>
+                          <td>{{ evenement.id}}</td>
+                          <td>{{ evenement.titreEvenement }}</td>
+                          <td>
+                              {% if evenement.idCatEvenement is not null %}
+                                  {{ evenement.idCatEvenement.nomCategorie }}
+                              {% else %}
+                                  N/A or some default value
+                              {% endif %}
+                          </td>                          
+                          <td>{{ evenement.lieuEvenement }}</td>
+                          <td>{{ evenement.dateEvenement ? evenement.dateEvenement|date('Y-m-d') : '' }}</td>
+                          <td>{{ evenement.status }}</td>
+                          <td>
+                              <a href="{{ path('app_evenement_dashboard_show', {'id': evenement.id}) }}">Détails</a>
+                              <a href="{{ path('app_evenement_dashboard_edit', {'id': evenement.id}) }}">Modifier</a>
+                              {#<a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}">Supprimer</a>#}
+>>>>>>> gestion_evenement
                           </td>
                       </tr>
                   {% else %}
@@ -242,6 +274,7 @@
 {% endblock %}
 </body>
 
+<<<<<<< HEAD
 </html>
 =======
 {% extends 'base.html.twig' %}
@@ -265,3 +298,6 @@
 </div>
 {% endblock %}
 >>>>>>> gestion_utilisateur
+=======
+</html>
+>>>>>>> gestion_evenement

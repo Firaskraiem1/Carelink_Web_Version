@@ -1,0 +1,18 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+    <div class="form-group">
+        {{ form_label(form.nomCategorie, "Titre") }}
+        {{ form_widget(form.nomCategorie, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nomCategorie) }}
+    </div>
+
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <button class="btn btn-primary btn-md btn-block">{{ button_label|default('Ajouter') }}</button>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_categorie_evenement_dashboard_index') }}">Annuler</a>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

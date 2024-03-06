@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block css %}
+          {{ parent() }}
+        {% endblock %}
+
+</head>
+{% block title %}Evenement{% endblock %}
+
+{##############################################################}
+{#########################BODY#################################}
+{% block body %}
+<div class="site-wrap">
+
+  {% block navbar %}
+    {{ parent() }}
+  {% endblock %}
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{##############################################################}
+{#########################DETAILS###############################}
+    <div class="title-section text-center col-12 mt-5 mb-3">
+        <h2>Détails <strong class="text-primary">Évènement</strong></h2>
+    </div>
+    <div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mr-auto">
+                <div class="border text-center">
+                    <img src="{{ asset('path_to_your_event_image') }}" alt="Event Image" class="img-fluid p-5">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-black">{{ evenement.titreEvenement }}</h2>
+                <p>{{ evenement.descEvenement }}</p>
+
+                <p><strong>ID:</strong> {{ evenement.id }}</p>
+                <p><strong>Type d'événement:</strong> {{ evenement.TypeEvenement }}</p>
+                <p><strong>Lieu d'événement:</strong> {{ evenement.lieuEvenement }}</p>
+                <p><strong>Date:</strong> {{ evenement.dateEvenement ? evenement.dateEvenement|date('Y-m-d') : '' }}</p>
+                <p><strong>Catégorie:</strong> {{ evenement.idCatEvenement.nomCategorie }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+        {#<div class="container">
+            <div class="row mb-5 mt-3">
+                <div class="col-md-4">
+                    <a class="btn btn-primary btn-md btn-block" href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_evenement_index') }}">Retourner</a>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    {{ include('evenement/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>#}
+    {####################################################################}
+    {############################FOOTER##################################}
+    {% block footer %}  
+        {{ parent() }}
+    {% endblock %}
+    </div>  
+         
+    {###################################################################################}
+
+{% endblock %}
+</html>
+{% endblock %}

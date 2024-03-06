@@ -77,12 +77,18 @@
 					<ul>
 						<li class="dashboard has-submenu open"><a href="#"><b>Dashboard</b></a></li>
 						<ul class="sidebar-menu__submenu active" style="display:block;">
+<<<<<<< HEAD
 								<li><a href="{{ path('app_medecin_index') }}">Liste des évènements</a></li>
 								
 								
 								{#
 								<li><a href="{{ path('app_categorie_evenement_dashboard_index') }}">Catégorie</a></li>
 								<li class="selected"><a href="">Catégorie</a></li>}
+=======
+								<li><a href="{{ path('app_evenement_dashboard_index') }}">Liste des évènements</a></li>
+								<li><a href="{{ path('app_categorie_evenement_dashboard_index') }}">Catégorie</a></li>
+								{#<li class="selected"><a href="">Catégorie</a></li>}
+>>>>>>> gestion_evenement
 						</ul>
 						{#<li class="components has-submenu"><a href="#"><b>Components<span class="submenu-arrow"></span></b></a>
 							<ul class="sidebar-menu__submenu active" style="display:block;">
@@ -174,7 +180,11 @@
 		<div class="content-subheader">
 		
 			<div class="content-subheader__titles">
+<<<<<<< HEAD
 					<h2 class="content-subheader__title">Liste des medecins </h2>
+=======
+					<h2 class="content-subheader__title">Liste des évènements </h2>
+>>>>>>> gestion_evenement
 					{#<nav class="content-subheader__breadcrumb-menu">			
 							<ul>
 								<li><a href="dashboard.html">Dashboard</a></li>
@@ -203,9 +213,14 @@
           <div class="col-md-6">
             <div class="row mb-2">
               <div class="col-md-6 mb-3 mb-md-0">
+<<<<<<< HEAD
              {#   <a href="{{ path('app_categorie_evenement_dashboard_new') }}" class="btn btn-primary btn-md btn-block">Ajouter Catégorie</a>
               #}
 			  </div>
+=======
+                <a href="{{ path('app_categorie_evenement_dashboard_new') }}" class="btn btn-primary btn-md btn-block">Ajouter Catégorie</a>
+              </div>
+>>>>>>> gestion_evenement
             </div>
           </div>
         </div>
@@ -213,13 +228,18 @@
                 <thead>
             <tr>
                 <th>Id</th>
+<<<<<<< HEAD
                 <th>Nom</th>
 				<th>Prenom</th>
 				<th>Tel</th>
+=======
+                <th>NomCategorie</th>
+>>>>>>> gestion_evenement
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
             {% for medecin in medecins %}
                 <tr>
                     <td>{{ medecin.id }}</td>
@@ -239,13 +259,26 @@
                         <a href="{{ path('app_categorie_evenement_dashboard_edit', {'id': categorie_evenement.id}) }}">Modifier</a>
                     	#}
 					</td>
+=======
+            {% for categorie_evenement in categorie_evenements %}
+                <tr>
+                    <td>{{ categorie_evenement.id }}</td>
+                    <td>{{ categorie_evenement.nomCategorie }}</td>
+                    <td>
+                        <a href="{{ path('app_categorie_evenement_dashboard', {'id': categorie_evenement.id}) }}">Afficher</a>
+                        <a href="{{ path('app_categorie_evenement_dashboard_edit', {'id': categorie_evenement.id}) }}">Modifier</a>
+                    </td>
+>>>>>>> gestion_evenement
                 </tr>
             {% else %}
                 <tr>
                     <td colspan="4">no records found</td>
                 </tr>
             {% endfor %}
+<<<<<<< HEAD
 			
+=======
+>>>>>>> gestion_evenement
         </tbody>
             </table>
         </div>
