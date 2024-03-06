@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 {% block header %}
@@ -78,8 +77,10 @@
 					<ul>
 						<li class="dashboard has-submenu open"><a href="#"><b>Dashboard</b></a></li>
 						<ul class="sidebar-menu__submenu active" style="display:block;">
-								<li><a href="{{ path('app_evenement_dashboard_index') }}">Liste des évènements</a></li>
-								<li><a href="{{ path('app_categorie_evenement_dashboard_index') }}">Catégorie</a></li>
+								<li><a href="#">Utilisateurs</a></li>
+								<li><a >Medecins</a></li>
+                                <li><a >Patients</a></li>
+                                <li><a >Evenements</a></li>
 								{#<li class="selected"><a href="">Catégorie</a></li>}
 						</ul>
 						{#<li class="components has-submenu"><a href="#"><b>Components<span class="submenu-arrow"></span></b></a>
@@ -108,8 +109,11 @@
 			
 			<div class="content-header__user content-header__dropdown">  
 			    <div class="content-header__user-avatar content-header__dropdown-activate" data-dropdown="userdropdown">
-					<div class="content-header__user-thumb"><img src="{{asset('images/avatar-2.jpg')}}" alt="" title=""/></div>
-					<span class="content-header__user-name">Admin</span>
+					<li class="has-children">
+						<a href="#">{{ app.session.get('user').nom }}</a>
+						<a href="{{path("utilisateur_update",{'id':app.session.get('user').id})}}">Profile</a>
+						<a href="{{path("app_logout")}}">Logout</a>
+            		</li>
 			    </div>  
 				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--user-menu " id="userdropdown"> 	
 				<h3 class="dropdown-menu__subtitle">User menu</h3>
@@ -172,7 +176,7 @@
 		<div class="content-subheader">
 		
 			<div class="content-subheader__titles">
-					<h2 class="content-subheader__title">Liste des évènements </h2>
+					<h2 class="content-subheader__title">Liste des Utilisateurs </h2>
 					{#<nav class="content-subheader__breadcrumb-menu">			
 							<ul>
 								<li><a href="dashboard.html">Dashboard</a></li>
@@ -200,31 +204,28 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Tel</th>
+                        <th>Email</th>
+                        <th>Role</th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for medecin in medecins %}
+                    {% for user in users %}
                       <tr>
-                          <td>{{ medecin.id}}</td>
-                          <td>{{ medecin.nom }}</td>
-                          <td>{{ medecin.prenom}}</td>                          
-                          <td>{{ medecin.tel }}</td>
-                        
+                          <td>{{ user.id}}</td>
+                          <td>{{ user.email }}</td>                         
+                          <td>{{ user.role }}</td>
                           <td>
-                              <a href="{{ path('app_medecin_show', {'id': medecin.id}) }}">Détails</a>
-                              <a href="{{ path('app_medecin_edit', {'id': medecin.id}) }}">Modifier</a>
-                              <a href="{{ path('app_medecin_delete', {'id': medecin.id}) }}">Supprimer</a>
+                            <a href="{{ path('utilisateur_getOne', {'id': user.id}) }}">Détails</a>
+                            <a href="{{ path('admin_utilisateur_update', {'id': user.id}) }}">Modifier</a>
+                            <a href="{{ path('utilisateur_delete', {'id': user.id}) }}">Supprimer</a>
                           </td>
                       </tr>
                   {% else %}
                       <tr>
                           <td colspan="8">no records found</td>
                       </tr>
-                  {% endfor %}
+                  {% endfor %} 
                 </tbody>
             </table>
         </div>
@@ -243,25 +244,3 @@
 </body>
 
 </html>
-=======
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello AdminController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/yassi/Desktop/PIDEV-Web/web_project_upgraded/src/Controller/AdminController.php</code></li>
-        <li>Your template at <code>C:/Users/yassi/Desktop/PIDEV-Web/web_project_upgraded/templates/admin/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
->>>>>>> gestion_utilisateur
