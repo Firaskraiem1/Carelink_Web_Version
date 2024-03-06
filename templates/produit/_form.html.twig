@@ -18,12 +18,26 @@
             <td>{{ form_widget(form.stock_prod) }}</td>
             <td>{{ form_errors(form.stock_prod) }}</td>
         </tr>
+
+        <tr>
+            <th>{{ form_label(form.description, "Description:") }}</th>
+            <td>{{ form_widget(form.description) }}</td>
+            <td>{{ form_errors(form.description) }}</td>
+        </tr>
+
+        <tr>
+            <th>{{ form_label(form.image, "Image:") }}</th>
+            <td>{{ form_widget(form.image) }}</td>
+            <td>{{ form_errors(form.image) }}</td>
+        </tr>
         
-         <tr>
+        <tr>
             <th>{{ form_label(form.id_C, "Categorie:") }}</th>
             <td>{{ form_widget(form.id_C) }}</td>
             <td>{{ form_errors(form.id_C) }}</td>
         </tr>
+
+        
 
     </table>
     
@@ -35,7 +49,7 @@
             </div>
             {% else %}
           <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-md btn-block" href="{{ path('app_produit_edit',{'id':produit.id}) }}">Editer Produit</button>
+                <button class="btn btn-primary btn-md btn-block" href="{{ path('app_produit_edit',{'id':produit.id}) }}">Modifier Produit</button>
             </div>
             {% endif %}
               <div class="col-md-6">

@@ -59,6 +59,8 @@
                 <th>Nom_prod</th>
                 <th>Prix_prod</th>
                 <th>Stock_prod</th>
+                <th>Description</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -69,9 +71,14 @@
                 <td>{{ produit.nomProd }}</td>
                 <td>{{ produit.prixProd }}</td>
                 <td>{{ produit.stockProd }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.image }}</td>
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Afficher</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                    <div>
+                    {{ include('produit/_delete_form.html.twig') }}
+                </div>
                 </td>
             </tr>
         {% else %}

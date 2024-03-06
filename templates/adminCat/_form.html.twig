@@ -1,0 +1,30 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+
+    <table style="border-collapse: separate; border-spacing: 5px;">
+        <tr>
+            <th>{{ form_label(form.nom_categorie, "Nom Categorie:") }}</th>
+            <td>{{ form_widget(form.nom_categorie) }}</td>
+            <td>{{ form_errors(form.nom_categorie) }}</td>
+        </tr>
+    
+    </table>
+    
+    <div class="container">
+        <div class="row mb-3">
+        {% if button_label == "new" %} 
+            <div class="col-md-6 mb-3 mb-md-0">
+                <button class="btn btn-primary btn-md btn-block" href="{{ path('app_categorie_prod_new_admin') }}">Ajouter Categorie</button>
+            </div>
+            {% else %}
+          <div class="col-md-6 mb-3 mb-md-0">
+                <button class="btn btn-primary btn-md btn-block" href="{{ path('app_categorie_prod_edit_admin',{'id':categorie_prod.id}) }}">Modifier Categorie</button>
+            </div>
+            {% endif %}
+              <div class="col-md-6">
+                <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_categorie_prod_index_admin') }}">Annuler</a>
+            </div>
+        </div>
+    </div>
+    
+{{ form_end(form) }}
+

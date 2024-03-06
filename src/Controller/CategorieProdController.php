@@ -14,16 +14,26 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/categorie/prod')]
 class CategorieProdController extends AbstractController
 {
-    #[Route('/', name: 'app_categorie_prod_index', methods: ['GET'])]
+   /* #[Route('/', name: 'app_categorie_prod_index', methods: ['GET'])]
     public function index(CategorieProdRepository $categorieProdRepository): Response
     {
         return $this->render('categorie_prod/index.html.twig', [
             'categorie_prods' => $categorieProdRepository->findAll(),
         ]);
+    }*/
+
+    #[Route('/admin', name: 'app_categorie_prod_index_admin', methods: ['GET'])]
+    public function indexad(CategorieProdRepository $categorieProdRepository): Response
+    {
+        return $this->render('adminCat/dashboard__tables.html.twig', [
+            'categorie_prods' => $categorieProdRepository->findAll(),
+        ]);
     }
 
-    #[Route('/new', name: 'app_categorie_prod_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+   
+
+    #[Route('/new/admin', name: 'app_categorie_prod_new_admin', methods: ['GET', 'POST'])]
+    public function newad(Request $request, EntityManagerInterface $entityManager): Response
     {
         $categorieProd = new CategorieProd();
         $form = $this->createForm(CategorieProdType::class, $categorieProd);
@@ -33,25 +43,29 @@ class CategorieProdController extends AbstractController
             $entityManager->persist($categorieProd);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_categorie_prod_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_categorie_prod_index_admin', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('categorie_prod/new.html.twig', [
+        return $this->render('adminCat/dashboard__new__prod.html.twig', [
             'categorie_prod' => $categorieProd,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_categorie_prod_show', methods: ['GET'])]
-    public function show(CategorieProd $categorieProd): Response
+   
+
+    #[Route('/{id}/admin', name: 'app_categorie_prod_show_admin', methods: ['GET'])]
+    public function showad(CategorieProd $categorieProd): Response
     {
-        return $this->render('categorie_prod/show.html.twig', [
+        return $this->render('adminCat/dashboard__show__prod.html.twig', [
             'categorie_prod' => $categorieProd,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_categorie_prod_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, CategorieProd $categorieProd, EntityManagerInterface $entityManager): Response
+    
+
+    #[Route('/{id}/edit/admin', name: 'app_categorie_prod_edit_admin', methods: ['GET', 'POST'])]
+    public function editad(Request $request, CategorieProd $categorieProd, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CategorieProdType::class, $categorieProd);
         $form->handleRequest($request);
@@ -59,23 +73,26 @@ class CategorieProdController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_categorie_prod_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_categorie_prod_index_admin', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('categorie_prod/edit.html.twig', [
+        return $this->render('adminCat/dashboard__update__prod.html.twig', [
             'categorie_prod' => $categorieProd,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_categorie_prod_delete', methods: ['POST'])]
-    public function delete(Request $request, CategorieProd $categorieProd, EntityManagerInterface $entityManager): Response
+    
+
+    #[Route('/{id}/admin', name: 'app_categorie_prod_delete_admin', methods: ['POST'])]
+    public function deletead(Request $request, CategorieProd $categorieProd, EntityManagerInterface $entityManager): Response
     {
         
             $entityManager->remove($categorieProd);
             $entityManager->flush();
        
 
-        return $this->redirectToRoute('app_categorie_prod_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_categorie_prod_index_admin', [], Response::HTTP_SEE_OTHER);
     }
+    
 }

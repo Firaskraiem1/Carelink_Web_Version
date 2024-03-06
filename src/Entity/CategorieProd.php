@@ -17,8 +17,8 @@ class CategorieProd
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Category name is required")]
-    #[Assert\Regex(pattern: "/^[a-zA-Z]+$/", message: "Category name must contain only letters")]
+    #[Assert\NotBlank(message: "Nom de la Gategorie est obligatoire")]
+    #[Assert\Regex(pattern: "/^[a-zA-Z]+$/", message: "Nom de la Gategorie ne doit contenir que des lettres")]
     private ?string $nom_categorie = null;
 
     #[ORM\OneToMany(mappedBy: 'id_C', targetEntity: Produit::class)]
