@@ -20,7 +20,12 @@ class MedecinRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Medecin::class);
     }
-
+    public function paginationQuery()
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.id', 'ASC')
+            ->getQuery();
+    }
 //    /**
 //     * @return Medecin[] Returns an array of Medecin objects
 //     */
