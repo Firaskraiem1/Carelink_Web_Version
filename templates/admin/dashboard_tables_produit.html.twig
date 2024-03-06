@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{{asset('css/select2.css')}}">
     <link rel="stylesheet" href="{{asset('css/ion.rangeSlider.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/dashboard.min.css')}}">
-    <link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900')}}" rel="stylesheet"> 
-	  <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900')}}" rel="stylesheet">
+	<link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
 
   <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -26,8 +26,8 @@
 
   <link rel="stylesheet" href="{{asset('css/aos.css')}}">
 
-  <link rel="stylesheet" href="{{asset('css/style.css')}}">
-   <style>
+  <link rel="stylesheet" href="{{asset('css/style.css')}}"> 
+    <style>
         /* Custom CSS for table */
         .table {
             width: 100%;
@@ -47,7 +47,6 @@
         }
 		 .btn-show,
             .btn-edit,
-
             .btn-delete {
               display: inline-block;
               padding: 8px 16px;
@@ -62,7 +61,11 @@
               text-decoration: none;
             }
 
-           
+            .btn-edit {
+              background-color: #ffc107; /* Change to desired color */
+              color: #212529;
+              text-decoration: none;
+            }
 
             .btn-delete {
               background-color: #dc3545; /* Change to desired color */
@@ -70,27 +73,11 @@
               text-decoration: none;
             }
 			.btn-back {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #17a2b8; /* Change to desired color */
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.btn-edit {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #ffc107; /* Change to desired color */
-  color: #212529;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-   
-	
-  </style>
+      		background-color: #ffc107;
+     		color: #212529;
+      		border-color: #ffc107;
+       		}
+    </style>
     {% endblock %}
 </head>
 <body>
@@ -104,11 +91,11 @@
 			<nav class="sidebar-menu"> 
 				<ul>
 					<li class="dashboard"><a href=""><b>Dashboard</b></a></li>
-					<li class="components has-submenu open"><a href="#"><b><span class="submenu-arrow"></span></b></a>
+					<li class="components has-submenu open"><a href="#"><b>Gestion Produits<span class="submenu-arrow"></span></b></a>
 						<ul class="sidebar-menu__submenu active" style="display:block;">
 							
-							<li><a href="">Forms</a></li>
-							<li class="selected"><a href="">Tables</a></li>
+							<li><a href="{{ path('app_produit_ad_index') }}">Produits</a></li>
+							<li><a href="{{ path('app_categorie_prod_index_admin') }}">Categorie Produits</a></li>
 						</ul>
 					</li>
 							
@@ -214,30 +201,58 @@
 		</div>
 		
 
-    {##############################################################}
-    {#########################EDIT FORM #################################}
-    <div class="center-container">
-        <div class="form-container mt-3 mb-3">
-            <div class="site-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="title-section text-center col-12">
-                            <h2>Modifier <strong class="text-primary">Produit</strong></h2>
-                        </div>
-                        <form class="col-md-12" method="post" novalidate>
-                            <div class="site-blocks-table" style="max-width: 100%; overflow-x: hidden;">
-                                {{ include('admin/_form-prod.html.twig', {'button_label': 'Update'}) }}
-                            </div>
-                        </form>
-                        <div class="col-md-12 text-center" style="padding-left: 150px;padding-right: 150px;">
-                            {{ include('admin/_delete_form_prod.html.twig') }}
-                        </div>
-                    </div>
-                </div>
+		 <div class="site-section">
+      <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+            <div class="row mb-2">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <a href="{{ path('app_produit_new_admin') }}" class="btn btn-primary btn-md btn-block">Ajouter Produit</a>
+              </div>
             </div>
+          </div>
         </div>
-    </div> 
-
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              <table class="table table-bordered">
+                   
+        <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Id_prod</th>
+                <th>Nom_prod</th>
+                <th>Prix_prod</th>
+                <th>Stock_prod</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.nomProd }}</td>
+                <td>{{ produit.prixProd }}</td>
+                <td>{{ produit.stockProd }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.image }}</td>
+                <td>
+                    <a href="{{ path('app_produit_show_admin', {'id': produit.id}) }}">Afficher</a>
+                    <a href="{{ path('app_produit_edit_admin', {'id': produit.id}) }}">Modifier</a>
+                    <div>
+                    {{ include('admin/_delete_form_prod.html.twig') }}
+                </div>
+                </td>
+            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
  {% block js %}
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('js/moment.min.js')}}"></script>

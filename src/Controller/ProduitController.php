@@ -43,7 +43,7 @@ class ProduitController extends AbstractController
     #[Route('/admin', name: 'app_produit_ad_index', methods: ['GET'])]
     public function indexad(ProduitRepository $produitRepository): Response
     {
-        return $this->render('admin/dashboard__tables.html.twig', [
+        return $this->render('admin/dashboard_tables_produit.html.twig', [
             'produits' => $produitRepository->findAll(),
         ]);
     }
