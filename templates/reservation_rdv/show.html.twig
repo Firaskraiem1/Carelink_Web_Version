@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block css %}
+{{ parent() }}
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Roboto&display=swap')}}" rel="stylesheet" />
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Segoe+UI+Emoji&display=swap')}}" rel="stylesheet" />
+    <link href="{{asset('css/main.css')}}" rel="stylesheet" />
+    <style>
+ body {
+ font-family: 'Nunito', sans-serif;
+  background-color: #f8f9fa;
+ margin: 0; /* Reset default margin */
+  padding: 0; /* Reset default padding */
+    }
+
+ .site-wrap {
+ min-height: 100vh; /* Set minimum height to full viewport height */
+  display: flex;
+  flex-direction: column;
+ }
+
+ .site-footer {
+ margin-top: auto; /* Push footer to the bottom */
+   }
+.center-container {
+ flex: 1; /* Allow the center container to take up remaining space */
+ display: flex;
+  justify-content: center;
+     align-items: center;
+                }
+
+.form-container {
+                  max-width: 600px;
+                  width: 100%;
+                  padding: 20px;
+                  background-color: #ffffff;
+                  border-radius: 10px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+ </style>
+{% endblock %} 
+</head>
+{% block title %}Patient{% endblock %}
+
+{% block body %}
+<div class="site-wrap">
+<div class="site-navbar py-2">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{{ path('app_home') }}" class="js-logo-clone">
+                <img src="{{ asset('/images/CareLinkLogo.png') }}" alt="CareLink Logo" class="logo-img">
+                <strong class="text-primary">Care</strong>Link
+              </a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+    <nav class="site-navigation text-right text-md-center" role="navigation">
+        <ul class="site-menu js-clone-nav d-none d-lg-block" id="main-menu">
+            <li ><a href="{{ path('app_home') }}">Page d'accueil</a></li>
+            <li><a href="#">Parapharmacie</a></li>
+            <li class="has-children">
+                <a href="#">Produits</a>
+                <ul class="dropdown">
+                    <li><a href="#">Supplements</a></li>
+                    <li class="has-children">
+                        <a href="#">Vitamins</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Supplements</a></li>
+                            <li><a href="#">Vitamins</a></li>
+                            <li><a href="#">Diet &amp; Nutrition</a></li>
+                            <li><a href="#">Tea &amp; Coffee</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Diet &amp; Nutrition</a></li>
+                    <li><a href="#">Tea &amp; Coffee</a></li>
+                </ul>
+            </li>
+            <li class="active"><a href="{{ path('app_patient_index') }}">Patient</a>
+            <li><a href="{{ path('app_fiche_patient_index') }}">Médecin</a><li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="icons">
+  <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+  <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none">
+  <span class="icon-menu"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="title-section text-center col-12 mt-5 mb-3">
+        <h2>Votre<strong class="text-primary"> Rendez-vous</strong></h2>
+    </div>
+    <div class="center-container">
+    <div class="form-container mt-3 mb-3">
+    <div class="container">
+    
+    <table class="table" style="margin-top:50px;">
+        <tbody>
+          {% for rdv in rdvs %}
+            <tr>
+                <th>Id</th>
+                <td>{{ rdv.getId() }}</td>
+            </tr>
+            <tr>
+                <th>Date de réservation</th>
+                <td>{{ rdv.getDateRdv() |date('Y-m-d')}}</td>
+            </tr>
+             <tr>
+                <th>Motif</th>
+                <td>{{ rdv.motif }}</td>
+            </tr>
+            <tr>
+                <th>Remarques</th>
+                <td>{{ rdv.remarques }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ rdv.statut }}</td>
+            </tr>
+          {% endfor %} 
+        </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+        <div class="center-container">
+            <div class="row mb-5 mt-3" >
+                    <a class="btn btn-primary" style="margin-right:10px;" href="{{ path('app_reservation_edit', {'idPatient':idPatient,'id':id}) }}">Modifier</a>
+                    <a href="{{ path('app_reservation_listes_patient',{'id':idPatient}) }}" class="btn btn-outline-primary" style="margin-right:10px;">Retourner</a>
+                    {{ include('reservation_rdv/_deleteRdv.html.twig',{'idPatient':idPatient,'id':id}) }}
+            </div>
+        </div>
+   
+
+    
+{% block footer %}
+{{ parent() }}
+</div>
+{% endblock %}
+{% endblock %}
+</html>
+{% endblock %}

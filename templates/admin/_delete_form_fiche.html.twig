@@ -1,0 +1,19 @@
+<form method="post" action="{{ path('app_fiche_patient_delete_admin', {'id': fiche_patient.getIdFiche()}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+   
+    <button class="btn btn-delete">Supprimer</button>
+    <style>
+    .btn-delete {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #dc3545; /* Red color */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+    </style>
+</form>

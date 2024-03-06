@@ -16,25 +16,23 @@ class FichePatientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('sexe')
-            ->add('adresse')
-            ->add('Code_Postal')
-            ->add('Ville')
-            ->add('adresse')
-            ->add('date_naissance', DateType::class, [
-                'input' => 'datetime',
-                'format' => 'yyyy-MM-dd', // Format de date souhaité
-            ])
-            ->add('taille')
-            ->add('poids')
-            ->add('maladie')
             ->add('relationPatient', EntityType::class, [
                 'class' => Patient::class,
                 'placeholder' => 'selectionner un patient',
                 'choice_label' =>  function ($patient) {
                     return $patient->getPrenomP() . ' ' . $patient->getNomP();
                 },
-            ]);
+            ])
+            ->add('adresse')
+            ->add('Code_Postal')
+            ->add('Ville')
+            ->add('date_naissance', DateType::class, [
+                'input' => 'datetime',
+                'format' => 'yyyy-MM-dd', // Format de date souhaité
+            ])
+            ->add('poids')
+            ->add('taille')
+            ->add('maladie');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
