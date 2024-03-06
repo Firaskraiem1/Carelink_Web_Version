@@ -29,13 +29,6 @@ class LoginController extends AbstractController
         ]);
     }
 
-    #[Route('/medecin', name: 'app_medecin')]
-    public function indexMedecin(): Response
-    {
-        return $this->render('medecin/dashboard.html.twig', [
-            
-        ]);
-    }
 
     #[Route('/login', name: 'app_login')]
     public function index(Request $request,UtilisateurRepository $userRepo, UserPasswordHasherInterface $passwordHasher, SessionInterface $session): Response
