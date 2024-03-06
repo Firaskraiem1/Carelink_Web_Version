@@ -1,1 +1,102 @@
-<h1>edit page here</h1>
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block css %}
+            {{ parent() }}
+
+            <style>
+              <style>
+                body {
+                  font-family: 'Nunito', sans-serif;
+                  background-color: #f8f9fa;
+                  margin: 0;
+                  padding: 0;
+                }
+
+                .site-wrap {
+                  min-height: 100vh;
+                  display: flex;
+                  flex-direction: column;
+                }
+
+                .site-footer {
+                  margin-top: auto; 
+                }
+
+                .center-container {
+                  flex: 1; 
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+
+                .form-container {
+                  max-width: 600px;
+                  width: 100%;
+                  padding: 20px;
+                  background-color: #ffffff;
+                  border-radius: 10px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+        {% endblock %}
+    </head>
+
+    {% block title %}Edit Evenement{% endblock %}
+
+{##############################################################}
+{#########################BODY#################################}
+        {% block body %}
+    <div class="site-wrap">
+
+        {% block navbar %}
+          {{ parent() }}
+        {% endblock %}
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {##############################################################}
+    {#########################EDIT FORM #################################}
+    <div class="center-container">
+        <div class="form-container mt-3 mb-3">
+            <div class="site-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="title-section text-center col-12">
+                            <h2>Modifier <strong class="text-primary">Évènement</strong></h2>
+                        </div>
+                        <form class="col-md-12" method="post" novalidate>
+                            <div class="site-blocks-table" style="max-width: 100%; overflow-x: hidden;">
+                                {{ include('evenement/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+                            </div>
+                        </form>
+                        <div class="col-md-12 text-center" style="padding-left: 150px;padding-right: 150px;">
+                            {{ include('evenement/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    {% block footer %}
+          {{ parent() }}
+        {% endblock %}
+    </div>  
+         
+    {###################################################################################}
+    {% endblock %}
+</html>
+{% endblock %}

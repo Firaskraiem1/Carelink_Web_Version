@@ -1,1 +1,112 @@
-<h1>index</h1>
+
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block css %}
+  <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
+  <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+  <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+
+
+  <link rel="stylesheet" href="{{asset('css/aos.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+{% endblock %}
+</head>
+
+<body>
+{% block body %}
+  <div class="site-wrap">
+
+
+    {% block navbar %}
+        {{ parent () }}
+    {% endblock %}
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              <table class="table table-bordered">
+                   
+        
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomCategorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_evenement in categorie_evenements %}
+            <tr>
+                <td>{{ categorie_evenement.id }}</td>
+                <td>{{ categorie_evenement.nomCategorie }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_evenement_show', {'id': categorie_evenement.id}) }}">show</a>
+                    <a href="{{ path('app_categorie_evenement_edit', {'id': categorie_evenement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_evenement_new') }}">Create new</a>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% block footer %}
+        {{ parent () }}
+    {% endblock %}
+  </div>
+
+
+
+{% block js %}
+  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.js')}}"></script>
+  <script src="{{asset('js/popper.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+  <script src="{{asset('js/aos.js')}}"></script>
+
+  <script src="{{asset('js/main.js')}}"></script>
+
+{% endblock %}
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}

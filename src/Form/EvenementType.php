@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\CategorieEvenement;
 use App\Entity\Evenement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,15 +14,15 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            //->add('idEvenement')
             ->add('titreEvenement')
-            ->add('typeEvenement')
+            ->add('TypeEvenement')
             ->add('lieuEvenement')
             ->add('dateEvenement')
             ->add('descEvenement')
-            ->add('status')
             ->add('idCatEvenement', EntityType::class, [
-                'class' => Evenement::class,
-'choice_label' => 'id',
+                'class' => CategorieEvenement::class,
+                'choice_label' => 'nomCategorie',
             ])
         ;
     }

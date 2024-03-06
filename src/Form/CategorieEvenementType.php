@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\CategoryEvenement;
+use App\Entity\CategorieEvenement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,6 +12,7 @@ class CategorieEvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            //->add('idCatEvenement')
             ->add('nomCategorie')
         ;
     }
@@ -19,7 +20,7 @@ class CategorieEvenementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => CategoryEvenement::class,
+            'data_class' => CategorieEvenement::class,
         ]);
     }
 }

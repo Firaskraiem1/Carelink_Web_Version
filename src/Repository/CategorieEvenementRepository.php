@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\CategoryEvenement;
+use App\Entity\CategorieEvenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CategoryEvenement>
+ * @extends ServiceEntityRepository<CategorieEvenement>
  *
- * @method CategoryEvenement|null find($id, $lockMode = null, $lockVersion = null)
- * @method CategoryEvenement|null findOneBy(array $criteria, array $orderBy = null)
- * @method CategoryEvenement[]    findAll()
- * @method CategoryEvenement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CategorieEvenement|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CategorieEvenement|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CategorieEvenement[]    findAll()
+ * @method CategorieEvenement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CategoryEvenementRepository extends ServiceEntityRepository
+class CategorieEvenementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CategoryEvenement::class);
+        parent::__construct($registry, CategorieEvenement::class);
     }
 
 //    /**
-//     * @return CategoryEvenement[] Returns an array of CategoryEvenement objects
+//     * @return CategorieEvenement[] Returns an array of CategorieEvenement objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class CategoryEvenementRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?CategoryEvenement
+//    public function findOneBySomeField($value): ?CategorieEvenement
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

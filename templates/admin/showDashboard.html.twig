@@ -1,0 +1,76 @@
+{% extends 'admin/index.html.twig' %}
+
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <body>
+        <div class="dashboard-wrap">
+            {% block sidebar %}
+                {{ parent() }}
+            {% endblock %}
+            	<div class="section section--content" id="content">
+            {% block content_header %}
+                {{ parent()}}
+            {% endblock %}
+            <div class="content-subheader">
+		
+			<div class="content-subheader__titles">
+					<h2 class="content-subheader__title">Forms</h2>
+					<nav class="content-subheader__breadcrumb-menu">			
+							<ul>
+								<li><a href="dashboard.html">Dashboard</a></li>
+							</ul>
+					</nav>
+			</div>
+			
+			<div class="content-subheader__dropdown">
+				<span class="content-subheader__more show-more show-more--select show-more--select-gray has-dropdown" data-dropdown="moreoptions">More Options</span>
+				<nav class="dropdown-menu dropdown-menu--content dropdown-menu--subheader" id="moreoptions"> 			
+					<ul>
+						<li><a href="#">More Details</a></li>
+						<li><a href="#">View Activity</a></li>
+						<li><a href="#">Edit Settings</a></li>
+						<li><a href="#">+ Add widget</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+		</div>
+        <div class="grid grid--margin bg-white">
+        <div class="col-md-12">
+        <div class="site-blocks-table">
+            <table class="table table-bordered">
+                <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie_evenement.id }}</td>
+            </tr>
+            <tr>
+                <th>NomCategorie</th>
+                <td>{{ categorie_evenement.nomCategorie }}</td>
+            </tr>
+        </tbody>
+            </table>
+            <div class="container">
+            <div class="row mb-5 mt-3">
+                <div class="col-md-4">
+                    <a class="btn btn-primary btn-md btn-block" href="{{ path('app_categorie_evenement_dashboard_edit', {'id': categorie_evenement.id}) }}">Modifier</a>
+               </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_evenement_dashboard_index') }}">Retourner</a>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    {{ include('admin/_deleteDashboard.html.twig') }}
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+         {% block js %}
+            {{ parent() }}
+        {% endblock %}
+    </body>
+{% endblock %}

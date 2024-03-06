@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% block css %}
+    {{ parent() }}
+  {% endblock %}
+</head>
+
+<body>
+{% block body %}
+  <div class="site-wrap">
+
+  {% block navbar %}
+    {{ parent() }}
+  {% endblock %}
+
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Cart</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {##############################################################}
+  {#########################TABLE#################################}
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row mb-2">
+              <div class="col-md-6 mb-3 mb-md-0">
+                <a href="{{ path('app_evenement_new') }}" class="btn btn-primary btn-md btn-block">Proposer évènement</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              <table class="table table-bordered">                  
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>TitreEvenement</th>
+                        <th>CategorieEvenement</th>
+                        <th>LieuEvenement</th>
+                        <th>DateEvenement</th>
+                        <th>Status</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for evenement in evenements %}
+                      <tr>
+                          <td>{{ evenement.id}}</td>
+                          <td>{{ evenement.titreEvenement }}</td>
+                          <td>
+                              {% if evenement.idCatEvenement is not null %}
+                                  {{ evenement.idCatEvenement.nomCategorie }}
+                              {% else %}
+                                  N/A or some default value
+                              {% endif %}
+                          </td>                          
+                          <td>{{ evenement.lieuEvenement }}</td>
+                          <td>{{ evenement.dateEvenement ? evenement.dateEvenement|date('Y-m-d') : '' }}</td>
+                          <td>{{ evenement.status }}</td>
+                          <td>
+                              <a href="{{ path('app_evenement_details', {'id': evenement.id}) }}">Détails</a>
+                              <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
+                              {#<a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}">Supprimer</a>#}
+                          </td>
+                      </tr>
+                  {% else %}
+                      <tr>
+                          <td colspan="8">no records found</td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {####################################################################}
+  {############################FOOTER##################################}
+  {% block footer %}
+    {{ parent() }}
+  {% endblock %}
+
+  {% block js %}
+    {{ parent() }}
+  {% endblock %}
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}

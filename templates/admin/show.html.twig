@@ -1,0 +1,108 @@
+{% extends 'admin/index.html.twig' %}
+
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <body>
+        <div class="dashboard-wrap">
+            {% block sidebar %}
+                {{ parent() }}
+            {% endblock %}
+            	<div class="section section--content" id="content">
+            {% block content_header %}
+                {{ parent()}}
+            {% endblock %}
+            <div class="content-subheader">
+		
+			<div class="content-subheader__titles">
+					<h2 class="content-subheader__title">Forms</h2>
+					<nav class="content-subheader__breadcrumb-menu">			
+							<ul>
+								<li><a href="dashboard.html">Dashboard</a></li>
+							</ul>
+					</nav>
+			</div>
+			
+			<div class="content-subheader__dropdown">
+				<span class="content-subheader__more show-more show-more--select show-more--select-gray has-dropdown" data-dropdown="moreoptions">More Options</span>
+				<nav class="dropdown-menu dropdown-menu--content dropdown-menu--subheader" id="moreoptions"> 			
+					<ul>
+						<li><a href="#">More Details</a></li>
+						<li><a href="#">View Activity</a></li>
+						<li><a href="#">Edit Settings</a></li>
+						<li><a href="#">+ Add widget</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+		</div>
+
+
+        <div class="grid grid--margin bg-white">
+             <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>{{ evenement.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Titre</th>
+                        <td>{{ evenement.titreEvenement }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type d'évenement</th>
+                        <td>{{ evenement.TypeEvenement }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lieu d'évenement</th>
+                        <td>{{ evenement.lieuEvenement }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{{ evenement.dateEvenement ? evenement.dateEvenement|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ evenement.descEvenement }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{evenement.status}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="grid grid--margin">
+            <div class="col-md-12">
+                <div class="site-blocks-table">    
+                    <div class="container">
+                        <div class="row mt-3">
+                            <div class="col-md-4 mb-3">
+                                <a class="btn btn-primary btn-block" href="{{ path('app_evenement_dashboard_edit', {'id': evenement.id}) }}">Modifier</a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a class="btn btn-outline-primary btn-block" href="{{ path('app_evenement_dashboard_index') }}">Retourner</a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                {{ include('admin/_delete.html.twig') }}
+                            </div>
+                            <div class="col-md-4 offset-md-2 mb-3">
+                                <a class="btn btn-success btn-block" href="{{ path('app_evenement_approve', {'id': evenement.id}) }}">Approver</a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a class="btn btn-danger btn-block" href="{{ path('app_evenement_reject', {'id': evenement.id}) }}">Rejecter</a>
+                            </div>               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         {% block js %}
+            {{ parent() }}
+        {% endblock %}
+    </body>
+{% endblock %}
