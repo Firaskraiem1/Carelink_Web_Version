@@ -11,12 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
 
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository): Response
@@ -25,6 +26,12 @@ class ProduitController extends AbstractController
             'produits' => $produitRepository->findAll(),
         ]);
     }
+    #[Autowire]
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+    
     #[Route('/listeProduits', name: 'app_produit_liste', methods: ['GET'])]
     public function indexListe(ProduitRepository $produitRepository): Response
     {
@@ -123,45 +130,25 @@ class ProduitController extends AbstractController
     #[Route('/search', name: 'app_prod_search', methods: ['GET'])]
     public function search(Request $request): JsonResponse
     {
-        $repository = $this->entityManager->getRepository(ProduitType::class);
+        $repository = $this->entityManager->getRepository(Produit::class);
         $query = $repository->createQueryBuilder('p');
-    
-        if($request->query->get('query')) {
-            $query->andWhere('p.nom_prod LIKE :query')
+
+        if ($request->query->get('query')) {
+            $query->andWhere('p.nom_prod LIKE :query OR p.prix_prod = :query')
                 ->setParameter('query', "%{$request->query->get('query')}%");
-    
-            $query->orWhere('p.prix_prod = :prix_prod')
-                ->setParameter('query', $request->query->get('query'));
-                
-                
-        
-            // ... add other fields to search
-                
-    
-            // ... add other fields to search
-    
-            $produits = $query->getQuery()->getResult();
-    
-            // Si les résultats sont vides, retournez une réponse vide pour éviter les erreurs côté client
-            if (empty($produits)) {
-                return new JsonResponse([]);
-            }
-    
-            // Convertissez les objets produi$produit en un tableau associatif pour éviter les problèmes de sérialisation
-            $formattedproduits = [];
-            foreach ($produits as $produit) {
-                $formattedproduits[] = [
-                    'id' => $produit->getIdProd(),
-                    'nom' => $produit->getNomProd(),
-                    'prix' => $produit->getPrixProd(),
-                    // Ajoutez d'autres champs si nécessaire
-                ];
-            }
-    
-            return new JsonResponse($formattedproduits);
         }
-    
-        // Si aucune requête n'est effectuée, retournez une réponse vide
-        return new JsonResponse([]);
+
+        $produits = $query->getQuery()->getResult();
+
+        $formattedProduits = [];
+        foreach ($produits as $produit) {
+            $formattedProduits[] = [
+                'id' => $produit->getId(),
+                'nomProd' => $produit->getNomProd(),
+                'prixProd' => $produit->getPrixProd(),
+            ];
+        }
+
+        return new JsonResponse($formattedProduits);
     }
 }
