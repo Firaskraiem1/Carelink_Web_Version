@@ -24,4 +24,20 @@ class NavigationController extends AbstractController
             'controller_name' => 'NavigationController',
         ]);
     }
+
+    #[Route('/contact', name: 'app_contact')]
+    public function contact(): Response
+    {
+        return $this->render('navigation/contact.html.twig', [
+            'controller_name' => 'NavigationController',
+        ]);
+    }
+
+    #[Route('/login', name: 'app_login')]
+    public function login(): Response
+    {
+        return $this->render('navigation/login.html.twig', [
+            'controller_name' => 'NavigationController',
+        ]);
+    }
 }
