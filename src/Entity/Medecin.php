@@ -49,10 +49,10 @@ class Medecin
     private ?string $tel = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Regex(
-        pattern: '/^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)-(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/',
-        message: "Le format de horaires de consultations doit etre sous le forma hh:mm[AM|PM]-hh:mm[AM|PM]"
-    )]
+    // #[Assert\Regex(
+    //     pattern: '/^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)-(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/',
+    //     message: "Le format de horaires de consultations doit etre sous le forma hh:mm[AM|PM]-hh:mm[AM|PM]"
+    // )]
     private ?string $horairesConsultation = null;
 
     #[ORM\ManyToOne(inversedBy: 'Specialite')]
