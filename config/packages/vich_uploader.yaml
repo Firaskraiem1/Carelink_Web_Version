@@ -1,4 +1,5 @@
 vich_uploader:
+<<<<<<< HEAD
     db_driver: orm
     metadata:
       type: attribute
@@ -10,3 +11,14 @@ vich_uploader:
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
   
+=======
+  db_driver: orm
+  metadata:
+    type: attribute
+
+  mappings:
+    images:
+      uri_prefix: /images/produits
+      upload_destination: "%kernel.project_dir%/public/uploads/images"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+>>>>>>> gestion_produit
