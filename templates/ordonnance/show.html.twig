@@ -71,19 +71,19 @@
     </div>
         <div class="container">
             <div class="row mb-5 mt-3">
-                <div class="col-md-4">
-                    <a class="btn btn-primary btn-md btn-block" href="{{ path('app_ordonnance_edit', {'id': ordonnance.id}) }}">Modifier</a>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_ordonnance_index') }}">Retourner</a>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    {{ include('ordonnance/_delete_form.html.twig') }}
-                </div>
-                  <div class="col-md-4 mb-3 mb-md-0">
-                 <a href="{{ path('app_ordonnance_pdf_show', {'id': ordonnance.id}) }}" class="btn btn-show">pdf</a>
-           </div>
-            </div>
+    <div class="col-md-3">
+        <a class="btn btn-primary btn-md btn-block rounded-pill" href="{{ path('app_ordonnance_edit', {'id': ordonnance.id}) }}">Modifier</a>
+    </div>
+    <div class="col-md-3 mb-3 mb-md-0">
+        <a class="btn btn-outline-primary btn-md btn-block rounded-pill" href="{{ path('app_ordonnance_index') }}">Retourner</a>
+    </div>
+    <div class="col-md-3 mb-3 mb-md-0">
+        {{ include('ordonnance/_delete_form.html.twig') }}
+    </div>
+    <div class="col-md-3 mb-3 mb-md-0">
+        <a href="{{ path('app_ordonnance_pdf_show', {'id': ordonnance.id}) }}" class="btn btn-show btn-dark btn-md btn-block rounded-pill">PDF</a>
+    </div>
+</div>
         </div>
     {####################################################################}
     {############################FOOTER##################################}
