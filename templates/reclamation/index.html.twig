@@ -1,83 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block header %}
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1" />
+		<meta name="author" content="SmartTemplates" />
+		<meta name="description" content="medikit admin dashboard" />
+		<meta name="keywords" content="medical dashboard, HTML UI KIT, medikit" />
+		<title>CareLink</title>
+		{% block css %}
+		<link rel="stylesheet" href="{{asset('css/daterangepicker.css')}}">
+		<link rel="stylesheet" href="{{asset('css/select2.css')}}">
+		<link rel="stylesheet" href="{{asset('css/ion.rangeSlider.min.css')}}">
+		<link rel="stylesheet" href="{{asset('css/dashboard.min.css')}}">
+		<link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900')}}" rel="stylesheet"> 
+		<link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
+		<link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
+
+		<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
+		<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+		<link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
+		<link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+		<link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 
-{% block title %}Reclamation index{% endblock %}
 
-<!DOCTYPE html> <html lang="en">
+		<link rel="stylesheet" href="{{asset('css/aos.css')}}">
+		<link rel="stylesheet" href="{{asset('css/style.css')}}">
 
-<head>
-
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{% block css %}
-  <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
-
-  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
-  <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
-  <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
-  <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
-  <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
-
-
-  <link rel="stylesheet" href="{{asset('css/aos.css')}}">
-
-  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+		
+		<style>
+			{#.section--sidebar .sidebar-menu {
+			background-color: #75B239; 
+			}
+			.sidebar-header {
+            background-color: #75B239; 
+            color: #75B239; 
+        	}
+			.open {
+			background-color: #75B239; 
+			}
+			.table {
+				width: 100%;
+				border-collapse: collapse;
+				border-spacing: 0;
+				font-family: 'Source Sans Pro', sans-serif;
+			}#}
+			.table th,
+			.table td {
+				padding: 8px;
+				border: 1px solid #ddd;
+				text-align: left;
+			}
+			.table th {
+				background-color: #f2f2f2;
+				font-weight: bold;
+			}
+		</style>
+		{% endblock %}
+	</head>
 {% endblock %}
-</head>
 
-<body>
 {% block body %}
-  <div class="site-wrap">
-{% block navbar %}
-    <div class="site-navbar py-2">
+<body>
+<div class="dashboard-wrap">
+	{% block sidebar %}
+		<header class="sidebar-header">
+			<h1 class="sidebar-header__logo">C<span>are<strong>Link</strong></span></h1>
+		</header>
 
-      <div class="search-wrap">
-        <div class="container">
-          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-          <form action="#" method="post">
-            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-          </form>
-        </div>
-      </div>
+		<div class="section section--sidebar" id="sidebar">
+		
+				<nav class="sidebar-menu"> 
+					<ul>
+						<li class="dashboard has-submenu open"><a href="{{path('app_admin')}}"><b>Dashboard</b></a></li>
+						<ul class="sidebar-menu__submenu active" style="display:block;">
+                        {# href="{{ path('app_evenement_dashboard_index') }}" #}
+								<li><a href="{{path('utilisateur_all')}}">Utilisateurs</a></li>
+								{# href="{{ path('app_categorie_evenement_dashboard_index') }}" #}
+                                <li><a >Medecins</a></li>
+                                <li><a >Patients</a></li>
+                                <li><a >Evenements</a></li>
+								<li><a href="{{path('app_reclamation_index')}}">Reclamations</a></li>
+								 {# <li class="selected"><a href="">Catégorie</a></li> #}
+						</ul>
+						{#<li class="components has-submenu"><a href="#"><b>Components<span class="submenu-arrow"></span></b></a>
+							<ul class="sidebar-menu__submenu active" style="display:block;">
+								
+								<li><a href="">Forms</a></li>
+								<li class="selected"><a href="">Tables</a></li>
+							</ul>
+						</li>
+								
+						<li class="inbox"><a href="dashboard__messages.html"><b>Messages<span class="submenu-bubble">3</span></b></a></li>
+						<li class="settings"><a href="#"><b>Settings</b></a></li>#}
+					</ul>
+				</nav>
+		
+		</div>
+	{% endblock %}
 
-      <div class="container">
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="logo">
-            <div class="site-logo">
-              <a href="home.html" class="js-logo-clone"><strong class="text-primary">Care</strong>Link</a>
-            </div>
-          </div>
-          <div class="main-nav d-none d-lg-block">
-            <nav class="site-navigation text-right text-md-center" role="navigation">
-                <li ><a href="{{ path('app_home') }}">Home</a></li>
-                
-               
-               <li ><a href="{{ path('app_about') }}">About</a></li>
-                <li class="active"><a href="">Contact</a></li>
-                <li><a href="{{ path('app_login') }}">Se connecter</a></li>
-                
-              </ul>
-            </nav>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-  
-{% endblock %}
-<div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0">
-            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">Contact</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="site-section">
+	
+	<div class="section section--content" id="content">
+	{% block content_header %}
+		<header class="content-header">
+		
+			<div class="sidebar-resize"></div>
+			<div class="mobile-menu"><div class="st-burger-icon st-burger-icon--medium"><span></span></div></div>
+			
+			<div class="content-header__user content-header__dropdown">  
+			    <div class="content-header__user-avatar content-header__dropdown-activate" data-dropdown="userdropdown">
+					<li class="has-children">
+						<a href="#">{{ app.session.get('user').nom }}</a>
+						<a href="{{path("utilisateur_update",{'id':app.session.get('user').id})}}">Profile</a>
+						<a href="{{path("app_logout")}}">Logout</a>
+            		</li>
+					{# <div class="content-header__user-thumb"><img src="{{asset('images/avatar-2.jpg')}}" alt="" title=""/></div>
+					<span class="content-header__user-name">{{ app.session.get('user').nom }}</span> #}
+			    </div>  
+				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--user-menu " id="userdropdown"> 	
+				<h3 class="dropdown-menu__subtitle">User menu</h3>
+				<ul>   
+				    <li><a href="#">My profile</a></li>
+				    <li><a href="#">Activity</a></li>
+				    <li><a href="#">Switch account</a></li>
+				    <li><a href="#">Support</a></li>
+				    <li class="logout"><a href="#" class="button button--general button--red-border">Logout</a></li>
+				</ul>
+				</nav>
+			</div>
+			
+			<div class="content-header__notifications content-header__dropdown">  
+			    <div class="content-header__notifications-icon content-header__icon content-header__dropdown-activate" data-dropdown="notificationsdropdown">
+					<img src="{{asset('images/icons/icons-24-gray/notifications.png')}}" alt="" title=""/>
+					<span class="content-header__icon-bubble">6</span>
+				</div>  
+				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--notifications-menu" id="notificationsdropdown"> 			
+				<h3 class="dropdown-menu__subtitle">You have <strong>6</strong> notifications</h3>
+				<ul>    
+					<li class="d-flex justify-sb"><span class="important">IMPORTANT</span>Michael D. kidney surgery <b class="task-time">today</b></li>
+					<li class="d-flex justify-sb"><span class="important">IMPORTANT</span>FLU Alert report generated <b class="task-time">today</b></li>
+					
+					<li class="d-flex justify-sb"><span>Meeting with <strong>Dr. Joshua</strong> </span> <b class="task-time">tomorrow</b></li>
+					<li class="d-flex justify-sb"><span>Remember to create prescriptions for <strong>Alexander P.</strong></span> <b class="task-time">tomorrow</b></li>
+					<li class="d-flex justify-sb"><span><strong>Jada Sacks</strong> canceled the appointment at Cardiology, Dr. Michael V. </span> <b class="task-time">24 jan, 19</b></li>
+					<li class="d-flex justify-sb"><span>Sarah D. registered as new patient of <strong>Dr. George</strong> at Dermatology </span> <b class="task-time">28 jan, 19</b></li>
+					<li class="view-all"><a href="#" class="button button--general button--blue-border">View all</a></li>
+				</ul>
+				</nav>
+			</div>
+			
+			<div class="content-header__quicklinks content-header__dropdown">  
+			        <div class="content-header__quicklinks-icon content-header__icon content-header__dropdown-activate" data-dropdown="quicklinksdropdown">
+					<img src="{{asset('images/icons/icons-24-gray/submenu.png')}}" alt="" title=""/>
+				</div>  
+				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--quicklinks-menu" id="quicklinksdropdown"> 	
+				<h3 class="dropdown-menu__subtitle">Quick links</h3>				
+				<ul>
+				        <li><a href="#">Add new doctor</a></li>
+					<li><a href="#">Add new patient</a></li>
+					<li><a href="#">Generate reports</a></li>
+				</ul>
+				</nav>
+			</div>
+			
+			<div class="mobile-submenu"></div>
+
+			<nav class="content-header__menu">       
+				<ul>
+					<li class="appointment modal-toggle" data-openpopup="appointment"><a href="#">Make an appointment</a></li>
+					<li class="prescription modal-toggle" data-openpopup="prescription"><a href="#">Write a prescription</a></li>
+					<li class="reports modal-toggle" data-openpopup="reports"><a href="#">Generate report</a></li>
+				</ul>
+			</nav>
+			
+		</header>
+	{% endblock %}
+		<div class="content-subheader">
+		
+			<div class="content-subheader__titles">
+					<h2 class="content-subheader__title">Liste des évènements </h2>
+					{#<nav class="content-subheader__breadcrumb-menu">			
+							<ul>
+								<li><a href="dashboard.html">Dashboard</a></li>
+							</ul>
+					</nav>#}
+			</div>
+			
+			<div class="content-subheader__dropdown">
+				<span class="content-subheader__more show-more show-more--select show-more--select-gray has-dropdown" data-dropdown="moreoptions">More Options</span>
+				<nav class="dropdown-menu dropdown-menu--content dropdown-menu--subheader" id="moreoptions"> 			
+					<ul>
+						<li><a href="#">More Details</a></li>
+						<li><a href="#">View Activity</a></li>
+						<li><a href="#">Edit Settings</a></li>
+						<li><a href="#">+ Add widget</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+		</div>
+{##########################################################################################################################}
+{##########################################################################################################################}
+		 
+		<div class="grid grid--margin bg-white">
+		<div class="site-section">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -114,75 +243,17 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
-    <a href="{{ path('app_reclamation_new') }}">Create new</a>
-    
-    
-    {% endblock %}
-  </div>
- <footer class="site-footer bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-
-            <div class="block-7">
-              <h3 class="footer-heading mb-4">About <strong class="text-primary">Pharmative</strong></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
-                sed dolorum excepturi iure eaque, aut unde.</p>
-            </div>
-
-          </div>
-          <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
-            <h3 class="footer-heading mb-4">Navigation</h3>
-            <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
-            </ul>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="block-5 mb-5">
-              <h3 class="footer-heading mb-4">Contact Info</h3>
-              <ul class="list-unstyled">
-                <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-                <li class="email">emailaddress@domain.com</li>
-              </ul>
-            </div>
-
-
-          </div>
-        </div>
-        <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-              Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
-              with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
-                class="text-primary">Colorlib</a>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </footer>
-
-
-{% block js %}
-  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-  <script src="{{asset('js/jquery-ui.js')}}"></script>
-  <script src="{{asset('js/popper.min.js')}}"></script>
-  <script src="{{asset('js/bootstrap.min.js')}}"></script>
-  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
-  <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
-  <script src="{{asset('js/aos.js')}}"></script>
-
-  <script src="{{asset('js/main.js')}}"></script>
+ {% block js %}
+<script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('js/moment.min.js')}}"></script>
+<script src="{{asset('js/select2.min.js')}}"></script>
+<script src="{{asset('js/daterangepicker.min.js')}}"></script>
+<script src="{{asset('js/ion.rangeSlider.min.js')}}"></script>
+<script src="{{asset('js/jquery.dashboard-custom.js')}}"></script>
 {% endblock %}
-
+{% endblock %}
 </body>
+
 </html>

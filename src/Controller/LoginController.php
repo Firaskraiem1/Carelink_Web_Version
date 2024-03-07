@@ -41,6 +41,9 @@ class LoginController extends AbstractController
             $email = $form->get('email')->getData();
             $password = $form->get('password')->getData();
             $user = $userRepo->findOneBy(["email"=>$email]);
+            if (!($user->isActive())){
+            $this->render('navigation/inactive.html.twig', []);
+            }
             if($user && $passwordHasher->isPasswordValid($user, $password)){
                 $session->set('user',$user);
                 if($user->getRole() == "ROLE_ADMIN"){
@@ -58,7 +61,7 @@ class LoginController extends AbstractController
             }
         }
 
-        return $this->render('login/index.html.twig', [
+        return $this->render('navigation/login.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -80,7 +80,7 @@
 								<li><a href="#">Utilisateurs</a></li>
 								<li><a >Medecins</a></li>
                                 <li><a >Patients</a></li>
-                                <li><a >Evenements</a></li>
+                                <li ><a href="{{ path('app_evenement_dashboard_index')}}">Evenements</a></li>
 								{#<li class="selected"><a href="">Catégorie</a></li>}
 						</ul>
 						{#<li class="components has-submenu"><a href="#"><b>Components<span class="submenu-arrow"></span></b></a>
@@ -206,6 +206,7 @@
                         <th>Id</th>
                         <th>Email</th>
                         <th>Role</th>
+						<th>Status</th>
                         <th>actions</th>
                     </tr>
                 </thead>
@@ -213,12 +214,18 @@
                     {% for user in users %}
                       <tr>
                           <td>{{ user.id}}</td>
-                          <td>{{ user.email }}</td>                         
+                          <td>{{ user.email }}</td>     
                           <td>{{ user.role }}</td>
+						  <td>{{ user.active }}</td>                    
                           <td>
                             <a href="{{ path('utilisateur_getOne', {'id': user.id}) }}">Détails</a>
                             <a href="{{ path('admin_utilisateur_update', {'id': user.id}) }}">Modifier</a>
                             <a href="{{ path('utilisateur_delete', {'id': user.id}) }}">Supprimer</a>
+							{% if user.active %}
+							<a href="{{ path('app_bloque_user', {'id': user.id}) }}">Désactiver</a>
+							{% else %}
+							<a href="{{ path('app_debloque_user', {'id': user.id}) }}">Activer</a>
+							{% endif %}
                           </td>
                       </tr>
                   {% else %}

@@ -194,41 +194,46 @@
 		</div>
 {##########################################################################################################################}
 {##########################################################################################################################}
-		 
 		 <div class="grid grid--margin bg-white">
-		 <div class="row">
-          <div class="col-md-6">
-            <div class="row mb-2">
-              <div class="col-md-6 mb-3 mb-md-0">
-                <a href="{{ path('app_categorie_evenement_dashboard_new') }}" class="btn btn-primary btn-md btn-block">Ajouter Catégorie</a>
-              </div>
-            </div>
-          </div>
-        </div>
              <table class="table">
                 <thead>
-            <tr>
-                <th>Id</th>
-                <th>NomCategorie</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for categorie_evenement in categorie_evenements %}
-                <tr>
-                    <td>{{ categorie_evenement.id }}</td>
-                    <td>{{ categorie_evenement.nomCategorie }}</td>
-                    <td>
-                        <a href="{{ path('app_categorie_evenement_dashboard', {'id': categorie_evenement.id}) }}">Afficher</a>
-                        <a href="{{ path('app_categorie_evenement_dashboard_edit', {'id': categorie_evenement.id}) }}">Modifier</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="4">no records found</td>
-                </tr>
-            {% endfor %}
-        </tbody>
+                    <tr>
+                        <th>Id</th>
+                        <th>TitreEvenement</th>
+                        <th>CategorieEvenement</th>
+                        <th>LieuEvenement</th>
+                        <th>DateEvenement</th>
+                        <th>Status</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for evenement in evenements %}
+                      <tr>
+                          <td>{{ evenement.id}}</td>
+                          <td>{{ evenement.titreEvenement }}</td>
+                          <td>
+                              {% if evenement.idCatEvenement is not null %}
+                                  {{ evenement.idCatEvenement.nomCategorie }}
+                              {% else %}
+                                  N/A or some default value
+                              {% endif %}
+                          </td>                          
+                          <td>{{ evenement.lieuEvenement }}</td>
+                          <td>{{ evenement.dateEvenement ? evenement.dateEvenement|date('Y-m-d') : '' }}</td>
+                          <td>{{ evenement.status }}</td>
+                          <td>
+                              <a href="{{ path('app_evenement_dashboard_show', {'id': evenement.id}) }}">Détails</a>
+                              <a href="{{ path('app_evenement_dashboard_edit', {'id': evenement.id}) }}">Modifier</a>
+                              {#<a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}">Supprimer</a>#}
+                          </td>
+                      </tr>
+                  {% else %}
+                      <tr>
+                          <td colspan="8">no records found</td>
+                      </tr>
+                  {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>

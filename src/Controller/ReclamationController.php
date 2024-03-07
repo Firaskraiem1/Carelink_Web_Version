@@ -30,6 +30,7 @@ class ReclamationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reclamation->setStatut('en cours');
             $entityManager->persist($reclamation);
             $entityManager->flush();
 

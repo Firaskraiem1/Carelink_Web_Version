@@ -57,6 +57,7 @@ class UtilisateurController extends AbstractController
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setMotDePasse($hashedPassword);
             $user->setRole("NULL");
+            $user->setActive(true);
             $entitymanager->persist($user);
             $entitymanager->flush();
             $session->set('user',$user);
@@ -68,13 +69,15 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/utilisateur/update/{id}', name: 'utilisateur_update')]
-    public function updateUser(SessionInterface $session, $id,ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
+    public function updateUser(SessionInterface $session, $id,ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request,UserPasswordHasherInterface $passwordHasher): Response
     {
         $em = $managerRegistry->getManager();
         $user = $userRepo->find($id);
         $form = $this->createForm(RegisterType::class,$user);
         $form->handleRequest($request);
         if($form->isSubmitted()){
+            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setMotDePasse($hashedPassword);
             $em->persist($user);
             $em->flush();
             // $action= $session->get('user')->role;

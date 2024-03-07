@@ -108,7 +108,12 @@
             {{ form_widget(form.motDePasse, { 'attr': {'class': 'form-control', 'type': 'password'} }) }}
             {{ form_errors(form.motDePasse) }}
         </div>
-        <button type="submit">Modifier</button>
+        <div class="form-group row">
+                    <div class="col-lg-12">
+                      <input type="submit" class="btn btn-primary btn-lg btn-block" value="update">
+                      <button href="{{ path('app_home')}}" class="btn  btn-lg btn-block" value="Cancel">
+                    </div>
+                  </div>
     {{ form_end(form) }}
 </form>
                 </div>

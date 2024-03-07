@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Form\UtilisateurType;
 use App\Repository\UtilisateurRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,4 +44,23 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/bloque/{id}', name: 'app_bloque_user')]
+    public function bloquer($id,UtilisateurRepository $userRepo, ManagerRegistry $managerRegistry): Response
+    {
+        $em = $managerRegistry->getManager();
+        $user=$userRepo->find($id);
+        $user->setActive(false);
+        $em->flush();
+        return $this->redirectToRoute('utilisateur_all');
+    }
+
+    #[Route('/admin/debloque/{id}', name: 'app_debloque_user')]
+    public function debloquer($id,UtilisateurRepository $userRepo, ManagerRegistry $managerRegistry): Response
+    {
+        $em = $managerRegistry->getManager();
+        $user=$userRepo->find($id);
+        $user->setActive(true);
+        $em->flush();
+        return $this->redirectToRoute('utilisateur_all');
+    }
 }

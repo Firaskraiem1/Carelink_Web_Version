@@ -33,10 +33,10 @@ class NavigationController extends AbstractController
         ]);
     }
 
-    #[Route('/login', name: 'app_login')]
-    public function login(): Response
+    #[Route('/espace', name: 'app_espace')]
+    public function gererEspace(): Response
     {
-        return $this->render('navigation/login.html.twig', [
+        return $this->render('navigation/Espace.html.twig', [
             'controller_name' => 'NavigationController',
         ]);
     }

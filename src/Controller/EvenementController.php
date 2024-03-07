@@ -35,7 +35,7 @@ class EvenementController extends AbstractController
     #[Route('/dashboard', name: 'app_evenement_dashboard_index', methods: ['GET'])]
     public function indexDashboard(EvenementRepository $evenementRepository): Response
     {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('evenement/evenementDashboard.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
     }

@@ -53,6 +53,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Reclamation::class, mappedBy: 'idUser')]
     private Collection $reclamations;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $idRole = null;
+
+    #[ORM\Column]
+    private ?bool $active = true;
+
     
 
     public function __construct()
@@ -176,17 +182,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getReclamation(): ?Reclamation
-    {
-        return $this->reclamation;
-    }
+    // public function getReclamation(): ?Reclamation
+    // {
+    //     return $this->reclamation;
+    // }
 
-    public function setReclamation(?Reclamation $reclamation): static
-    {
-        $this->reclamation = $reclamation;
+    // public function setReclamation(?Reclamation $reclamation): static
+    // {
+    //     $this->reclamation = $reclamation;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Reclamation>
@@ -214,6 +220,30 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $reclamation->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdRole(): ?int
+    {
+        return $this->idRole;
+    }
+
+    public function setIdRole(?int $idRole): static
+    {
+        $this->idRole = $idRole;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
 
         return $this;
     }
