@@ -13,8 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Form\SearchFormType; 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+
 
 #[Route('/para/pharmacie')]
 class ParaPharmacieController extends AbstractController
@@ -317,41 +316,7 @@ public function newDash(Request $request, EntityManagerInterface $entityManager,
       return $list;
   
     }
-    #[Route('/pdf/{id}', name: 'app_para_pharmacie_pdf_show')]
-    public function pdfShow(ParaPharmacie $paraPharmacie): Response 
-    {
-        // Création des options de Dompdf pour autoriser le chargement d'images externes
-        $options = new Options();
-        $options->set('isRemoteEnabled', true);  
-    
-        // Création de l'instance Dompdf avec les options configurées
-        $dompdf = new Dompdf($options);
-    
-        // Rendu du template Twig avec les données de la ParaPharmacie
-        $html = $this->renderView('para_pharmacie/pdf.html.twig', [
-            'para_pharmacie' => $paraPharmacie
-        ]);
-    
-        // Chargement du HTML dans Dompdf
-        $dompdf->loadHtml($html);
-    
-        // Définition du format de papier
-        $dompdf->setPaper('A4', 'portrait');
-    
-        // Rendu du PDF
-        $dompdf->render();
-    
-        // Retour de la réponse HTTP avec le contenu PDF
-        return new Response(
-            $dompdf->output(),
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="' . $paraPharmacie->getNomPara() . '.pdf"',
-            ]
-        );
-    }
-    
+   
 
 
 

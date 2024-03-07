@@ -8,11 +8,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-<<<<<<< HEAD
-/composer.json
-=======
 /composer.json 
->>>>>>> gestion_utilisateur
 /composer.lock
 /config/bundles.php
 /symfony.lock
