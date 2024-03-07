@@ -1,53 +1,3 @@
-{# {% extends 'base.html.twig' %}
-
-{% block title %}Ordonnance{% endblock %}
-
-{% block body %}
-    <h1>Ordonnance</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ ordonnance.id }}</td>
-            </tr>
-            <tr>
-                <th>Patient</th>
-                <td>{{ ordonnance.patient }}</td>
-            </tr>
-            <tr>
-                <th>Email_patient</th>
-                <td>{{ ordonnance.emailPatient }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ ordonnance.date ? ordonnance.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ ordonnance.description }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_ordonnance_index') }}">back to list</a>
-
-    <a href="{{ path('app_ordonnance_edit', {'id': ordonnance.id}) }}">edit</a>
-
-    {{ include('ordonnance/_delete_form.html.twig') }}
-{% endblock %}
-
-
-
-
- #}
-
-
-
-
-
-
-
 
 
 
@@ -130,6 +80,9 @@
                 <div class="col-md-4 mb-3 mb-md-0">
                     {{ include('ordonnance/_delete_form.html.twig') }}
                 </div>
+                  <div class="col-md-4 mb-3 mb-md-0">
+                 <a href="{{ path('app_ordonnance_pdf_show', {'id': ordonnance.id}) }}" class="btn btn-show">pdf</a>
+           </div>
             </div>
         </div>
     {####################################################################}

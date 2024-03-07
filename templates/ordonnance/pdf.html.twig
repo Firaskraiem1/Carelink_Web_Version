@@ -1,0 +1,64 @@
+{# templates/ordonnance/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    {{ parent() }}
+    <style>
+        /* Add your custom CSS styles here */
+        /* Example styles */
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            color: #48b759;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        .table th, .table td {
+            padding: 15px;
+            font-size: 18px;
+            border: 1px solid #48b759;
+        }
+
+        .table th {
+            color: #48b759;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="prescription-details">
+        <h1>Prescription Details</h1>
+
+        <div class="prescription-info">
+            <div class="info-item">
+                <span class="label">Patient:</span>
+                <span class="value">{{ ordonnance.patient }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Email Patient:</span>
+                <span class="value">{{ ordonnance.emailPatient }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Date:</span>
+                <span class="value">{{ ordonnance.date|date('Y-m-d') }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Description:</span>
+                <span class="value">{{ ordonnance.description }}</span>
+            </div>
+            <!-- Add other fields as needed -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
