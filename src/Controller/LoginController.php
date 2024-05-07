@@ -41,24 +41,23 @@ class LoginController extends AbstractController
             $email = $form->get('email')->getData();
             $password = $form->get('password')->getData();
             $user = $userRepo->findOneBy(["email"=>$email]);
-            if (!($user->isActive())){
-            $this->render('navigation/inactive.html.twig', []);
-            }
-            if($user && $passwordHasher->isPasswordValid($user, $password)){
-                $session->set('user',$user);
-                if($user->getRole() == "ROLE_ADMIN"){
-                    return $this->redirectToRoute('app_admin');
+                if($user && $passwordHasher->isPasswordValid($user, $password)){
+                    if($user)
+                    $session->set('user',$user);
+                    if($user->getRole() == "ROLE_ADMIN"){
+                        return $this->redirectToRoute('app_admin');
+                    }
+                    if($user->getRole() == "ROLE_PATIENT"){
+                        return $this->redirectToRoute('app_patient');
+                    }
+                    if($user->getRole() == "ROLE_MEDECIN"){
+                        return $this->redirectToRoute('app_medecin');
+                    }
+                    return $this->redirectToRoute('app_home');
+                }else{
+                    return $this->redirectToRoute('app_login');
                 }
-                if($user->getRole() == "ROLE_PATIENT"){
-                    return $this->redirectToRoute('app_patient');
-                }
-                if($user->getRole() == "ROLE_MEDECIN"){
-                    return $this->redirectToRoute('app_medecin');
-                }
-                return $this->redirectToRoute('app_home');
-            }else{
-                return $this->redirectToRoute('app_login');
-            }
+            
         }
 
         return $this->render('navigation/login.html.twig', [
