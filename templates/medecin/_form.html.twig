@@ -1,27 +1,14 @@
-
-{#{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_widget(form) }}
-    {{form_errors(form.nom)}}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
-#}
-
-{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
-    {#<div class="form-group">
-        {{ form_label(form.idEvenement, "ID") }}
-        {{ form_widget(form.idEvenement, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.idEvenement) }}
-    </div>#}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     <div class="form-group">
-        {{ form_label(form.nom, "Nom") }}
-        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.nom) }}
+        {{ form_label(form.nomDeCabinet, "Nom de Cabinet") }}
+        {{ form_widget(form.nomDeCabinet, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nomDeCabinet) }}
     </div>
 
     <div class="form-group">
-        {{ form_label(form.prenom, "Prenom") }}
-        {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.prenom) }}
+        {{ form_label(form.tel, "Numéro de téléphone") }}
+        {{ form_widget(form.tel, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.tel) }}
     </div>
 
     <div class="form-group">
@@ -31,26 +18,32 @@
     </div>
 
     <div class="form-group">
-        {{ form_label(form.tel, "Numero de tel") }}
-        {{ form_widget(form.tel, {'attr': {'class': 'form-control', 'data-input': 'flatpickr'}}) }}
-        {{ form_errors(form.tel) }}
+        {{ form_label(form.email, "Email") }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.email) }}
     </div>
 
     <div class="form-group">
-        {{ form_label(form.horairesConsultation, 'Horaires de consultation') }}
-        {{ form_widget(form.horairesConsultation, {'attr': {'class': 'form-control', 'placeholder': 'hhAM-hhPM'}}) }}
-        {{ form_errors(form.horairesConsultation) }}
+        {{ form_label(form.heures, "Horaires d'ouverture") }}
+        {{ form_widget(form.heures, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.heures) }}
     </div>
-<div class="form-group">
-        {{ form_label(form.idSpecialite, 'specialite') }}
-        {{ form_widget(form.idSpecialite, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.idSpecialite) }}
+
+    <div class="form-group">
+        {{ form_label(form.licenceMedicalId, "ID de Licence Médicale") }}
+        {{ form_widget(form.licenceMedicalId, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.licenceMedicalId) }}
     </div>
+
+ 
+
+    
+
 
     <div class="container">
         <div class="row mb-3">
             <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-md btn-block">{{ button_label|default('Ajouter') }}</button>
+                <button class="btn btn-primary btn-md btn-block">{{ button_label|default('Enregistrer') }}</button>
             </div>
             <div class="col-md-6">
                 <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_medecin_index') }}">Annuler</a>
