@@ -21,8 +21,8 @@ class Commentaire
     #[ORM\ManyToOne(inversedBy: 'user')]
     private ?Evenement $evenement = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?Utilisateur $user = null;
+    // #[ORM\ManyToOne(inversedBy: 'commentaires')]
+    // private ?Utilisateur $user = null;
 
     public function getId(): ?int
     {
@@ -56,15 +56,15 @@ class Commentaire
         return $this;
     }
 
-    public function getUser(): ?Utilisateur
-    {
-        return $this->user;
-    }
+    // public function getUser(): ?Utilisateur
+    // {
+    //     return $this->user;
+    // }
 
-    public function setUser(?Utilisateur $user): static
-    {
-        $this->user = $user;
+    // public function setUser(?Utilisateur $user): static
+    // {
+    //     $this->user = $user;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

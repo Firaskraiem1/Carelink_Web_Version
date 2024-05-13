@@ -10,28 +10,29 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ORM\Table(name: "user")]
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    // #[ORM\GeneratedValue]
+    #[ORM\Column(type:"string" , length:255 , name:"email")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name:'firstname')]
     #[Assert\NotBlank(message: "Le nom est obligatoire")]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name:'lastname')]
     #[Assert\NotBlank(message: "Le prenom est obligatoire")]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,unique:true,name:"image")]
     #[Assert\NotBlank(message: "L'email est obligatoire")]
     #[Assert\Email(message: "L'email '{{ value }}' n'est pas valide.")]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name:'password')]
     #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
     #[Assert\Length(
     min: 8,
@@ -47,24 +48,24 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     // #[Assert\NotBlank(message: "]
     private ?string $role = null;
 
-    #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'user')]
-    private Collection $commentaires;
+    // #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'user')]
+    // private Collection $commentaires;
 
-    #[ORM\OneToMany(targetEntity: Reclamation::class, mappedBy: 'idUser')]
-    private Collection $reclamations;
+    // #[ORM\OneToMany(targetEntity: Reclamation::class, mappedBy: 'idUser')]
+    // private Collection $reclamations;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $idRole = null;
-
-    #[ORM\Column]
+    #[ORM\Column(name:"access")]
     private ?bool $active = true;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $phone = null;
 
     
 
     public function __construct()
     {
-        $this->commentaires = new ArrayCollection();
-        $this->reclamations = new ArrayCollection();
+        // $this->commentaires = new ArrayCollection();
+        // $this->reclamations = new ArrayCollection();
     }
 
     public function getRoles(): array
@@ -155,32 +156,32 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Commentaire>
      */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
+    // public function getCommentaires(): Collection
+    // {
+    //     return $this->commentaires;
+    // }
 
-    public function addCommentaire(Commentaire $commentaire): static
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires->add($commentaire);
-            $commentaire->setUser($this);
-        }
+    // public function addCommentaire(Commentaire $commentaire): static
+    // {
+    //     if (!$this->commentaires->contains($commentaire)) {
+    //         $this->commentaires->add($commentaire);
+    //         $commentaire->setUser($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCommentaire(Commentaire $commentaire): static
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getUser() === $this) {
-                $commentaire->setUser(null);
-            }
-        }
+    // public function removeCommentaire(Commentaire $commentaire): static
+    // {
+    //     if ($this->commentaires->removeElement($commentaire)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($commentaire->getUser() === $this) {
+    //             $commentaire->setUser(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     // public function getReclamation(): ?Reclamation
     // {
@@ -197,44 +198,32 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Reclamation>
      */
-    public function getReclamations(): Collection
-    {
-        return $this->reclamations;
-    }
+    // public function getReclamations(): Collection
+    // {
+    //     return $this->reclamations;
+    // }
 
-    public function addReclamation(Reclamation $reclamation): static
-    {
-        if (!$this->reclamations->contains($reclamation)) {
-            $this->reclamations->add($reclamation);
-            $reclamation->setIdUser($this);
-        }
+    // public function addReclamation(Reclamation $reclamation): static
+    // {
+    //     if (!$this->reclamations->contains($reclamation)) {
+    //         $this->reclamations->add($reclamation);
+    //         $reclamation->setIdUser($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeReclamation(Reclamation $reclamation): static
-    {
-        if ($this->reclamations->removeElement($reclamation)) {
-            // set the owning side to null (unless already changed)
-            if ($reclamation->getIdUser() === $this) {
-                $reclamation->setIdUser(null);
-            }
-        }
+    // public function removeReclamation(Reclamation $reclamation): static
+    // {
+    //     if ($this->reclamations->removeElement($reclamation)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($reclamation->getIdUser() === $this) {
+    //             $reclamation->setIdUser(null);
+    //         }
+    //     }
 
-        return $this;
-    }
-
-    public function getIdRole(): ?int
-    {
-        return $this->idRole;
-    }
-
-    public function setIdRole(?int $idRole): static
-    {
-        $this->idRole = $idRole;
-
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function isActive(): ?bool
     {
@@ -244,6 +233,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActive(bool $active): static
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): static
+    {
+        $this->phone = $phone;
 
         return $this;
     }
