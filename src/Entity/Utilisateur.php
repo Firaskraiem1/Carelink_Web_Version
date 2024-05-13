@@ -46,7 +46,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     // #[Assert\NotBlank(message: "]
-    private ?string $role = null;
+    public ?string $role = null;
 
     // #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'user')]
     // private Collection $commentaires;
@@ -55,10 +55,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     // private Collection $reclamations;
 
     #[ORM\Column(name: "access")]
-    private ?bool $active = true;
+    public ?bool $active = true;
 
     #[ORM\Column(length: 30, nullable: true)]
-    private ?string $phone = null;
+    public ?string $phone = null;
 
 
 
