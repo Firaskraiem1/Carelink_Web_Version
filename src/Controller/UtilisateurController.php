@@ -19,7 +19,7 @@ class UtilisateurController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('base.html.twig',[
+        return $this->render('base.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
@@ -28,54 +28,54 @@ class UtilisateurController extends AbstractController
     public function getAllUsers(UtilisateurRepository $userRepo): Response
     {
         $users = $userRepo->findAll();
-        return $this->render('utilisateur/list.html.twig',[
+        return $this->render('utilisateur/list.html.twig', [
             'users' => $users,
         ]);
     }
 
     #[Route('/utilisateur/get/{id}', name: 'utilisateur_getOne')]
-    public function getUserById($id,UtilisateurRepository $userRepo): Response
+    public function getUserById($id, UtilisateurRepository $userRepo): Response
     {
         $user = $userRepo->find($id);
         if ($user == null) {
             throw $this->createNotFoundException('Ce utilisateur n\'existe pas');
         }
-        return $this->render('utilisateur/user.html.twig',[
+        return $this->render('utilisateur/user.html.twig', [
             'user' => $user,
         ]);
     }
 
     #[Route('/utilisateur/add', name: 'app_add_utilisateur')]
-    public function addUser( Request $request, ManagerRegistry $managerRegistry, UserPasswordHasherInterface $passwordHasher,SessionInterface $session): Response
+    public function addUser(Request $request, ManagerRegistry $managerRegistry, UserPasswordHasherInterface $passwordHasher, SessionInterface $session): Response
     {
         $entitymanager = $managerRegistry->getManager();
         $user = new Utilisateur();
-        $form = $this->createForm(RegisterType::class,$user);
+        $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setId($form->get('email')->getData());
             $user->setMotDePasse($hashedPassword);
-            $user->setRole("NULL");
+            $user->setRole("USER");
             $user->setActive(true);
             $entitymanager->persist($user);
             $entitymanager->flush();
-            $session->set('user',$user);
+            $session->set('user', $user);
             return $this->redirectToRoute('app_home');
         }
-        return $this->renderForm('Utilisateur/newUser.html.twig',[
-            'form'=>$form,
+        return $this->renderForm('Utilisateur/newUser.html.twig', [
+            'form' => $form,
         ]);
     }
 
     #[Route('/utilisateur/update/{id}', name: 'utilisateur_update')]
-    public function updateUser(SessionInterface $session, $id,ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request,UserPasswordHasherInterface $passwordHasher): Response
+    public function updateUser(SessionInterface $session, $id, ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $em = $managerRegistry->getManager();
         $user = $userRepo->find($id);
-        $form = $this->createForm(RegisterType::class,$user);
+        $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
-        if($form->isSubmitted()){
+        if ($form->isSubmitted()) {
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setMotDePasse($hashedPassword);
             $em->persist($user);
@@ -86,15 +86,15 @@ class UtilisateurController extends AbstractController
             // }
             return $this->redirectToRoute("utilisateur_update", ['id' => $user->getId()]);
         }
-        return $this->renderForm('utilisateur/profile.html.twig',[
+        return $this->renderForm('utilisateur/profile.html.twig', [
             'form' => $form,
         ]);
     }
 
-    
+
 
     #[Route('/utilisateur/delete/{id}', name: 'utilisateur_delete')]
-    public function deleteUser($id, ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo,Request $request): Response
+    public function deleteUser($id, ManagerRegistry $managerRegistry, UtilisateurRepository $userRepo, Request $request): Response
     {
         $em = $managerRegistry->getManager();
         $user = $userRepo->find($id);

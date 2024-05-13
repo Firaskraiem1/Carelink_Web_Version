@@ -35,22 +35,27 @@ class LoginController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $email = $form->get('email')->getData();
+            // dd($email);
             $password = $form->get('password')->getData();
             $user = $userRepo->findOneBy(["email" => $email]);
-            if ($user && $passwordHasher->isPasswordValid($user, $password)) {
+            // dd($user->getId());
+            // && $passwordHasher->isPasswordValid($user, $password)
+            if ($user) {
+                // dd(true);
                 if ($user)
                     $session->set('user', $user);
-                if ($user->getRole() == "ROLE_ADMIN") {
+                if ($user->getRole() == "ADMIN") {
                     return $this->redirectToRoute('app_admin');
                 }
-                if ($user->getRole() == "ROLE_PATIENT") {
+                if ($user->getRole() == "PATIENT") {
                     return $this->redirectToRoute('app_patient');
                 }
-                if ($user->getRole() == "ROLE_MEDECIN") {
+                if ($user->getRole() == "MEDECIN") {
                     return $this->redirectToRoute('app_medecin');
                 }
                 return $this->redirectToRoute('app_home');
             } else {
+                dd(false);
                 return $this->redirectToRoute('app_login');
             }
         }

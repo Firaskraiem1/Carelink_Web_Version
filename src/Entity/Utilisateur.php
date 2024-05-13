@@ -16,31 +16,31 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     // #[ORM\GeneratedValue]
-    #[ORM\Column(type:"string" , length:255 , name:"email")]
-    private ?int $id = null;
+    #[ORM\Column(type: "string", length: 255, name: "email")]
+    private ?string $id = null;
 
-    #[ORM\Column(length: 255, name:'firstname')]
+    #[ORM\Column(length: 255, name: 'firstname')]
     #[Assert\NotBlank(message: "Le nom est obligatoire")]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255, name:'lastname')]
+    #[ORM\Column(length: 255, name: 'lastname')]
     #[Assert\NotBlank(message: "Le prenom est obligatoire")]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255,unique:true,name:"image")]
+    #[ORM\Column(length: 255, unique: true, name: "image")]
     #[Assert\NotBlank(message: "L'email est obligatoire")]
     #[Assert\Email(message: "L'email '{{ value }}' n'est pas valide.")]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255, name:'password')]
+    #[ORM\Column(length: 255, name: 'password')]
     #[Assert\NotBlank(message: "Le mot de passe est obligatoire")]
     #[Assert\Length(
-    min: 8,
-    minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+        min: 8,
+        minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
     )]
     #[Assert\Regex(
-    pattern: '/^(?=.*[A-Z])(?=.*\d).+$/',
-    message: 'Le mot de passe doit contenir au moins une majuscule et un chiffre.'
+        pattern: '/^(?=.*[A-Z])(?=.*\d).+$/',
+        message: 'Le mot de passe doit contenir au moins une majuscule et un chiffre.'
     )]
     private ?string $motDePasse = null;
 
@@ -54,13 +54,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     // #[ORM\OneToMany(targetEntity: Reclamation::class, mappedBy: 'idUser')]
     // private Collection $reclamations;
 
-    #[ORM\Column(name:"access")]
+    #[ORM\Column(name: "access")]
     private ?bool $active = true;
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $phone = null;
 
-    
+
 
     public function __construct()
     {
@@ -75,7 +75,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials()
     {
-        
+    }
+
+    public function setId(string $id)
+    {
+        $this->id = $id;
     }
 
     public function getUserIdentifier(): string
@@ -88,7 +92,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->motDePasse;
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
