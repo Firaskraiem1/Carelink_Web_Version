@@ -12,11 +12,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
 {
-    const STATUS_PENDING = 'en attente';
-    const STATUS_APPROVED = 'approved';
-    const STATUS_REJECTED = 'rejected';
+    const STATUS_PENDING = 'En attente';
+    const STATUS_APPROVED = 'Approuvé';
+    const STATUS_REJECTED = 'Refusé';
 
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -40,7 +40,7 @@ class Evenement
         min: 3,
         max: 255,
         minMessage: "Le type doit contenir au moins 3 caractères"
-    )]       
+    )]
     private ?string $TypeEvenement = null;
 
     #[ORM\Column(length: 255)]
@@ -49,7 +49,7 @@ class Evenement
         min: 3,
         max: 255,
         minMessage: "Le lieu doit contenir au moins 3 caractères"
-    )]       
+    )]
     private ?string $lieuEvenement = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -62,7 +62,7 @@ class Evenement
         min: 3,
         max: 255,
         minMessage: "La description doit contenir au moins 3 caractères"
-    )]       
+    )]
     private ?string $descEvenement = null;
 
     #[ORM\ManyToOne(inversedBy: 'relation')]

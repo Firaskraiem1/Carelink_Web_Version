@@ -48,7 +48,7 @@
             <div class="container">
                 <div class="row">
                     {% for evenement in evenements %}
-                        {% if evenement.status == 'approved' %}
+                        {% if evenement.status == 'Approuvé' %}
                             <div class="col-md-4 mb-4">
                                 <div class="bg-white" style="margin-left: 10px; margin-right: 10px; padding: 20px;">
                                     <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="d-block">

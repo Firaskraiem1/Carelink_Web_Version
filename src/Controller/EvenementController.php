@@ -48,7 +48,7 @@ class EvenementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $evenement->setStatus('en attente');
+            $evenement->setStatus('En attente');
             $entityManager->persist($evenement);
             $entityManager->flush();
 
@@ -131,7 +131,7 @@ class EvenementController extends AbstractController
     #[Route('/{id}', name: 'app_evenement_delete', methods: ['POST'])]
     public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $evenement->getId(), $request->request->get('_token'))) {
             $entityManager->remove($evenement);
             $entityManager->flush();
         }
@@ -142,7 +142,7 @@ class EvenementController extends AbstractController
     #[Route('/dashboard/{id}', name: 'app_evenement_dashboard_delete', methods: ['POST'])]
     public function deleteDashboard(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $evenement->getId(), $request->request->get('_token'))) {
             $entityManager->remove($evenement);
             $entityManager->flush();
         }
@@ -153,7 +153,7 @@ class EvenementController extends AbstractController
     #[Route('/approve/{id}', name: 'app_evenement_approve', methods: ['GET'])]
     public function approve(Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
-        $evenement->setStatus('approved');
+        $evenement->setStatus('Approuvé');
         $entityManager->flush();
 
         return $this->redirectToRoute('app_evenement_dashboard_index');
@@ -162,10 +162,9 @@ class EvenementController extends AbstractController
     #[Route('/reject/{id}', name: 'app_evenement_reject', methods: ['GET'])]
     public function reject(Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
-        $evenement->setStatus('rejected');
+        $evenement->setStatus('Refusé');
         $entityManager->flush();
 
         return $this->redirectToRoute('app_evenement_dashboard_index');
     }
-
 }
