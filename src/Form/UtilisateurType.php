@@ -32,6 +32,9 @@ class UtilisateurType extends AbstractType
                 'choices' => [
                     'User' => 'USER',
                     'Admin' => 'ADMIN',
+                    'Patient' => 'PATIENT',
+                    'Medecin' => 'MEDECIN',
+                    'Para' => 'PARA',
                 ],
             ])
             ->add('motDePasse', SymfonyPasswordType::class);

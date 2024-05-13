@@ -53,9 +53,9 @@ class UtilisateurController extends AbstractController
         $form = $this->createForm(RegisterType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+            // $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setId($form->get('email')->getData());
-            $user->setMotDePasse($hashedPassword);
+            // $user->setMotDePasse($hashedPassword);
             $user->setRole("USER");
             $user->setActive(true);
             $entitymanager->persist($user);
@@ -73,11 +73,25 @@ class UtilisateurController extends AbstractController
     {
         $em = $managerRegistry->getManager();
         $user = $userRepo->find($id);
-        $form = $this->createForm(RegisterType::class, $user);
+        $form = $this->createForm(UtilisateurType::class, $user);
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
+            // $imageFile = $form['photo']->getData();
             $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setMotDePasse($hashedPassword);
+            // if ($imageFile) {
+
+            //     $newFilename = md5(uniqid()) . '.' . $imageFile->guessExtension();
+
+            //     $imageFile->move(
+            //         $this->getParameter('imageDir'),
+            //         $newFilename
+            //     );
+
+            //     $user->setEmail($newFilename);
+            // }
+
             $em->persist($user);
             $em->flush();
             // $action= $session->get('user')->role;
