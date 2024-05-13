@@ -27,17 +27,16 @@ class ReservationRdv
     private ?string $motif = null;
 
     #[ORM\ManyToOne(inversedBy: 'relation_rdv')]
+    #[ORM\JoinColumn(name: "patient")]
     private ?Patient $patient = null;
 
+
     #[ORM\ManyToOne(inversedBy: 'relation_rdv')]
-    private ?Medecin $medecin = null;
+    #[ORM\JoinColumn(name: "medecin")]
+    private ?Med $medecin = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $remarques = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $nbrAnnulations = null;
-
 
 
     public function getId(): ?int
@@ -93,12 +92,12 @@ class ReservationRdv
         return $this;
     }
 
-    public function getMedecin(): ?Medecin
+    public function getMedecin(): ?Med
     {
         return $this->medecin;
     }
 
-    public function setMedecin(?Medecin $medecin): static
+    public function setMedecin(?Med $medecin): static
     {
         $this->medecin = $medecin;
 
@@ -113,18 +112,6 @@ class ReservationRdv
     public function setRemarques(string $remarques): static
     {
         $this->remarques = $remarques;
-
-        return $this;
-    }
-
-    public function getNbrAnnulations(): ?int
-    {
-        return $this->nbrAnnulations;
-    }
-
-    public function setNbrAnnulations(?int $nbrAnnulations): static
-    {
-        $this->nbrAnnulations = $nbrAnnulations;
 
         return $this;
     }

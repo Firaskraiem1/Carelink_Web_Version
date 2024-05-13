@@ -8,6 +8,7 @@ use App\Form\FichePatientType;
 use App\Repository\FichePatientRepository;
 use App\Repository\PatientRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +58,7 @@ class FichePatientController extends AbstractController
 
 
     #[Route('/new', name: 'app_fiche_patient_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, FlashyNotifier $flashy, EntityManagerInterface $entityManager): Response
     {
         $fichePatient = new FichePatient();
         $form = $this->createForm(FichePatientType::class, $fichePatient);
@@ -66,6 +67,7 @@ class FichePatientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($fichePatient);
             $entityManager->flush();
+            $flashy->success('Fiche Patient creé avec succes');
             return $this->redirectToRoute('app_fiche_patient_listes', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -118,7 +120,7 @@ class FichePatientController extends AbstractController
     #[Route('/admin', name: 'app_fiche_patient_listes_admin', methods: ['GET'])]
     public function indexAdmin(FichePatientRepository $fichePatientRepository): Response
     {
-        return $this->render('admin/dashboard__tables.html.twig', [
+        return $this->render('admin_fiche/dashboard__tables.html.twig', [
             'fiche_patients' => $fichePatientRepository->findAll(),
         ]);
     }
@@ -128,7 +130,7 @@ class FichePatientController extends AbstractController
     #[Route('/admin/{id}', name: 'app_fiche_patient_show_admin', methods: ['GET'])]
     public function showficheadmin(FichePatient $fichePatient): Response
     {
-        return $this->render('admin/dashboard__show__fiche.html.twig', [
+        return $this->render('admin_fiche/dashboard__show__fiche.html.twig', [
             'fiche_patient' => $fichePatient,
         ]);
     }
@@ -149,7 +151,7 @@ class FichePatientController extends AbstractController
             return $this->redirectToRoute('app_fiche_patient_listes_admin', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/dashboard__new_fiche.html.twig', [
+        return $this->render('admin_fiche/dashboard__new_fiche.html.twig', [
             'fiche_patient' => $fichePatient,
             'form' => $form,
         ]);
@@ -169,7 +171,7 @@ class FichePatientController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('app_fiche_patient_listes_admin');
         }
-        return $this->render('admin/dashboard__update__fiche.html.twig', [
+        return $this->render('admin_fiche/dashboard__update__fiche.html.twig', [
             'fiche_patient' => $fichePatient,
             'form' => $form,
         ]);

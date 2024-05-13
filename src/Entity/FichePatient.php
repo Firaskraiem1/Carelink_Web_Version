@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ORM\Table(name: "fichepatient")]
 #[ORM\Entity(repositoryClass: FichePatientRepository::class)]
 class FichePatient
 {
@@ -19,7 +20,7 @@ class FichePatient
     #[Assert\NotBlank(allowNull: false, message: "Veuillez saisir l'adresse.")]
     private ?string $adresse = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, name: "dateNaissance")]
     #[Assert\GreaterThan("today", message: "La date ne doit pas être dans le passé.")]
     private ?\DateTimeInterface $date_naissance = null;
 
@@ -33,14 +34,14 @@ class FichePatient
     #[Assert\NotBlank(allowNull: false, message: "Veuillez saisir la taille.")]
     private ?float $taille = null;
 
+
     #[ORM\OneToOne(inversedBy: 'relationFiche', cascade: ['persist'])]
+    #[ORM\JoinColumn(name: "patient")]
     #[Assert\NotBlank(allowNull: false, message: "Veuillez choisir un patient de la liste.")]
     private ?Patient $relationPatient = null;
 
-    #[ORM\ManyToOne(inversedBy: 'relationFiche1')]
-    private ?Medecin $relationMedecin = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: "codePostal")]
     #[Assert\GreaterThan(value: 0, message: "le code postal doit etre positive")]
     #[Assert\NotBlank(message: "Veuillez saisir le code postal.")]
     private ?int $Code_Postal = null;
@@ -53,8 +54,7 @@ class FichePatient
     #[Assert\NotBlank(message: "Veuillez saisir la maladie.")]
     private ?string $maladie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'relationFiche')]
-    private ?Medecin $relation_medecin = null;
+
 
 
     public function getIdFiche(): ?int
@@ -122,17 +122,6 @@ class FichePatient
         return $this;
     }
 
-    public function getRelationMedecin(): ?Medecin
-    {
-        return $this->relationMedecin;
-    }
-
-    public function setRelationMedecin(?Medecin $relationMedecin): static
-    {
-        $this->relationMedecin = $relationMedecin;
-
-        return $this;
-    }
 
     public function getCodePostal(): ?int
     {

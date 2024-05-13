@@ -2,11 +2,11 @@
 
 namespace App\Model;
 
-use App\Entity\Medecin;
+use App\Entity\Med;
 
 class SearchMedecin
 {
 
     public string $nom;
-    public ?Medecin $medecin = null;
+    public ?Med $medecin = null;
 }

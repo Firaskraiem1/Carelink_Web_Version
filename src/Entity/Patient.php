@@ -16,20 +16,20 @@ class Patient
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name: "nomP")]
     #[Assert\NotBlank(allowNull: false, message: "Veuillez saisir votre nom.")]
     private ?string $nomP = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name: "prenomP")]
     #[Assert\NotBlank(allowNull: false, message: "Veuillez saisir votre prenom.")]
     private ?string $prenomP = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name: "emailP")]
     #[Assert\NotBlank(allowNull: false, message: "Veuillez saisir votre email .")]
     #[Assert\Regex(pattern: "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", message: "L'adresse email n'est pas valide.")]
     private ?string $email_P = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: "numTelP")]
     #[Assert\NotBlank(allowNull: false, message: "Veuillez saisir votre numero de telephone .")]
     #[Assert\GreaterThan(value: 0, message: "le numero de telephone doit etre positive")]
     #[Assert\Length(min: 8, max: 8, exactMessage: "le numero de telephone doit contenir 8 nombres")]
@@ -38,8 +38,14 @@ class Patient
     #[ORM\OneToOne(mappedBy: 'relationPatient', cascade: ['persist', 'remove'])]
     private ?FichePatient $relationFiche = null;
 
-    #[ORM\OneToMany(targetEntity: ReservationRdv::class, mappedBy: 'patient')]
+    #[ORM\OneToMany(targetEntity: ReservationRdv::class, mappedBy: 'patient', cascade: ['remove'])]
     private Collection $relation_rdv;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $blocked = null;
+
+    #[ORM\Column(nullable: true, name: "nbr_annulations")]
+    private ?int $nb_annulations = null;
 
 
     public function __construct()
@@ -149,6 +155,30 @@ class Patient
                 $relationRdv->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isBlocked(): ?bool
+    {
+        return $this->blocked;
+    }
+
+    public function setBlocked(bool $blocked): static
+    {
+        $this->blocked = $blocked;
+
+        return $this;
+    }
+
+    public function getNbAnnulations(): ?int
+    {
+        return $this->nb_annulations;
+    }
+
+    public function setNbAnnulations(int $nb_annulations): static
+    {
+        $this->nb_annulations = $nb_annulations;
 
         return $this;
     }

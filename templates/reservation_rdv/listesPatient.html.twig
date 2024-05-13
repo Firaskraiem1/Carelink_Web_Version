@@ -6,6 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 {% block css %}
   <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
@@ -21,7 +22,16 @@
   <link rel="stylesheet" href="{{asset('css/aos.css')}}">
 
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+  <style>
+ #calendrier{
+  width:80%;
+  margin:auto;
+ }
+</style>
 {% endblock %}
+
+
 </head>
 
 <body>
@@ -129,8 +139,8 @@
                 <td>{{ rdv.medecin.getNom() }} {{ rdv.medecin.getPrenom() }}</td>
                 <td>{{ rdv.statut }}</td>
                 <td>
-                    <a href="{{ path('app_reservation_show', {'idPatient':idPatient,'id': rdv.getId()}) }}">afficher</a>
-                    <a href="{{ path('app_reservation_edit', {'idPatient':idPatient,'id': rdv.getId()}) }}">modifier</a>
+                    <a  href="{{ path('app_reservation_show', {'idPatient':idPatient,'id': rdv.getId()}) }}">afficher</a>
+                    <a  href="{{ path('app_reservation_edit', {'idPatient':idPatient,'id': rdv.getId()}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -140,6 +150,10 @@
         {% endfor %}
         </tbody>
     </table>
+<div align="center">
+    <a class="btn btn-primary"  style="margin-top:50px;" href="{{ path('app_reservation_search',{'id':idPatient}) }}">Retourner</a>
+    </div>
+
   <div align="center">
     {# <a class="btn btn-primary"  style="margin-top:50px;" href="{{ path('app_reservation_new') }}">Create new</a> #}
     </div>
@@ -149,14 +163,16 @@
         </div>
       </div>
     </div>
+    <div id="calendrier">
 
+    </div>
 {% block footer %}
 {{ parent() }}
 </div>
 {% endblock %}
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 {% block js %}
   <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{asset('js/jquery-ui.js')}}"></script>
@@ -167,7 +183,24 @@
   <script src="{{asset('js/aos.js')}}"></script>
 
   <script src="{{asset('js/main.js')}}"></script>
-
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendrier');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          locale:'fr',
+          timeZone:'Africa/Tunis' ,
+          headerToolbar:{
+            start:'prev,next today',
+            center:'title',
+            end:'dayGridMonth,timeGridWeek'
+          },
+          events: {{ data|raw }}
+        });
+        calendar.render();
+      });
+    </script>
 {% endblock %}
 
 </body>

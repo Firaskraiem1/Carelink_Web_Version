@@ -76,14 +76,13 @@
 	
 			<nav class="sidebar-menu"> 
 				<ul>
-					<li class="components has-submenu open"><a href="#"><b><span>Dashboard</span></b></a>
+					<li class="components has-submenu open"><a href="#"><b><span >Dashboard</span></b></a>
 						<ul class="sidebar-menu__submenu active" style="display:block;">
 							<li><a href="{{path('app_patient_list_admin')}}">Listes des patients </a></li>
 							<li><a href="{{path('app_fiche_patient_listes_admin')}}">Listes des fiches patients</a></li>
-							<li><a href="{{path('app_reservation_listes')}}">Listes des rendez-vous</a></li>
 						</ul>
 					</li>
-				
+					
 				</ul>
 			</nav>
 	
@@ -98,8 +97,8 @@
 			
 			<div class="content-header__user content-header__dropdown">  
 			    <div class="content-header__user-avatar content-header__dropdown-activate" data-dropdown="userdropdown">
-				<div class="content-header__user-thumb"><img src="{{ asset('public/images/unnamed.jpg' )}}" alt="" title=""/></div>
-					<span class="content-header__user-name">Firas Ben Kraiem</span>
+					<div class="content-header__user-thumb"><img src="{{ asset('public/images/unnamed.jpg') }}" alt="" title=""/></div>
+					<span class="content-header__user-name">Firas Ben Kraiem</span>	
 			    </div>  
 				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--user-menu " id="userdropdown"> 	
 				<h3 class="dropdown-menu__subtitle">User menu</h3>
@@ -185,41 +184,38 @@
 		
 
 		 <div class="grid grid--margin bg-white">
-		 <div align="center" class="title-section text-center col-12 mt-5 mb-3">
-         <h2>Listes des <strong class="text-primary">patients</strong></h2>
+		<div align="center" class="title-section text-center col-12 mt-5 mb-3">
+         <h2>Listes des <strong class="text-primary">fiches</strong></h2>
     </div>
-              <table class="table table-bordered">
+             <table class="table table-bordered">
                    
-        <thead>
+       <thead>
             <tr>
-                <th>Id</th>
-                <th>NomP</th>
-                <th>PrenomP</th>
-                <th>Email_P</th>
-                <th>NumTelP</th>
+                <th>Id fiche</th>
+                <th>Prenom du patient</th>
+                <th>Nom du patient</th> 
+                <th>Adresse</th>
+                <th>Date naissance</th>
+                <th>Poids</th>
+                <th>Taille</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for patient in patients %}
+        {% for fiche_patient in fiche_patients %}
             <tr>
-                <td>{{ patient.getIdPatient() }}</td>
-                <td>{{ patient.nomP }}</td>
-                <td>{{ patient.prenomP }}</td>
-                <td>{{ patient.emailP }}</td>
-                <td>{{ patient.numTelP }}</td>
+                <td>{{ fiche_patient.getIdFiche() }}</td>
+                <td>{{ fiche_patient.relationPatient.getPrenomP() }}</td>
+                <td>{{ fiche_patient.relationPatient.getNomP() }}</td>
+                <td>{{ fiche_patient.adresse }}</td>
+                <td>{{ fiche_patient.getDateNaissance() ? fiche_patient.getDateNaissance()|date('Y-m-d') : '' }}</td>
+                <td>{{ fiche_patient.poids }}</td>
+                <td>{{ fiche_patient.taille }}</td>
                 <td>
-                    <a href="{{ path('app_patient_show_admin', {'id': patient.getIdPatient()}) }}">afficher</a>
-                    <a href="{{ path('app_patient_edit_admin', {'id': patient.getIdPatient()}) }}">modifier</a>
-			
-				{% if patient.getNbAnnulations() >= 3 and patient.isBlocked()==0 %}
-					<a href="{{ path('app_patient_admin_block', {'id': patient.getIdPatient()}) }}">bloque</a>
-				{% elseif patient.isBlocked()==1 %}
-					<a href="{{ path('app_patient_admin_deblock', {'id': patient.getIdPatient()}) }}">deblouque</a>
-				{% endif %}
-			</tr>
-			
-
+                    <a href="{{ path('app_fiche_patient_show_admin', {'id': fiche_patient.getIdFiche()}) }}">afficher</a>
+                    <a href="{{ path('app_fiche_patient_edit_admin', {'id': fiche_patient.getIdFiche()}) }}">modifier</a>
+                </td>
+            </tr>
         {% else %}
             <tr>
                 <td colspan="7">no records found</td>
@@ -227,7 +223,7 @@
         {% endfor %}
         </tbody>
     </table>
-	<div style="margin-top:15px;" align="center"><a href="{{ path('app_patient_new_admin') }}" class="btn btn-show">ajouter patient</a></div>
+	 <div style="margin-top:15px;" align="center"><a  href="{{ path('app_fiche_patient_new_admin') }}" class="btn btn-show">ajouter fiche patient</a></div>
         </div>
     </div>
 </div>

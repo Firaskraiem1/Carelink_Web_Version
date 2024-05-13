@@ -107,8 +107,10 @@
                               </div>
                            </div>
                            <a href="{{path('app_patient_show',{'id': id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Voir informations personnels</a>
-                           <a href="{{path('app_fiche_list_patient',{'idPatient': id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Voir listes des fiches</a>
-                           <a href="{{path('app_reservation_search',{'id':id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Réserver un rendez-vous</a>
+                           {# <a href="{{path('app_fiche_list_patient',{'idPatient': id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Voir listes des fiches</a> #}
+                           {% if patient.isBlocked()==0 or patient.isBlocked() is null  %}
+                                 <a href="{{path('app_reservation_search',{'id':id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Réserver un rendez-vous</a>
+                           {% endif %}
                            <a href="{{path('app_reservation_listes_patient' ,{'id':id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Consulter liste de rendez-vous</a>
                            {{ include('patient/_delete_form.html.twig',{'id':id}) }}
                              <a href="{{path('app_patient_index')}}" class="btn btn-secondary" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Déconnecter</a>

@@ -29,19 +29,21 @@ class PatientController extends AbstractController
     }
 
     #[Route('/new', name: 'app_patient_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, FlashyNotifier $flashy, EntityManagerInterface $entityManager): Response
     {
         $patient = new Patient();
         $form = $this->createForm(PatientType::class, $patient);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //$patient->setBlocked(false);
+            $patient->setNbAnnulations(0);
             $entityManager->persist($patient);
             $entityManager->flush();
-
+            $flashy->success('Espace creé avec succes');
             return $this->render(
                 'patient/espace.html.twig',
-                ['id' => $patient->getIdPatient(),]
+                ['id' => $patient->getIdPatient(), 'patient' => $patient,]
             );
         }
         return $this->render('patient/new.html.twig', [
@@ -51,7 +53,7 @@ class PatientController extends AbstractController
     }
 
     #[Route('/join', name: 'app_patient_join', methods: ['GET', 'POST'])]
-    public function join(Request $request, PatientRepository $patientRepository, FlashyNotifier $flashy, UrlGeneratorInterface $urlGenerator): Response
+    public function join(Request $request, PatientRepository $patientRepository,  UrlGeneratorInterface $urlGenerator): Response
     {
         $url = $urlGenerator->generate('app_patient_index');
         $form = $this->createFormBuilder()
@@ -77,8 +79,8 @@ class PatientController extends AbstractController
             $data = $form->getData();
             $patient = $patientRepository->findOneBy(['email_P' => $data['email']]);
             if ($patient) {
-                $flashy->success('Bienvenue');
-                return $this->redirectToRoute('app_patient_espace', ['id' => $patient->getIdPatient()]);
+
+                return $this->redirectToRoute('app_patient_espace', ['id' => $patient->getIdPatient(),]);
             }
         }
         return $this->render('patient/login.html.twig', [
@@ -88,9 +90,11 @@ class PatientController extends AbstractController
 
 
     #[Route('/espace/{id}', name: 'app_patient_espace', methods: ['GET'])]
-    public function espace(int $id): Response
+    public function espace(int $id, FlashyNotifier $flashy, PatientRepository $patientRepository): Response
     {
-        return $this->render('patient/espace.html.twig', ['id' => $id]);
+        $patient = $patientRepository->findOneBy(['id' => $id]);
+        $flashy->success('Bienvenue à votre espace');
+        return $this->render('patient/espace.html.twig', ['id' => $id, 'patient' => $patient]);
     }
 
 
@@ -190,11 +194,27 @@ class PatientController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/{id}', name: 'app_patient_delete_admin', methods: ['POST'])]
+    #[Route('/admin/delete/{id}', name: 'app_patient_delete_admin', methods: ['POST'])]
     public function deletePatient(EntityManagerInterface $entityManager, PatientRepository $rep, $id): Response
     {
         $patient = $rep->find($id);
         $entityManager->remove($patient);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_patient_list_admin', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/block/patient/{id}', name: 'app_patient_admin_block', methods: ['GET'])]
+    public function blockPatient(EntityManagerInterface $entityManager, PatientRepository $rep, $id): Response
+    {
+        $patient = $rep->find($id);
+        $patient->setBlocked(true);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_patient_list_admin', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/deblock/patient/{id}', name: 'app_patient_admin_deblock', methods: ['GET'])]
+    public function deblouque(EntityManagerInterface $entityManager, PatientRepository $rep, $id): Response
+    {
+        $patient = $rep->find($id);
+        $patient->setBlocked(false);
         $entityManager->flush();
         return $this->redirectToRoute('app_patient_list_admin', [], Response::HTTP_SEE_OTHER);
     }

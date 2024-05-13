@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Medecin;
+use App\Entity\Med;
 use App\Model\SearchMedecin;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,9 +19,11 @@ class SearchType extends AbstractType
                 'attr' => ['placeholder' => 'nom du médecin']
             ])
             ->add('medecin', EntityType::class, [
-                'class' => Medecin::class,
+                'class' => Med::class,
                 'placeholder' => 'spécialité du médecin',
-                'choice_label' =>  'specialite',
+                'choice_label' =>  function ($medecin) {
+                    return $medecin->getSpecialité();
+                },
             ]);
     }
 

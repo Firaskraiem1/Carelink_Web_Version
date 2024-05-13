@@ -8,7 +8,7 @@
     
         {% block css %}
             {{ parent()}}
-
+<link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
             <style>
               <style>
                 body {
@@ -57,7 +57,6 @@
 
 {% block body %}
  <div class="site-wrap">
-{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
        <div class="site-navbar py-2">
 
       <div class="search-wrap">

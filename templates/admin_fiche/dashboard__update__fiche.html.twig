@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/ion.rangeSlider.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/dashboard.min.css')}}">
     <link href="{{asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900')}}" rel="stylesheet"> 
-    <style>
+   <style>
         /* Custom CSS for table */
         .table {
             width: 100%;
@@ -33,6 +33,7 @@
         }
 		 .btn-show,
             .btn-edit,
+
             .btn-delete {
               display: inline-block;
               padding: 8px 16px;
@@ -47,11 +48,7 @@
               text-decoration: none;
             }
 
-            .btn-edit {
-              background-color: #ffc107; /* Change to desired color */
-              color: #212529;
-              text-decoration: none;
-            }
+           
 
             .btn-delete {
               background-color: #dc3545; /* Change to desired color */
@@ -59,11 +56,27 @@
               text-decoration: none;
             }
 			.btn-back {
-      		background-color: #ffc107;
-     		color: #212529;
-      		border-color: #ffc107;
-       		}
-    </style>
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #17a2b8; /* Change to desired color */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn-edit {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ffc107; /* Change to desired color */
+  color: #212529;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+   
+	
+  </style>
     {% endblock %}
 </head>
 <body>
@@ -76,14 +89,12 @@
 	
 			<nav class="sidebar-menu"> 
 				<ul>
-					<li class="components has-submenu open"><a href="#"><b><span>Dashboard</span></b></a>
+					<li class="components has-submenu open"><a href="#"><b><span >Dashboard</span></b></a>
 						<ul class="sidebar-menu__submenu active" style="display:block;">
 							<li><a href="{{path('app_patient_list_admin')}}">Listes des patients </a></li>
 							<li><a href="{{path('app_fiche_patient_listes_admin')}}">Listes des fiches patients</a></li>
-							<li><a href="{{path('app_reservation_listes')}}">Listes des rendez-vous</a></li>
 						</ul>
 					</li>
-				
 				</ul>
 			</nav>
 	
@@ -98,7 +109,7 @@
 			
 			<div class="content-header__user content-header__dropdown">  
 			    <div class="content-header__user-avatar content-header__dropdown-activate" data-dropdown="userdropdown">
-				<div class="content-header__user-thumb"><img src="{{ asset('public/images/unnamed.jpg' )}}" alt="" title=""/></div>
+					<div class="content-header__user-thumb"><img src="{{asset('public/images/unnamed.jpg')}}" alt="" title=""/></div>
 					<span class="content-header__user-name">Firas Ben Kraiem</span>
 			    </div>  
 				<nav class="dropdown-menu dropdown-menu--header dropdown-menu--user-menu " id="userdropdown"> 	
@@ -184,53 +195,17 @@
 		</div>
 		
 
-		 <div class="grid grid--margin bg-white">
-		 <div align="center" class="title-section text-center col-12 mt-5 mb-3">
-         <h2>Listes des <strong class="text-primary">patients</strong></h2>
-    </div>
-              <table class="table table-bordered">
-                   
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NomP</th>
-                <th>PrenomP</th>
-                <th>Email_P</th>
-                <th>NumTelP</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for patient in patients %}
-            <tr>
-                <td>{{ patient.getIdPatient() }}</td>
-                <td>{{ patient.nomP }}</td>
-                <td>{{ patient.prenomP }}</td>
-                <td>{{ patient.emailP }}</td>
-                <td>{{ patient.numTelP }}</td>
-                <td>
-                    <a href="{{ path('app_patient_show_admin', {'id': patient.getIdPatient()}) }}">afficher</a>
-                    <a href="{{ path('app_patient_edit_admin', {'id': patient.getIdPatient()}) }}">modifier</a>
-			
-				{% if patient.getNbAnnulations() >= 3 and patient.isBlocked()==0 %}
-					<a href="{{ path('app_patient_admin_block', {'id': patient.getIdPatient()}) }}">bloque</a>
-				{% elseif patient.isBlocked()==1 %}
-					<a href="{{ path('app_patient_admin_deblock', {'id': patient.getIdPatient()}) }}">deblouque</a>
-				{% endif %}
-			</tr>
-			
+		 <div class="grid grid--margin bg-white" align="center">
+		 <h1 class="text-center mb-4" style="color: purple;">modifier une fiche patient</h1>
+             <form class="col-md-12" method="post" novalidate>  
+                  {{ include('admin_fiche/dashboard_form.html.twig',{'state': 'update'}) }}
+              </form>
 
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-	<div style="margin-top:15px;" align="center"><a href="{{ path('app_patient_new_admin') }}" class="btn btn-show">ajouter patient</a></div>
-        </div>
-    </div>
-</div>
+			
+		</div>
+
+		</div>
+ </div> 
  {% block js %}
 <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('js/moment.min.js')}}"></script>

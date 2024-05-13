@@ -14,10 +14,11 @@ class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
 
-    public function base(CategorieProdRepository $categorieProdRepository , SessionInterface $session ): Response
-    {   $cat_prod = $categorieProdRepository->findAll();
-        $session->set('cat_prod',$cat_prod);
-        return $this->render('base.html.twig',[
+    public function base(CategorieProdRepository $categorieProdRepository, SessionInterface $session): Response
+    {
+        $cat_prod = $categorieProdRepository->findAll();
+        $session->set('cat_prod', $cat_prod);
+        return $this->render('base.html.twig', [
             //'categorie_prods' => $categorieProdRepository->findAll(),
 
         ]);

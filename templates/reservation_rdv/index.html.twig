@@ -117,18 +117,26 @@
                      <div class="medecin-details">
                      <table  style="margin-top:50px;margin-bottom:50px;">
                         <tbody>
-                              <tr>
-                                 <th>Médecin:</th>
-                                 <td>{{ medecin.nom }}</td>
-                              </tr>
-                              <tr>
-                                 <th>Adresse:</th>
-                                 <td>{{ medecin.adresse }}</td>
-                              </tr>
-                              <tr>
-                                 <th>Spécialité:</th>
-                                 <td>{{ medecin.specialite }}</td>
-                              </tr>
+                              {% if medecin is defined and medecin is not null %}
+    <tr>
+        <th>Médecin:</th>
+        <td>{{ medecin.nom }}</td>
+    </tr>
+    <tr>
+        <th>Adresse:</th>
+        <td>{{ medecin.adresse }}</td>
+    </tr>
+   {% if medecin.specialité is not null %}
+        <tr>
+            <th>Spécialité:</th>
+            <td>{{ medecin.specialité }}</td>
+        </tr>
+  {% endif %}
+{% else %}
+    <tr>
+        <td colspan="2">Aucun médecin trouvé.</td>
+    </tr>
+{% endif %}
                         </tbody>
                      </table>
                      </div>
