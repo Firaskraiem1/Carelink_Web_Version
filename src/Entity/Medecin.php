@@ -7,94 +7,71 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MedecinRepository::class)]
+#[ORM\Table(name: "medecincabinet")] 
+
 class Medecin
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom ne peut pas etre vide.")]
-    #[Assert\Length(
-        min: 3,
-        max:25,
-        minMessage:"Le nom il faut avoir au moins 3 lettres", 
-        maxMessage: "Le nom est trop long"
-    )]
-    #[Assert\Regex(
-        pattern: '/^[A-Za-z]+$/',
-        message: "Le nom ne peut contenir que des lettres alphabétiques."
-    )]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le prenom ne peut pas être vide.")]
-    #[Assert\Regex(
-        pattern: '/^[A-Za-z]+$/',
-        message: "Le prenom ne peut contenir que des lettres alphabétiques."
-    )]
-    private ?string $prenom = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "L'adresse de téléphone ne peut pas être vide.")]
-    private ?string $adresse = null;
+    #[Assert\NotBlank(message: "Le nom de cabinet ne peut pas être vide.")]
+    private ?string $nomDeCabinet = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le numéro de téléphone ne peut pas être vide.")]
-    #[Assert\Regex(
-        pattern: '/^\d{8}$/',
-        message: "Le numéro de téléphone doit contenir exactement 8 chiffres."
-    )]
     private ?string $tel = null;
 
     #[ORM\Column(length: 255)]
-    // #[Assert\Regex(
-    //     pattern: '/^(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)-(0?[1-9]|1[0-2]):[0-5][0-9](AM|PM)$/',
-    //     message: "Le format de horaires de consultations doit etre sous le forma hh:mm[AM|PM]-hh:mm[AM|PM]"
-    // )]
-    private ?string $horairesConsultation = null;
+    #[Assert\NotBlank(message: "L'adresse ne peut pas être vide.")]
+    private ?string $adresse = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Specialite')]
-    private ?Specialite $idSpecialite = null;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "L'email ne peut pas être vide.")]
+    #[Assert\Email(message: "L'email n'est pas valide.")]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Les horaires ne peuvent pas être vides.")]
+    private ?string $heures = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "L'ID de licence médicale ne peut pas être vide.")]
+    private ?string $licenceMedicalId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+   
+    private ?string $imagePathProfile = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+   
+    private ?string $fileLicencePath = null;
+
+    #[ORM\Column(type: 'integer')]
+    #[Assert\Choice(choices: [0, 1], message: "La valeur de 'active' doit être 0 ou 1.")]
+    private ?int $active = 1;
+
+    // Constructor with all attributes except 'id'
+  
+  
+
+    // Getter and setter methods for all attributes
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNomDeCabinet(): ?string
     {
-        return $this->nom;
+        return $this->nomDeCabinet;
     }
 
-    public function setNom(string $nom): static
+    public function setNomDeCabinet(string $nomDeCabinet): static
     {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): static
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): static
-    {
-        $this->adresse = $adresse;
+        $this->nomDeCabinet = $nomDeCabinet;
 
         return $this;
     }
@@ -111,26 +88,86 @@ class Medecin
         return $this;
     }
 
-    public function getHorairesConsultation(): ?string
+    public function getAdresse(): ?string
     {
-        return $this->horairesConsultation;
+        return $this->adresse;
     }
 
-    public function setHorairesConsultation(string $horairesConsultation): static
+    public function setAdresse(string $adresse): static
     {
-        $this->horairesConsultation = $horairesConsultation;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
-    public function getIdSpecialite(): ?Specialite
+    public function getEmail(): ?string
     {
-        return $this->idSpecialite;
+        return $this->email;
     }
 
-    public function setIdSpecialite(?Specialite $idSpecialite): static
+    public function setEmail(string $email): static
     {
-        $this->idSpecialite = $idSpecialite;
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getHeures(): ?string
+    {
+        return $this->heures;
+    }
+
+    public function setHeures(string $heures): static
+    {
+        $this->heures = $heures;
+
+        return $this;
+    }
+
+    public function getLicenceMedicalId(): ?string
+    {
+        return $this->licenceMedicalId;
+    }
+
+    public function setLicenceMedicalId(string $licenceMedicalId): static
+    {
+        $this->licenceMedicalId = $licenceMedicalId;
+
+        return $this;
+    }
+
+    public function getImagePathProfile(): ?string
+    {
+        return $this->imagePathProfile;
+    }
+
+    public function setImagePathProfile(string $imagePathProfile): static
+    {
+        $this->imagePathProfile = $imagePathProfile;
+
+        return $this;
+    }
+
+    public function getFileLicencePath(): ?string
+    {
+        return $this->fileLicencePath;
+    }
+
+    public function setFileLicencePath(string $fileLicencePath): static
+    {
+        $this->fileLicencePath = $fileLicencePath;
+
+        return $this;
+    }
+
+    public function getActive(): ?int
+    {
+        return $this->active;
+    }
+
+    public function setActive(int $active): static
+    {
+        $this->active = $active;
 
         return $this;
     }
