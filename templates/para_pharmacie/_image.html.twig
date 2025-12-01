@@ -1,0 +1,10 @@
+{% if image %}
+  <img src="{{ asset('images/' ~ image) }}" alt="{{ para_pharmacie.nomPara }}">
+{% endif %}
+
+<style>
+  img {
+    width: 200px;
+    height: auto;
+  }
+</style>

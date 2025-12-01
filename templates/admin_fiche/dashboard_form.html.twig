@@ -1,0 +1,82 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<table style="border-collapse: separate; border-spacing: 5px;">
+   <tr>
+      <th>{{ form_label(form.relationPatient, "Patient:") }}</th>
+      <td>
+      {{ form_widget(form.relationPatient) }}
+      <br>
+         {{ form_errors(form.relationPatient) }}
+      </td>
+   </tr>
+   <tr>
+      <th> {{ form_label(form.adresse, "Adresse:") }}</th>
+      <td>
+       {{ form_widget(form.adresse) }}
+       <br>
+      {{ form_errors(form.adresse) }}
+      </td>
+   </tr>
+  
+   <tr>
+      <th> {{ form_label(form.Code_Postal, "Code postal:") }}</th>
+      <td> 
+      {{ form_widget(form.Code_Postal) }}
+      <br>
+      {{ form_errors(form.Code_Postal) }}
+      </td>
+   </tr>
+   <tr>
+      <th> {{ form_label(form.Ville, "Ville:") }}</th>
+      <td> 
+      {{ form_widget(form.Ville) }}
+      <br>
+      {{ form_errors(form.Ville) }}
+      </td>
+   </tr>
+   <tr>
+      <th>  {{ form_label(form.date_naissance,"Date naissance:") }}</th>
+      <td> 
+      {{ form_widget(form.date_naissance) }}
+      <br>
+      {{ form_errors(form.date_naissance) }}
+      </td>
+   </tr>
+   <tr>
+      <th>  {{ form_label(form.poids, "Poids:") }}</th>
+      <td> 
+      {{ form_widget(form.poids) }}
+      <br>
+      {{ form_errors(form.poids) }}
+      </td>
+   </tr>
+   <tr>
+      <th>  {{ form_label(form.taille, "Taille:") }}</th>
+      <td>  
+      {{ form_widget(form.taille) }}
+      <br>
+      {{ form_errors(form.taille) }}
+      </td>
+   </tr>
+   <tr>
+      <th>  {{ form_label(form.maladie,"Maladie:") }}</th>
+      <td> 
+      {{ form_widget(form.maladie) }}
+      <br>
+      {{ form_errors(form.maladie) }}
+      </td>
+   </tr>      
+</table>
+<div class="center-Buttons-container">
+   {% if state=="update" %}
+   <div class="row" style="margin-top:50px;" >
+      <button class="btn btn-primary" style="margin-right:10px;" href="{{ path('app_fiche_patient_edit_admin', {'id': fiche_patient.getIdFiche()}) }}">Modifier</button>
+      <a href="{{ path('app_fiche_patient_listes_admin') }}" class="btn btn-outline-primary"   >Annuler </a>
+   </div>
+   {% else %}
+   <div class="row" style="margin-top:50px;" >
+      <button class="btn btn-primary" style="margin-right:10px;" href="{{ path('app_fiche_patient_new_admin')}}">Ajouter</button>
+      <a href="{{ path('app_fiche_patient_listes_admin') }}" class="btn btn-outline-primary" >Annuler </a>
+   </div>
+   {% endif %}
+</div>
+{{ form_end(form) }}

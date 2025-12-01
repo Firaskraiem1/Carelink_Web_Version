@@ -1,0 +1,251 @@
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block css %}
+  <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
+  <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+  <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+
+
+  <link rel="stylesheet" href="{{asset('css/aos.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <style>
+        /* Custom CSS for table */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        .table th,
+        .table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+		 .btn-show,
+            .btn-edit,
+            .btn-delete {
+              display: inline-block;
+              padding: 8px 16px;
+              border-radius: 4px;
+              transition: background-color 0.3s;
+              margin-right: 10px; /* Add margin to create space */
+            }
+
+            .btn-show {
+              background-color: #17a2b8; /* Change to desired color */
+              color: #fff;
+              text-decoration: none;
+            }
+
+            .btn-edit {
+              background-color: #ffc107; /* Change to desired color */
+              color: #212529;
+              text-decoration: none;
+            }
+
+            .btn-delete {
+              background-color: #dc3545; /* Change to desired color */
+              color: #fff;
+              text-decoration: none;
+            }
+			.btn-back {
+      		background-color: #ffc107;
+     		color: #212529;
+      		border-color: #ffc107;
+       		}
+          		
+    </style>
+      
+{% endblock %}
+
+</head>
+
+<body>
+{% block body %}
+  <div class="site-wrap">
+
+
+    <div class="site-navbar py-2">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+         <form id="search-form1">
+  <input type="text" name="query" class="form-control">
+
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="" class="js-logo-clone"><strong class="text-primary">Care</strong>link</a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+               
+                <li class="has-children" >
+                  <a href="">gestion Para</a>
+                  <ul class="dropdown">
+                <li ><a href="{{ path('app_para_pharmacie_index') }}">ParaPharmacie</a></li>
+                <li class="active"><a href="">zone</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a href="cart.html" class="icons-btn d-inline-block bag">
+              <span class="icon-shopping-bag"></span>
+              <span class="number">2</span>
+            </a>
+            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+                class="icon-menu"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <strong class="text-black">Zone</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 
+          
+          <style>
+            .btn-show,
+            .btn-edit,
+            .btn-delete {
+              display: inline-block;
+              padding: 8px 16px;
+              border-radius: 4px;
+              transition: background-color 0.3s;
+              margin-right: 10px; /* Add margin to create space */
+            }
+
+            .btn-show {
+              background-color: #17a2b8; /* Change to desired color */
+              color: #fff;
+              text-decoration: none;
+            }
+
+            .btn-edit {
+              background-color: #ffc107; /* Change to desired color */
+              color: #212529;
+              text-decoration: none;
+            }
+
+            .btn-delete {
+              background-color: #dc3545; /* Change to desired color */
+              color: #fff;
+              text-decoration: none;
+            }
+          </style>
+          
+<div class="site-section" id="search-results-zone">
+
+        <div class="container">
+            <div class="row mb-5">
+                 {% for zone in zones %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <p class="card-text">ville: {{ zone.ville }}</p>
+                                <p class="card-text">numRue: {{ zone.numRue }}</p>
+                               <a href="{{ path('app_zone_show', {'id': zone.id}) }}" class="btn btn-show">afficher</a>
+                                <!-- Ajoutez d'autres détails de parapharmacie ici -->
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+{% block js %}
+  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.js')}}"></script>
+  <script src="{{asset('js/popper.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+  <script src="{{asset('js/aos.js')}}"></script>
+
+  <script src="{{asset('js/main.js')}}"></script>
+<script>
+$(document).ready(function() {
+  $('#search-form1').submit(function(event) {
+    event.preventDefault();
+
+    $.get("{{ path('app_zone_search') }}", $(this).serialize())
+      .done(function(data) {
+        $('#search-results-zone').empty(); // Vide tous les résultats de recherche existants
+        data.forEach(function(zone) {
+          // Vérifie si les propriétés existent avant de les utiliser
+          var numRue = zone.numRue ? 'Numéro de Rue: ' + zone.numRue : 'Numéro de Rue non défini';
+          var email = zone.ville ? 'Email: ' + zone.ville : 'Email non défini';
+          // Crée une nouvelle site-section pour chaque résultat de recherche et l'ajoute à #search-results
+          var siteSection = $('<div class="site-section"></div>');
+          var container = $('<div class="container"></div>');
+          var row = $('<div class="row mb-5"></div>');
+          var col = $('<div class="col-md-6 mb-4"></div>');
+          var card = $('<div class="card"></div>');
+          var cardBody = $('<div class="card-body"></div>');
+
+          var cardTitle = $('<p class="card-text"></p>').text(ville);
+          var cardText1 = $('<p class="card-text"></p>').text(numRue);
+
+          cardBody.append(cardTitle, cardText1);
+          card.append(cardBody);
+          col.append(card);
+          row.append(col);
+          container.append(row);
+          siteSection.append(container);
+
+          $('#search-results-zone').append(siteSection);
+        });
+      })
+      .fail(function() {
+        alert("Une erreur s'est produite lors de la recherche.");
+      });
+  });
+});
+</script>
+
+{% endblock %}
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}

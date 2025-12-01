@@ -1,0 +1,176 @@
+{% extends 'base.html.twig' %}
+
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block css %}
+  <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
+  <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+  <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+
+
+  <link rel="stylesheet" href="{{asset('css/aos.css')}}">
+
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+  <style>
+    /* New style for the background image */
+    .background-image {
+      background-image: url('{{ asset('images/para.jpg') }}'); /* Path to your image */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      padding-top: 100px; /* Adjust this value to move the box below the navbar */
+
+    }
+
+    .form-box {
+      border: 2px solid #17a2b8;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .btn-back {
+      background-color: #ffc107;
+      color: #212529;
+      border-color: #ffc107;
+    }
+
+    .btn-edit {
+      background-color: #17a2b8;
+      color: #fff;
+      border-color: #17a2b8;
+    }
+  </style>
+{% endblock %}
+</head>
+
+<body>
+{% block body %}
+  <div class="site-wrap">
+
+
+    <div class="site-navbar py-2">
+        <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="index.html" class="js-logo-clone"><strong class="text-primary">Care</strong>Link</a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="base.html.twig">Home</a></li>
+                <li class="has-children">
+                  <a href="">gestion Zone</a>
+                  <ul class="dropdown">
+                <li ><a href="{{ path('app_para_pharmacie_index') }}">ParaPharmacie</a></li>
+                <li class="active"><a href="">zone</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a href="cart.html" class="icons-btn d-inline-block bag">
+              <span class="icon-shopping-bag"></span>
+              <span class="number">2</span>
+            </a>
+            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+                class="icon-menu"></span></a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Zone</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- Background image container -->
+    
+      <div class="container">
+      <div class="background-image">
+        <div class="row mb-5">
+          <div class="col-md-6 mx-auto">
+            <div class="form-box">
+              <h1 class="text-center mb-4" style="color: green;">Create Zone</h1>
+              <form method="post" novalidate> 
+   {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<table class="table">
+    
+    <tbody>
+        <tr>
+            <td>{{ form_label(form.ville) }}</td>
+            <td>{{ form_widget(form.ville) }}</td>
+            <td>{{ form_errors(form.ville) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.numRue) }}</td>
+            <td>{{ form_widget(form.numRue) }}</td>
+            <td>{{ form_errors(form.numRue) }}</td>
+        </tr>
+       
+    </tbody>
+</table>
+ <button type="submit" class="btn btn-block btn-primary">{{ button_label|default('Save') }}</button>
+   <a href="{{ path('app_zone_index') }}" class="btn btn-block btn-secondary mt-3">Back to List</a>
+{{ form_end(form) }}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% block js %}
+  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.js')}}"></script>
+  <script src="{{asset('js/popper.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+  <script src="{{asset('js/aos.js')}}"></script>
+
+  <script src="{{asset('js/main.js')}}"></script>
+
+{% endblock %}
+
+</body>
+{% endblock %}
+</html>
+{% endblock %}

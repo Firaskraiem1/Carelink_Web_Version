@@ -1,0 +1,44 @@
+{{ form_start(form) }}
+<table style="border-collapse: separate; border-spacing: 5px;">
+   <tr>
+      <th> {{ form_label(form.date_rdv, "Date de réservation:") }}</th>
+      <td> {{ form_widget(form.date_rdv) }}
+         <br>
+         {{ form_errors(form.date_rdv) }}
+      </td>
+   </tr>
+   <tr>
+      <th> {{ form_label(form.motif, "Motif:") }}</th>
+      <td> {{ form_widget(form.motif) }}
+         <br>
+         {{ form_errors(form.motif) }}
+      </td>
+   </tr>
+   <tr>
+      <th> {{ form_label(form.remarques, "Remarques:") }}</th>
+      <td> {{ form_widget(form.remarques) }}
+         <br>
+         {{ form_errors(form.remarques) }}
+      </td>
+   </tr>
+   
+</table>
+
+<div class="center-Buttons-container">
+   {% if state=="update" %}
+   <div class="row" style="margin-top:50px;" >
+      <button class="btn btn-primary" style="margin-right:10px;" href="{{ path('app_reservation_edit', {'idPatient':idPatient,'id': id}) }}">Modifier</button>
+      <a href="{{ path('app_reservation_listes_patient',{'id':idPatient}) }}" class="btn btn-outline-primary">Annuler </a>
+   </div>
+   
+   {% else %}
+   <div class="row" style="margin-top:50px;" >
+      <button class="btn btn-primary" style="margin-right:10px;" href="{{ path('app_reservation_new',{'idPatient': idPatient,'idMedecin':idMedecin})}}">Créer</button>
+      <a href="{{ path('app_reservation_search',{'id':idPatient}) }}" class="btn btn-outline-primary" >Annuler </a>
+   </div>
+   {% endif %}
+</div>
+
+
+
+{{ form_end(form) }}

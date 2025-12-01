@@ -1,0 +1,19 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+<table style="border-collapse: separate; border-spacing: 5px;">
+   <tr>
+      <th> {{ form_label(form.email, "Email:") }}</th> 
+      <td> {{ form_widget(form.email) }}
+         <br>
+         {{ form_errors(form.email) }}
+      </td>
+   </tr>
+ 
+   
+</table>
+<div class="center-Buttons-container">
+   <div class="row" style="margin-top:50px;" >
+      <a  style="margin-right:10px;" >{{ form_widget(form.submit) }}</a>
+      <a  >{{ form_widget(form.cancel) }} </a>
+   </div>
+</div>
+{{ form_end(form) }}    

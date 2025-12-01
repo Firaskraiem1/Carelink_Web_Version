@@ -1,0 +1,149 @@
+
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block css %}
+            {{ parent()}}
+
+            <style>
+              <style>
+                body {
+                  font-family: 'Nunito', sans-serif;
+                  background-color: #f8f9fa;
+                  margin: 0; /* Reset default margin */
+                  padding: 0; /* Reset default padding */
+                }
+
+                .site-wrap {
+                  min-height: 100vh; /* Set minimum height to full viewport height */
+                  display: flex;
+                  flex-direction: column;
+                }
+
+                .site-footer {
+                  margin-top: auto; /* Push footer to the bottom */
+                }
+
+                .center-container {
+                  flex: 1; /* Allow the center container to take up remaining space */
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+
+                .form-container {
+                  max-width: 600px;
+                  width: 100%;
+                  padding: 20px;
+                  background-color: #ffffff;
+                  border-radius: 10px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+            </style>
+        {% endblock %}
+    </head>
+
+    {% block title %}Profile{% endblock %}
+
+  {##############################################################}
+  {#########################BODY#################################}
+  {% block body %}
+
+    <div class="site-wrap">
+
+        {% block navbar %}
+          {{ parent() }}
+        {% endblock %}
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="#">Utilisateur</a> <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">Profile</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {##############################################################}
+  {#########################FORM#################################}
+    <div class="center-container">
+      <div class="form-container mt-3 mb-3">
+        <div class="site-section">
+          <div class="container">
+            <div class="row">
+              <form class="col-md-12" method="post" novalidate>
+                <div class="site-blocks-table" style="max-width: 100%; overflow-x: hidden;">
+                  <div class="row">
+                    <div class="title-section text-center col-12">
+                      <h2> <strong class="text-primary">Profile</strong></h2>
+                    </div>
+                  </div>
+                  <form method="post" action="{{ path('app_login') }}">
+    {# <h1>Profile</h1> #}
+
+    {{ form_start(form,{'attr':{ 'novalidate':'novalidate' }})  }}
+    <div class="form-group">
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nom) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.prenom) }}
+        {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.prenom) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.email) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.phone, 'phone') }}
+        {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.phone) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.photo, 'Upload Photo') }}
+        {{ form_widget(form.photo, {'attr': {'class': 'form-control-file'}}) }}
+        {{ form_errors(form.photo) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.role, 'Role') }}
+        {{ form_widget(form.role, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.role) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.motDePasse, 'Password') }}
+        {{ form_widget(form.motDePasse, {'attr': {'class': 'form-control', 'type': 'password'}}) }}
+        {{ form_errors(form.motDePasse) }}
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-12">
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Update">
+            <a href="{{ path('app_home') }}" class="btn btn-secondary btn-lg btn-block">Cancel</a>
+        </div>
+    </div>
+{{ form_end(form) }}
+</form>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    {% block footer %}
+      {{ parent() }}
+    {% endblock %}
+    </div>  
+         
+  {% endblock %}
+</html>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+{% block html %} 
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      {% block css %}
+         {{ parent() }}
+      <link href="{{asset('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap')}}" rel="stylesheet">
+      <link rel="stylesheet" href="{{asset('fonts/icomoon/style.css')}}">
+      <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+      <link rel="stylesheet" href="{{asset('fonts/flaticon/font/flaticon.css')}}">
+      <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+      <link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}">
+      <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+      <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+      <link rel="stylesheet" href="{{asset('css/aos.css')}}">
+      <link rel="stylesheet" href="{{asset('css/style.css')}}">
+      {% endblock %}
+   </head>
+   <body>
+      {% block body %}
+   
+      <div class="site-wrap">
+        
+         {% block navbar %}
+         <div class="site-navbar py-2">
+            <div class="search-wrap">
+           
+               <div class="container">
+               
+                  <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+                  <form action="#" method="post">
+                     <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+                  </form>
+               </div>
+            </div>
+            <div class="container">
+               <div class="d-flex align-items-center justify-content-between">
+                  <div class="logo">
+                     <div class="site-logo">
+                        <a href="{{ path('app_home') }}" class="js-logo-clone">
+                        <img src="{{ asset('/images/CareLinkLogo.png') }}" alt="CareLink Logo" class="logo-img">
+                        <strong class="text-primary">Care</strong>Link
+                        </a>
+                     </div>
+                  </div>
+                  <div class="main-nav d-none d-lg-block">
+                     <nav class="site-navigation text-right text-md-center" role="navigation">
+                        <ul class="site-menu js-clone-nav d-none d-lg-block" id="main-menu">
+                           <li ><a href="{{ path('app_home') }}">Page d'accueil</a></li>
+                           <li><a href="#">Parapharmacie</a></li>
+                           <li class="has-children">
+                              <a href="#">Produits</a>
+                              <ul class="dropdown">
+                                 <li><a href="#">Supplements</a></li>
+                                 <li class="has-children">
+                                    <a href="#">Vitamins</a>
+                                    <ul class="dropdown">
+                                       <li><a href="#">Supplements</a></li>
+                                       <li><a href="#">Vitamins</a></li>
+                                       <li><a href="#">Diet &amp; Nutrition</a></li>
+                                       <li><a href="#">Tea &amp; Coffee</a></li>
+                                    </ul>
+                                 </li>
+                                 <li><a href="#">Diet &amp; Nutrition</a></li>
+                                 <li><a href="#">Tea &amp; Coffee</a></li>
+                              </ul>
+                           </li>
+                           <li class="active"><a href="{{ path('app_patient_index') }}">Patient</a>
+                           <li ><a href="{{ path('app_fiche_patient_index') }}">Médecin</a>
+                           <li><a href="#">About</a></li>
+                           <li><a href="#">Contact</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+                  <div class="icons">
+                     <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+                     <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none">
+                     <span class="icon-menu"></span></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endblock %}
+         <div class="bg-light py-3">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12 mb-0">
+                     <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+                     <strong class="text-black">Cart</strong>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="owl-carousel owl-single px-0">
+            <div class="site-blocks-cover overlay" style="background-image: url('/images/espacepatient.png');">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-lg-12 mx-auto align-self-center">
+                        <div class="site-block-cover-content text-center">
+                           <h1 class="mb-0">Espace<strong class="text-primary"> Patient</strong></h1>
+                           <div class="row justify-content-center mb-5">
+                              <div class="col-lg-6 text-center">
+                                 <p></p>
+                              </div>
+                           </div>
+                           <a href="{{path('app_patient_show',{'id': id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Voir informations personnels</a>
+                           {# <a href="{{path('app_fiche_list_patient',{'idPatient': id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Voir listes des fiches</a> #}
+                           {% if patient.isBlocked()==0 or patient.isBlocked() is null  %}
+                                 <a href="{{path('app_reservation_search',{'id':id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Réserver un rendez-vous</a>
+                           {% endif %}
+                           <a href="{{path('app_reservation_listes_patient' ,{'id':id})}}" class="btn btn-primary px-5 py-3" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Consulter liste de rendez-vous</a>
+                           {{ include('patient/_delete_form.html.twig',{'id':id}) }}
+                             <a href="{{path('app_patient_index')}}" class="btn btn-secondary" style="margin-right:10px;margin-top:10px;margin-bottom:15px;">Déconnecter</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div>
+            <script src="//code.jquery.com/jquery.js"></script>
+            <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+            {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+        </div>
+         {% block footer %}
+         {{ parent() }}
+      </div>
+      {% endblock %}
+      {% block js %}
+      {{parent()}}
+      <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+      <script src="{{asset('js/jquery-ui.js')}}"></script>
+      <script src="{{asset('js/popper.min.js')}}"></script>
+      <script src="{{asset('js/bootstrap.min.js')}}"></script>
+      <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+      <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+      <script src="{{asset('js/aos.js')}}"></script>
+      <script src="{{asset('js/main.js')}}"></script>
+      {% endblock %}
+      
+      
+   </body>
+   {% endblock %}
+</html>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails Medecin{% endblock %}
+
+{% block body %}
+<div class="site-wrap">
+  {% block navbar %}
+    {{ parent() }}
+  {% endblock %}
+
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+        
+          <strong class="text-black">Détails Medecin</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row mb-5 mt-3">
+      <div class="title-section text-center col-12 mt-5 mb-3">
+        <h2>Détails <strong class="text-primary">Medecin</strong></h2>
+      </div>
+      <div class="col-md-12">
+        <div class="site-blocks-table">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Id</th>
+                <td>{{ medecin.id }}</td>
+              </tr>
+              <tr>
+                <th>Nom</th>
+                <td>{{ medecin.nomDeCabinet }}</td>
+              </tr>
+              <tr>
+                <th>Tel</th>
+                <td>{{ medecin.tel }}</td>
+              </tr>
+              <tr>
+                <th>Adresse</th>
+                <td>{{ medecin.adresse }}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{ medecin.email }}</td>
+              </tr>
+              <tr>
+                <th>Heures de Consultation</th>
+                <td>{{ medecin.heures }}</td>
+              </tr>
+              <tr>
+                <th>Licence Médicale ID</th>
+                <td>{{ medecin.licenceMedicalId }}</td>
+              </tr>
+              <tr>
+                <th>Image Path Profile</th>
+                <td>{{ medecin.imagePathProfile }}</td>
+              </tr>
+              <tr>
+                <th>File Licence Path</th>
+                <td>{{ medecin.fileLicencePath }}</td>
+              </tr>
+              <tr>
+                <th>Active</th>
+                <td>{{ medecin.active ? 'Yes' : 'No' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-5 mt-3">
+      <div class="col-md-4">
+        <a class="btn btn-primary btn-md btn-block" href="{{ path('app_medecin_edit', {'id': medecin.id}) }}">Modifier</a>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        <a class="btn btn-outline-primary btn-md btn-block" href="{{ path('app_medecin_index') }}">Retourner</a>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        {{ include('medecin/_delete_form.html.twig') }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
